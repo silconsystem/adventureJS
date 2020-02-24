@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>D&D like stuff</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+	<header id="header"></header>
+
+	<div id="player-content">
+		<p>give your name</p>
+
+		<form id="name-input">
+		  <input type="text" id="name-value" placeholder="your name" autocomplete="off">
+		  <button id="name-submit">submit</button>
+		</form>
+			<br><br>
+		<label for="character">Select a Class</label>
+	    <select name="char-name-select" id="character-menu" placeholder="your class" autocomplete="off">
+	      <option disabled selected>Character Class</option>
+	      <option>Thief</option>
+	      <option>Warrior</option>
+	      <option>Rogue</option>
+	      <option>Mage</option>
+	    </select>
+	    	<br><br>
+	    <label for="weapon">Select a Weapon</label>
+	    <select name="char-weapon-select" id="weapon-menu" placeholder="your arms" autocomplete="off">
+	      <option disabled selected>Character Weapon</option>
+	      <option></option>
+	      <option></option>
+	      <option></option>
+	      <option></option>
+	    </select>
+	    	<br><br>
+	    <button id="start-btn" name="start" value="start">create character</button>
+	    	<br>		
+	</div>
+
+	<div id="player-stats" 		class="player-stats">
+
+		<div id="input-values">
+			<span id="char-name" 	class="character-build"></span><br>
+			<span id="char-class" 	class="character-build"></span><br>
+			<span id="arm-name" 	class="character-build"></span><br>
+			<span id="stats" 		class="character-build"></span><br>
+			<span id="class-image"  class="character-build"></span>
+		</div>
+
+	<div id="game-content">
+		<!--<input type="text" id="move-value" placeholder="move N/S/E/W" autocomplete="off">
+		  <button id="move-submit">submit</button>-->
+		  <div id="control-buttons">
+				<h1>N = up | S = down |	W = left | E = right</h1>
+				<button id="north" 	value="n">N</button>
+				<button id="east" 	value="e">E</button>
+				<button id="south" 	value="s">S</button>
+				<button id="west" 	value="w">W</button>
+				<br>
+				<button id="look" 	value="look-ctrl">look</button>
+				<button id="weapon" value="weapon-ctrl">weapon</button>
+				<button id="item" 	value="item-ctrl">item</button>
+			  <br><br>
+		  </div>
+		  	
+		 <div id="room">
+		 	<span id="room-name"></span>
+		 	<span id="direction"></span>
+		 	<span id="describe">you are nowhere yet !</span>
+		 	
+		 	<div id="room-content" class="room-content"></div>
+
+		 </div>
+	</div>
+
+	<!-- libraries
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.js"
+	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	  crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	 -->
+	<!-- scripts -->
+	<script src="js/sources.js"></script>
+	<script src="js/handles.js"></script>
+	<script src="js/entities.js"></script>
+	<script src="js/room.js"></script>
+	<script src="js/engine.js"></script>
+
+</body>
+</html>
