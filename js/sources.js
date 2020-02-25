@@ -2,8 +2,8 @@
  *
  *		global variables, objects
  */
- //								____logic
- // global variables
+//								____logic
+// global variables
 var id,							// set room id
 	move,						// holds move direction
 	moved = ["entry", "exit"],	// check if room is done and stop submit if false
@@ -15,8 +15,12 @@ var id,							// set room id
 	intro = false,				// set move to n on first page room_001
 	entry_flag = false,
 	Room_1;
- //								____player
- // global variables
+//
+// 								____room
+var room_objects = [];
+
+//								____player
+// global variables
 var playerName,
 	playerClass,
 	playerWeapon,
@@ -91,6 +95,16 @@ var	enemyStats = {
 	LUC : 1
 };
 
+// enemy state
+var action_state = [
+		["aware"	, "unaware"],			// enemy attack on entry or ignores entry
+		["attack"	, "passive"], 			// attack on look or ignore look
+		["leave"	, "defeat"],			// no exit before defeat
+		["speak"	, "mute"],				// interacts or silent
+		["drop"		, "nodrop"], 			// drops inventory items or nothing
+		["boss"		, "noboss"]				// boss enemy or not
+];
+
 // enemy spells
 var enemySpellBook = [attack_spells, restore_spells];
 
@@ -141,6 +155,14 @@ var enemyFinalWord = [
 	"stoned",
 	"confused"
 ];
+
+// npc names
+var npc_objects = [
+	"harold"
+];
+
+// enemy names
+var enemy_names = [];
 
 //								____rooms_objects_arrays
 // scenes

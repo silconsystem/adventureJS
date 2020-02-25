@@ -172,6 +172,8 @@ armSelMenu.onchange = function(event) {
 		player.weapon = playerWeapon;
 		writeHTML('arm-name' ,'weapon selected: ' + playerWeapon);
 
+		loadWeaponImg(player.class, player.weapon);
+
 		c_created = true;
 
 		console.log('weapon: ' + playerWeapon);
@@ -218,6 +220,9 @@ startBtn.onclick = function(event) {
 
 				console.log('style changed: ' + new_stats);
 			}
+
+		// TODO new position
+		// TODO add rogue and mage img
 
 		switch (playerClass) {
 			case "Thief":

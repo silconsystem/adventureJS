@@ -33,7 +33,7 @@ function manInventory(func, id, item) {
 				1	"weapons"
 				2	"magic_H"
 				3	"magic_D"
-				4	"special"
+				4	"skills"
 
 		item 	: item string
 				get id to push or remove from
@@ -306,4 +306,92 @@ function changeCSSStyle(id,arg,val) {
 	console.log("element id: " + id + " argument: " + arg + " val: " + val);
 
 	return true;
+}
+
+// load weapon image
+function loadWeaponImg(cl, wp) {
+	// cl = player.class
+	// wp = player.weapon
+	switch (cl) {
+		case "Thief":
+			// find selected weapon
+			console.log('matched thief class');
+			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
+			for (var i = 0; i < weapon[0].length; i++) {		// iterate through class assigned weapons
+
+				if (weapon[0][i][0] == wp) {					// if match
+
+					wp_name = weapon[0][i][0];					// set var
+					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+
+					console.log(cl_name + ' weapon: ' + wp_name);
+					// write the element and url in html page 
+					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+
+				} else {
+					console.log('no matching values found!, check input');
+				}
+			}
+			break;
+		case "Warrior":
+			// find selected weapon
+			console.log('matched warrior class');
+			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
+			for (var i = 0; i < weapon[1].length; i++) {		// iterate through class assigned weapons
+
+				if (weapon[1][i][0] == wp) {					// if match
+
+					wp_name = weapon[1][i][0];					// set var
+					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+
+					console.log(cl_name + ' weapon: ' + wp_name);
+					// write the element and url in html page 
+					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+
+				} else {
+					console.log('no matching values found!, check input');
+				}
+			}
+			break;
+		case "Rogue":
+			// find selected weapon
+			console.log('matched rogue class');
+			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
+			for (var i = 0; i < weapon[2].length; i++) {		// iterate through class assigned weapons
+
+				if (weapon[2][i][0] == wp) {					// if match
+
+					wp_name = weapon[2][i][0];					// set var
+					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+
+					console.log(cl_name + ' weapon: ' + wp_name);
+					// write the element and url in html page 
+					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+
+				} else {
+					console.log('no matching values found!, check input');
+				}
+			}
+			break;
+		case "Mage":
+			// find selected weapon
+			console.log('matched mage class');
+			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
+			for (var i = 0; i < weapon[3].length; i++) {		// iterate through class assigned weapons
+
+				if (weapon[3][i][0] == wp) {					// if match
+
+					wp_name = weapon[3][i][0];					// set var
+					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+
+					console.log(cl_name + ' weapon: ' + wp_name);
+					// write the element and url in html page 
+					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+
+				} else {
+					console.log('no matching values found!, check input');
+				}
+			}
+			break;
+	}
 }

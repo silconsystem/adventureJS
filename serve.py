@@ -6,6 +6,7 @@
 #							#
 #########################################################
 import subprocess
+from optparse import OptionParser
 
 # test empty user input
 # a = test against
@@ -40,5 +41,12 @@ if isNotBlank(host) and isNotBlank (port):
 	print('')
 	subprocess.call(("python3", "-m", "http.server", "--bind", host, port))
 else:
-	print('values are not in order, exit and try again')
-	quit()
+	print('one or both values empty, getting default addresses')
+	print('localhost on: 127.0.0.1:8000')
+	print('')
+	print('starting your localhost server')
+	print('')
+	print('')
+	host = "127.0.0.1"
+	port = "8000"
+	subprocess.call(("python3", "-m", "http.server", "--bind", host, port))
