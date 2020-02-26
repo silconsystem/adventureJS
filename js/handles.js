@@ -30,7 +30,7 @@ function manInventory(func, id, item) {
 
 		id 		: type of inventory item 
 				0	"items"
-				1	"weapons"
+				1	"weapon"
 				2	"magic_H"
 				3	"magic_D"
 				4	"skills"
@@ -46,28 +46,52 @@ function manInventory(func, id, item) {
 
 			TODO: get array  id and push given value 
 				or remove
-	*/
-	if (func == 0) {									// 0 : add to array
+	*//* TODO less code with function
+	function itemTest(id) {
+				for (var i = 0; i > id.length; i++) {
 
-		for (var i = 0; i < inventory.length; i++) {	// loop inv[i] == id values
-			if (inventory[i][0] == id) {				// if matched then
-				
-				id = id;
-				console.log(id);						// console
+					if (item == id[i]) {
 
-				switch (id) {
-					case "items":
-						player.inventory.items.push.push(item);	// add to inventory
-						console.log('added ' + item + ' to: ' + id);
-						break;
-					default:
-						// statements_def
-						break;
+						item = id[i];
+						player.inventory.id.push(item);	// add to inventory
+						console.log('item: ' + item + 'exists, added to player inventory');
+					} else {
+						console.log('item doesn\'t exist, error');
+					}
 				}
-			} else {
-				console.log('unknown value');
 			}
+			*/
+	if (func == 0) {	
+
+		switch (id) {
+			case "items":
+				player.inventory.items.push(item);	// add to inventory
+				/*itemTest(id);*/
+				console.log('added ' + item + ' to: ' + id);
+				break;
+			case "weapon":
+				player.inventory.weapon.push(item);	// add to inventory
+				console.log('added ' + item + ' to: ' + id);
+				break;
+			case "spell_H":
+				player.inventory.spell_H.push(item);	// add to inventory
+				console.log('added ' + item + ' to: ' + id);
+				break;
+			case "spell_D":
+				break;
+				player.inventory.spell_D.push(item);	// add to inventory
+				console.log('added ' + item + ' to: ' + id);
+			case "skill":
+				player.inventory.skill.push(item);	// add to inventory
+				console.log('added ' + item + ' to: ' + id);
+				break;
+			default:
+
+				// statements_def
+				break;
 		}
+	} else {
+		console.log('unknown value');
 	}
 }
 
@@ -312,6 +336,10 @@ function changeCSSStyle(id,arg,val) {
 function loadWeaponImg(cl, wp) {
 	// cl = player.class
 	// wp = player.weapon
+	var cl_name,
+		wp_name,
+		wp_url;
+
 	switch (cl) {
 		case "Thief":
 			// find selected weapon
@@ -321,12 +349,13 @@ function loadWeaponImg(cl, wp) {
 
 				if (weapon[0][i][0] == wp) {					// if match
 
-					wp_name = weapon[0][i][0];					// set var
+					wp_name = weapon[0][i][0]; 					// set name as var
+					wp_url 	= weapon[0][i][3];					// set url as var
 					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
 
 				} else {
 					console.log('no matching values found!, check input');
@@ -342,11 +371,12 @@ function loadWeaponImg(cl, wp) {
 				if (weapon[1][i][0] == wp) {					// if match
 
 					wp_name = weapon[1][i][0];					// set var
+					wp_url 	= weapon[1][i][3];					// set url as var
 					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
 
 				} else {
 					console.log('no matching values found!, check input');
@@ -362,11 +392,12 @@ function loadWeaponImg(cl, wp) {
 				if (weapon[2][i][0] == wp) {					// if match
 
 					wp_name = weapon[2][i][0];					// set var
+					wp_url 	= weapon[2][i][3];					// set url as var
 					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
 
 				} else {
 					console.log('no matching values found!, check input');
@@ -382,11 +413,12 @@ function loadWeaponImg(cl, wp) {
 				if (weapon[3][i][0] == wp) {					// if match
 
 					wp_name = weapon[3][i][0];					// set var
+					wp_url 	= weapon[3][i][3];					// set url as var
 					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="../img/weapons/' + cl_name + '/' + wp_name + '.png" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
 
 				} else {
 					console.log('no matching values found!, check input');

@@ -199,13 +199,11 @@ startBtn.onclick = function(event) {
 
 			for (let i = 0; i < new_stats.length; i++) {
 
-				new_stats[i].style.position = "absolute";
-				new_stats[i].style.border 	= "1px solid #000";
-				new_stats[i].style.width 	= "350px";
-				new_stats[i].style.height 	= "400px";
-				new_stats[i].style.left 	= "0px";
-				new_stats[i].style.top 		= "10px";
-				new_stats[i].style.padding 	= "10px;";
+				new_stats[i].style.visibility 	= 'visible';
+				new_stats[i].style.position 	= "absolute";
+				new_stats[i].style.height 		= "550px";
+				new_stats[i].style.left 		= "0px";
+				new_stats[i].style.top 			= "90px";
 
 				console.log('style changed: ' + new_stats);
 			}
@@ -214,9 +212,8 @@ startBtn.onclick = function(event) {
 
 			for (let i = 0; i < new_img.length; i++) {
 
-				new_img[i].style.border = "3px solid #000";
-				new_img[i].style.top 	= "60px";
-				new_img[i].style.left 	= "200px";
+				new_img[i].style.top 	= "-220px";
+				new_img[i].style.left 	= "455px";
 
 				console.log('style changed: ' + new_stats);
 			}

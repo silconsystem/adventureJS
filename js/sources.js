@@ -33,15 +33,10 @@ var playerName,
 	inventory_weapons 	= [],
 	inventory_spell_H	= [],
 	inventory_spell_D 	= [],
-	inventory_special 	= [];
-// 								____enemies
+	inventory_skill 	= [];
+// 								____enemies_npc's
 // global variables
-var enemyName,
- 	enemyClass,
- 	enemyLevel,
- 	enemyHealth,
- 	enemyMagic,
- 	experience_rewarded;
+var experience_rewarded;
 
 //								____rooms
 // global variables
@@ -184,29 +179,30 @@ var treasure = [
 ];
 
 var weapon = [
-	[	["nothing","unarmed","HP -5"],
-		["stick","a strong stick","HP -6"],
-		["throwknife","small and deadly","HP -7"],
-		["cane","pointy cane","HP -8"],
-		["whip","longrange","HP -10"]
+		// name			// description 		// damage 	//img url	
+	[	["nothing"		,"unarmed"			,"HP -5"	, "none"],
+		["stick"		,"a strong stick"	,"HP -6"	, "../img/weapons/thief/stick.png"],
+		["throwknife"	,"small and deadly"	,"HP -7"	, "../img/weapons/thief/throwknife.png"],
+		["cane"			,"pointy cane"		,"HP -8"	, "../img/weapons/thief/cane.png"],
+		["whip"			,"longrange"		,"HP -10"	, "../img/weapons/thief/whip.png"]
 	],
-	[	["nothing","unarmed","HP -5"],
-		["club","a wood club","HP -6"],
-		["mace","smash heads","HP -7"],
-		["chains","brute force","HP -8"],
-		["trident","shortrange","HP -10"]
+	[	["nothing" 		,"unarmed"			,"HP -5", 	,"none"],
+		["club"			,"a wood club"		,"HP -6"	,"../img/weapons/warrior/club.png"],	
+		["mace"			,"smash heads"		,"HP -7"	,"../img/weapons/warrior/mace.png"],
+		["chains"		,"brute force"		,"HP -8"	,"../img/weapons/warrior/chains.png"],
+		["trident"		,"shortrange"		,"HP -10"	,"../img/weapons/warrior/trident.png"]
 	],
-	[	["nothing","unarmed","HP -5"],
-		["dagger","simple dagger","HP -6"],
-		["sword","sharp and deadly","HP -7"],
-		["rapier","elegance","HP -8"],
-		["longsword","more range","HP -10"]
+	[	["nothing"		,"unarmed"			,"HP -5"	,"none"],
+		["dagger"		,"simple dagger"	,"HP -6"	,"../img/weapons/rogue/dagger.png"],
+		["sword"		,"sharp and deadly"	,"HP -7"	,"../img/weapons/rogue/sword.png"],
+		["rapier"		,"elegance"			,"HP -8"	,"../img/weapons/rogue/rapier.png"],
+		["longsword"	,"more range"		,"HP -10"	,"../img/weapons/rogue/longsword.png"]
 	],
-	[	["nothing","unarmed","HP -5"],
-		["woodstaff","walking staff","HP -6"],
-		["copperstaff","simple staff","HP -7"],
-		["ironstaff","strong staff","HP -8",],
-		["silverstaff","fancy staff","HP -10"]
+	[	["nothing"		,"unarmed"			,"HP -5"	,"none"],
+		["woodstaff"	,"walking staff"	,"HP -6"	,"../img/weapons/mage/woodstaff.png"],
+		["copperstaff"	,"simple staff"		,"HP -7"	,"../img/weapons/mage/copperstaff.png"],
+		["ironstaff"	,"strong staff"		,"HP -8"	,"../img/weapons/mage/ironstaff.png"],
+		["silverstaff"	,"fancy staff"		,"HP -10"	,"../img/weapons/mage/silverstaff.png"]
 	]
 ];
 
@@ -232,12 +228,6 @@ var secret = [
 	"to room_four",
 	"str + 5",
 	"HP & MP full"
-];
-
-var inventory = [
-	["items", "nothing",],			
-	["weapons","nothing"],
-	["magic", "nothing"]
 ];
 
 var roomItems = [treasure, weapon, items];
