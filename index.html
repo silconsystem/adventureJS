@@ -6,6 +6,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Lacquer|Orbitron&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Lacquer|Orbitron|Press+Start+2P&display=swap" rel="stylesheet"> 
 </head>
 <body>
 
@@ -18,7 +21,7 @@
 		</div><!-- game-stats -->
 
 		<div id="player-content" class="player-content">
-			<p>give your name</p>
+			give your name<br><br>
 
 			<form id="name-input">
 			  <input type="text" id="name-value" placeholder="your name" autocomplete="off">
@@ -58,6 +61,13 @@
 				<div id="inventory" class="inventory">
 					<table id="inventory-display" class="inventory-table" align="center">
 						<tr>
+							<td>Weapon</td>
+							<td>Items</td>
+							<td>M_Heal</td>
+							<td>M_Def</td>
+							<td>Skill</td>
+						</tr>
+						<tr>
 							<td>
 								<span id="weapon-image" class="inventory-table">
 									<img src="img/weapons/thief/nothing.png">
@@ -87,16 +97,26 @@
 					</table>
 				</div>
 
-				<div id="input-values">
-				<span id="char-name" 	class="character-build"></span><br>
-				<span id="char-class" 	class="character-build"></span><br>
-				<span id="arm-name" 	class="character-build"></span><br>
-				<br>
+				<div id="input-values" class="character-build">
+					<table id="player-info" class="character-build">
+						<tr>
+							<td><span id="char-name" 	class="character-build"></td>
+						</tr>
+						<tr>
+							<td><span id="skills" 		class="character-build"></td>
+						</tr>
+						<tr>
+							<td><span id="char-class" 	class="character-build"></td>
+						</tr>
+							<td><span id="arm-name" 	class="character-build"></td>
+						</tr>
+					</table>
 			</div>
 
 			<div id="room">
+			 	<span id="room-name">still cilling, doing your thing..</span><br>
+				<h2 id="room-text">your location</h2>
 			 	<span id="describe">you are nowhere yet !</span><br>
-			 	<span id="room-name"></span><br>
 			 	<span id="direction"></span><br>
 			 	
 			</div>

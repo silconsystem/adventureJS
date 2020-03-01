@@ -164,6 +164,16 @@ function checkInputValue(field, button) {
     }
 
 };*/
+
+// create room descriptions
+function getRoomText(rm_nm) {
+	/* 
+		rm_nm: 	room name
+	 */
+	 // TODO:
+
+}
+
 // call if html page is loaded
 function onload() {
 		
@@ -171,12 +181,14 @@ function onload() {
 
 	if (rm_name == "room one") {
 		intro = true;
+		document.getElementById('describe').innerHTML = "this is a creepy looking house over here,<br><br>do you really want to go on...";
 	} else {
 		intro = false;
 	}
 	console.log(rm_name);
 	// do !
 	console.log('room html loaded');
+	return rm_name;
 }
 
 // entrypoint logic

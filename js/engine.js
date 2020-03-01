@@ -72,7 +72,7 @@ nameBtn.onclick = function(event) {
 		player.name = playerName;								
 
 		writeHTML(char_name ,playerName);						// alert user in span element
-		writeHTML('arm-name', playerSkills.none);				// add info
+		writeHTML('skills', playerSkills.none);				// add info
 		
 		console.log('player name set: ' + playerName);			// console info
 		
@@ -355,12 +355,14 @@ startBtn.onclick = function(event) {
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
 			}
-
+		// TODO: change to class to use less code !
+		
 		changeCSSStyle("input-values", "height", "0px");
 
 		writeHTML('char-name', '');
 		writeHTML('char-class', ''),
 		writeHTML('arm-name', '');
+		writeHTML('skills', '');
 		writeHTML('describe','you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !');
 
 		console.log('character created');
@@ -369,6 +371,7 @@ startBtn.onclick = function(event) {
 		hideHTML("char-name");
 		hideHTML("char-class");
 		hideHTML("arm-name");
+		hideHTML("skills");
 	}
 }
 

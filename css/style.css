@@ -12,12 +12,50 @@ header {
 h1 {
 	font-size: 10px;
 }
+
+h2 {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+body {
+	font-family: 'Lacquer';
+}
+
+input,
+input,
+select,
+button {
+	font-family: 'Orbitron';
+	font-size: 12px;
+}
+
+input[type=text] {
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2de2d6+0,7db9e8+100&0.3+1,0+100 */
+	background: -moz-linear-gradient(top,  rgba(45,226,214,0.3) 0%, rgba(46,226,214,0.3) 1%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(45,226,214,0.3) 0%,rgba(46,226,214,0.3) 1%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(45,226,214,0.3) 0%,rgba(46,226,214,0.3) 1%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d2de2d6', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+	border-radius: 6px;
+	color: #fff;
+	font-family: 'Press Start 2P';
+	font-size: 14px;
+	width: 175px;
+	height: 30px;
+}
+
+.character-build {
+	font-family: 'Lacquer';
+	font-weight: bold;
+	font-synthesis: all;
+}
 /* 								____DOM		*/
 .content-wrapper {
 	position: absolute;
 	width: 1024px;
 	height: 640px;
-	background-color: #c1c9b9;
+	/*background-color: #c1c9b9;*/
+	background-image: url('../img/wrap-bg.png');
 }
 /*								___DOM / CLASSES 	*/
 .game-stats {
@@ -26,47 +64,64 @@ h1 {
 	border: 0;
 	width: 0px;
 	height: 0px;
+	color: #fff;
 }
 
 /*							___DOM -- player-content	*/
 div#player-content {
 	position: absolute;
-	border: 1px solid #000;
+	font-family: 'Orbitron';
+	font-size: 16px;
+	font-weight: bold;
+	border: 1px dotted #fa7d7d;
 	width: 300px;
 	height: 640px;
 	left: 0px;
 	top: 50px;
 	padding: 10px;
+	color: #fff;
+}
+
+span#stats.character-build {
+	display: inline-table;
+	min-width: 280px;
+	height: 70%;
 }
 
 /*							___DOM -- player-stats	*/
 div#player-stats {
 	position: absolute;
-	border: 1px solid #000;
+	border: 1px dotted #fa7d7d;
 	width: 424px;
 	height: 640px;
 	left: 300px;
 	top: 50px;
+	color: #fff;
 }
 
 .descriptions {
 	position: relative;
 	margin: 0 auto;
 	width: 400px;
-	height: 300px;
+	height: 450px;
 	top: 10px;
-	background-color: #808080;
+	color: #fff;
 }
 
 /* 									____INVENTORY 	*/
 .inventory {
 	position: relative;
+	font-size: 10px;
 	width: 400px;
-	height: 40px;
+	height: 80px;
 	top: 0px;
-	background-color: #bfa3cc;
+	color: #fff;
 	padding: 0px;
 	margin: 0px;
+	text-align: center;
+}
+td.inventory {
+	width: 80px;
 	text-align: center;
 }
 
@@ -76,7 +131,6 @@ div#player-stats {
 	height: 120px;
 	margin: 0 auto;
 	text-align: center;	
-	background-color: #b2c2cf;
 }
 
 #weapon-image.inventory-table {
@@ -115,7 +169,7 @@ div#game-content {
 	/*visibility: hidden;*/
 	
 	position: absolute;
-	border: 1px solid #000;
+	border: 1px dotted #fa7d7d;
 	width: 300px;
 	height: 640px;
 	left: 422px;
@@ -125,10 +179,10 @@ div#game-content {
 div#control-buttons {
 	text-align: center;
 }
-
+// 							___DOM - room
 div#room-content.room-content {		
 	position: absolute;
-	top: 200px;
+	top: 100px;
 	left: 0;
 	width: 300px;
 	height: 250px;
@@ -140,10 +194,4 @@ div#room-content.room-content {
 	font-weight: bold;
 	font-size: 20px;
 	color: #fff;
-}
-
-span#stats.character-build {
-	display: inline-table;
-	min-width: 280px;
-	height: 70%;
 }

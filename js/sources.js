@@ -38,6 +38,7 @@ var playerName,
 var entered,
 	room_name,
 	room_no = 0;
+	room_exits = [];
 
 //								____player_objects_arrays
 // stat objects
