@@ -2,80 +2,119 @@
 		npc / enemy handlers: npc-handles.js
 */
 // returns npc/enemy action states 
-function actionState(a,b,c,d,e,f) {
+function actionState(a,b,c,d,e,f) {					// TODO: returns value even if non extisting, breaks on undefined
 	/*
-		a = aware 	, unaware  	> action_state[0][0][0] / action_state[0][0][1] || null
-		b = attack , passive 	> action_state[0][1][0] / action_state[0][1][1]	|| null
-		c = leave	, defeat 	> action_state[0][2][0] / action_state[0][2][1]	|| null
-		d = speak 	, mute 		> action_state[1][0][0] / action_state[1][0][1]	|| null
-		e = drop 	, nodrop	> action_state[1][1][0] / action_state[1][1][1]	|| null
-		f = boss 	, noboss	> action_state[1][2][0] / action_state[1][2][1]	|| null
+		usage: fill out the arguments in this order 
 
+		a = aware 	, unaware  	> action_state[0][0] / action_state[0][1] 	|| null
+		b = attack , passive 	> action_state[1][0] / action_state[1][1]	|| null
+		c = leave	, defeat 	> action_state[2][0] / action_state[2][1]	|| null
+		d = speak 	, mute 		> action_state[3][0] / action_state[3][1]	|| null
+		e = drop 	, nodrop	> action_state[4][0] / action_state[4][1]	|| null
+		f = boss 	, noboss	> action_state[5][0] / action_state[5][1]	|| null
 		arguments to be tested against action_state[]
 	*/
 	
 	var actions = [];
 
-	function testValue(val) {
+	function testValue(val) { 
 
+		console.log('val testing: ' + val.toString());														// TODO: returns val also when bad
+
+		var i;
+
+		for (i = 0; i > action_state.length; i++) {									
+
+			if (val === action_state[i][0]) {
+				
+				val = action_state[i][0];
+				console.log('matched value: ' + val);
+			} else {
+
+				val = undefined;
+				console.log('values not found !, return: ' + val);
+			}
+			if (val === action_state[i][1]) {
+				
+				val = action_state[i][1];
+				console.log('matched value: ' + val);
+			} else {
+				
+				val = undefined;
+				console.log('values not found !, return: ' + val);
+			}
+		}			
+		//actions.push(val);
+		//console.log('pushing matched value: ' + val + ' to actions array');
+		console.log('value equals: ', val);
+		return val;
+	}
+/*
 		var i, test;
-		for (i = 0; i >= action_state[0].length; i++) {
-			val = action_state[0][i];
 
-			// test a argument
-			if (val == test) {						// if a is eq to array 'aware'
-				
-				val = test;  						// set a to matched test value
+		for (i = 0; i > action_state.length; i++) {				// iterate tru array
 
-				console.log('value: ' + val);		// log
-				return val; 							// return val
-			} else if (val == null) { 				// can have null value
-				
-				val = null;							// set a to null
-				console.log('val 1 null: ' + val);	// log
-				return val; 							// return a = null
-			} else { 								// if != action_state || null
+			if (val == action_state[i][0]){ 					// 1st array field
 
-				console.log('bad values ! ' + val);	// log
-				return false; 						// return false
+				val = action_state[i][0];						// set matched value
+				console.log('pushing value ' + val);			// log
+				return val;										// return argument value
+			} else if (val == action_state[i][1]) {				// 2nd array field
+
+				val = action_state[i][1];						// set matched value
+				console.log('pushing value ' + val);			// log
+				return val;										// return argument value
+			} else if (val != action_state[i][0]) {				// if not in 1st array field
+																
+				val = "empty";									// empty of undefined 
+				console.log('bad values ! set to: ' + val);		// log
+				return val; 									// return argument value
+			} else if (val != action_state[i][1]) {				// if not in 2nd array field
+																// set to null if 
+				val = "empty";									// empty of undefined 
+				console.log('bad values ! set to: ' + val);		// log
+				return val; 									// return argument value
+			} else if (val == null || undefined) {
+
+				console.log('null or undefined value: ' + val);	// log
+				return false;									
 			}
 		}
-		if (val != null) {
-			actions.push(val); 					// push value to actions[]
-		}
-	}
+		actions.push(val); 
+	}*/
 
-	function objExists(obj) {
+	actions.push(testValue(a));
+	actions.push(testValue(b));
+	actions.push(testValue(c));
+	actions.push(testValue(d));
+	actions.push(testValue(e));
+	actions.push(testValue(f));
 
-		// look if our object exists
-		for (var i = 0; i > npc_objects.length; i++) {
-			for (var j = 0; j > enemy_objects.length; j++) {
-
-				if (obj != npc_objects[i] || enemy_objects[j]) {
-
-					console.log('obj ' + obj + 'doesnt exist');
-					return false;
-				} else {
-
-					obj = obj;
-
-					console.log(obj);
-					return obj;
-				}
-			}
-		}
-	}
-
-	// test the function argument values
-	// from right to left for the LIFO stack order
-	testValue(a);
-	testValue(b);
-	testValue(c);
-	testValue(d);
-	testValue(e);
-	testValue(f);
-
-	console.log(actions)
-
+	console.log('succes...')
+	console.log('player object properties: ' + actions);
 	return actions;
 }
+
+// check if given object exists in our name array
+function objExists(obj) {								// TODO: doesnt work 
+
+	// look if our object exists
+	for (var i = 0; i > npc_objects.length; i++) {							// i: cycle through npc list
+
+		if (obj != npc_objects[i]) {									// if not npc_O or enemy_O
+										
+			console.log(obj + ' exists');
+			return obj;											// return false
+		} else {
+
+			console.log(obj + ' exists');
+			return false;
+		}
+	}
+}
+
+	
+
+	
+
+

@@ -355,7 +355,7 @@ function loadWeaponImg(cl, wp) {
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
 
 				} else {
 					console.log('no matching values found!, check input');
@@ -376,7 +376,7 @@ function loadWeaponImg(cl, wp) {
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image',  '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
 
 				} else {
 					console.log('no matching values found!, check input');
@@ -397,7 +397,7 @@ function loadWeaponImg(cl, wp) {
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image',  '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
 
 				} else {
 					console.log('no matching values found!, check input');
@@ -418,7 +418,7 @@ function loadWeaponImg(cl, wp) {
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 75px; height : 75px; text-align: center;">');
+					writeHTML('weapon-image',  '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
 
 				} else {
 					console.log('no matching values found!, check input');

@@ -194,30 +194,89 @@ startBtn.onclick = function(event) {
 
 		var htmlString,
 			targetElement = 'stats';
+	let new_stats 	= document.querySelectorAll("#game-stats");
 
-		let new_stats 	= document.querySelectorAll("#player-stats");
+		for (let i = 0; i < new_stats.length; i++) {
 
-			for (let i = 0; i < new_stats.length; i++) {
+			new_stats[i].style.visibility 	= 'visible';
+			new_stats[i].style.position 	= "absolute";
+			new_stats[i].style.width 		= "300px";
+			new_stats[i].style.height 		= "640px";
+			new_stats[i].style.left 		= "0px";
+			new_stats[i].style.top 			= "50px";
+			new_stats[i].style.border 		= "1px solid #000";
 
-				new_stats[i].style.visibility 	= 'visible';
-				new_stats[i].style.position 	= "absolute";
-				new_stats[i].style.height 		= "550px";
-				new_stats[i].style.left 		= "0px";
-				new_stats[i].style.top 			= "90px";
+			console.log('style changed: ' + new_stats[0].id);
+		}
 
-				console.log('style changed: ' + new_stats);
+	let new_img 	= document.querySelectorAll("#class-image");
+
+		for (let i = 0; i < new_img.length; i++) {
+
+			new_img[i].style.position 		= "relative";
+			new_img[i].style.top 			= "5px";
+			new_img[i].style.margin 	 	= "0 auto";
+
+			console.log('style changed: ' + new_stats[0].id);
+	}
+
+	let new_W_img 	= document.querySelectorAll("#weapon-image");
+
+		for (let i = 0; i < new_img.length; i++) {
+
+			new_W_img[i].style.position 	= "relative";
+			new_W_img[i].style.top 			= "0px";
+			new_W_img[i].style.left 		= "0px";
+			new_W_img[i].style.width	 	= "40px";
+			new_W_img[i].style.height 		= "40px";
+
+			console.log('style changed: ' + new_stats[0].id);
+	}
+/*
+		let new_content = document.querySelectorAll(".player-content");
+		let new_stats 	= document.querySelectorAll(".player-stats");
+		let new_game 	= document.querySelectorAll(".game-content");
+		let new_img 	= document.querySelectorAll(".class-image");
+
+			for (let i = 0; i < new_content.length; i++) {
+
+				new_content[i].style.visibility = 'hidden';
+				new_content[i].style.position 	= 'absolute';
+				new_content[i].style.height 	= '0px';
+				new_content[i].style.width 		= '0px';
+
+				console.log('style changed: ' + new_content[0].id);
+
+				for (let i = 0; i < new_stats.length; i++) {
+
+					new_stats[i].style.position 	= "absolute";
+					new_stats[i].style.height 		= "550px";
+					new_stats[i].style.width 		= "250px";
+					new_stats[i].style.left 		= "0px";
+					new_stats[i].style.top 			= "90px";
+
+					console.log('style changed: ' + new_stats[0].id);
+					for (let i = 0; i < new_game.length; i++) {
+
+						new_game[i].style.position 		= 'absolute';
+						new_game[i].style.width 		= '300px';
+						new_game[i].style.height 		= '450px';
+						new_game[i].style.left 			= '724px';
+						new_game[i].style.top 			= '0px';
+
+						console.log('style changed: ' + new_game[0].id);
+
+						for (let i = 0; i < new_img.length; i++) {
+
+							new_img[i].style.top 	= "-220px";
+							new_img[i].style.left 	= "455px";
+
+							console.log('style changed: ' + new_stats[0].id);
+						}
+					}
+				}
 			}
-
-		let new_img 	= document.querySelectorAll("#class-image");
-
-			for (let i = 0; i < new_img.length; i++) {
-
-				new_img[i].style.top 	= "-220px";
-				new_img[i].style.left 	= "455px";
-
-				console.log('style changed: ' + new_stats);
-			}
-
+*/
 		// TODO new position
 		// TODO add rogue and mage img
 
@@ -226,7 +285,7 @@ startBtn.onclick = function(event) {
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 2;
+				player.str 		= player.str = 6;
 				player.int 		= player.int = 6;
 				player.evd 		= player.evd = 4;
 				player.luc 		= player.luc = 11;
@@ -263,7 +322,7 @@ startBtn.onclick = function(event) {
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 3;
+				player.str 		= player.str = 6;
 				player.int 		= player.int = 11;
 				player.evd 		= player.evd = 7;
 				player.luc 		= player.luc = 6;
@@ -281,7 +340,7 @@ startBtn.onclick = function(event) {
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 3;
+				player.str 		= player.str = 4;
 				player.int 		= player.int = 11;
 				player.evd 		= player.evd = 7;
 				player.luc 		= player.luc = 6;

@@ -11,72 +11,115 @@
 
 	<header id="header"></header>
 
-	<div id="player-content">
-		<p>give your name</p>
+	<div id="wrapper" class="content-wrapper">
 
-		<form id="name-input">
-		  <input type="text" id="name-value" placeholder="your name" autocomplete="off">
-		  <button id="name-submit">submit</button>
-		</form>
-			<br><br>
-		<label for="character">Select a Class</label>
-	    <select name="char-name-select" id="character-menu" placeholder="your class" autocomplete="off">
-	      <option disabled selected>Character Class</option>
-	      <option>Thief</option>
-	      <option>Warrior</option>
-	      <option>Rogue</option>
-	      <option>Mage</option>
-	    </select>
-	    	<br><br>
-	    <label for="weapon">Select a Weapon</label>
-	    <select name="char-weapon-select" id="weapon-menu" placeholder="your arms" autocomplete="off">
-	      <option disabled selected>Character Weapon</option>
-	      <option></option>
-	      <option></option>
-	      <option></option>
-	      <option></option>
-	    </select>
-	    	<br><br>
-	    <button id="start-btn" name="start" value="start">create character</button>
-	    	<br>		
-	</div>
-
-	<div id="player-stats" 		class="player-stats">
-
-		<div id="input-values">
-			<span id="char-name" 	class="character-build"></span><br>
-			<span id="char-class" 	class="character-build"></span><br>
-			<span id="arm-name" 	class="character-build"></span><br>
+		<div id="game-stats" class="game-stats">
 			<span id="stats" 		class="character-build"></span><br>
-			<span id="class-image"  class="character-build"></span><br>
-			<span id="weapon-image" class="character-build"></span>
+		</div><!-- game-stats -->
+
+		<div id="player-content" class="player-content">
+			<p>give your name</p>
+
+			<form id="name-input">
+			  <input type="text" id="name-value" placeholder="your name" autocomplete="off">
+			  <button id="name-submit">submit</button>
+			</form>
+				<br><br>
+			<label for="character">Select a Class</label>
+		    <select name="char-name-select" id="character-menu" placeholder="your class" autocomplete="off">
+		      <option disabled selected>Character Class</option>
+		      <option>Thief</option>
+		      <option>Warrior</option>
+		      <option>Rogue</option>
+		      <option>Mage</option>
+		    </select>
+		    	<br><br>
+		    <label for="weapon">Select a Weapon</label>
+		    <select name="char-weapon-select" id="weapon-menu" placeholder="your arms" autocomplete="off">
+		      <option disabled selected>Character Weapon</option>
+		      <option></option>
+		      <option></option>
+		      <option></option>
+		      <option></option>
+		    </select>
+		    	<br><br>
+		    <button id="start-btn" name="start" value="start">create character</button>
+		    	<br>		
 		</div>
 
-	<div id="game-content">
-		<!--<input type="text" id="move-value" placeholder="move N/S/E/W" autocomplete="off">
-		  <button id="move-submit">submit</button>-->
-		  <div id="control-buttons">
-				<h1>N = up | S = down |	W = left | E = right</h1>
-				<button id="north" 	value="n">N</button>
-				<button id="east" 	value="e">E</button>
-				<button id="south" 	value="s">S</button>
-				<button id="west" 	value="w">W</button>
-				<br>
-				<button id="look" 	value="look-ctrl">look</button>
-				<button id="weapon" value="weapon-ctrl">weapon</button>
-				<button id="item" 	value="item-ctrl">item</button>
-			  <br><br>
-		  </div>
-		  	
-		 <div id="room">
-		 	<span id="room-name"></span>
-		 	<span id="direction"></span>
-		 	<span id="describe">you are nowhere yet !</span>
-		 	
-		 	<div id="room-content" class="room-content"></div>
+		<div id="player-stats" class="player-stats">
 
-		 </div>
-	</div>
+			<div id="descriptions" class="descriptions">
+				<div id="player-img">
+					<span id="class-image"  class="character-build">
+						<img width="100px" height="100px" src="img/placeholder.png">
+					</span>
+				</div>
+				<div id="inventory" class="inventory">
+					<table id="inventory-display" class="inventory-table" align="center">
+						<tr>
+							<td>
+								<span id="weapon-image" class="inventory-table">
+									<img src="img/weapons/thief/nothing.png">
+								</span>
+							</td>
+							<td>
+								<span id="item-image" class="inventory-table">
+									<img src="img/weapons/thief/nothing.png">
+								</span>
+							</td>
+							<td>
+								<span id="item-image" class="inventory-table">
+									<img src="img/weapons/thief/nothing.png">
+								</span>
+							</td>
+							<td>
+								<span id="item-image" class="inventory-table">
+									<img src="img/weapons/thief/nothing.png">
+								</span>
+							</td>
+							<td>
+								<span id="item-image" class="inventory-table">
+									<img src="img/weapons/thief/nothing.png">
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div id="input-values">
+				<span id="char-name" 	class="character-build"></span><br>
+				<span id="char-class" 	class="character-build"></span><br>
+				<span id="arm-name" 	class="character-build"></span><br>
+				<br>
+			</div>
+
+			<div id="room">
+			 	<span id="describe">you are nowhere yet !</span><br>
+			 	<span id="room-name"></span><br>
+			 	<span id="direction"></span><br>
+			 	
+			</div>
+		</div>
+
+		<div id="game-content" class="game-content">
+			<!--<input type="text" id="move-value" placeholder="move N/S/E/W" autocomplete="off">
+			  <button id="move-submit">submit</button>-->
+			  <div id="control-buttons">
+					<h1>N = up | S = down |	W = left | E = right</h1>
+					<button id="north" 	value="n">N</button>
+					<button id="east" 	value="e">E</button>
+					<button id="south" 	value="s">S</button>
+					<button id="west" 	value="w">W</button>
+					<br>
+					<button id="look" 	value="look-ctrl">look</button>
+					<button id="weapon" value="weapon-ctrl">weapon</button>
+					<button id="item" 	value="item-ctrl">item</button>
+				  <br><br>
+			  </div>
+			 <div id="room-content" class="room-content"></div> 	
+		</div>
+	</div><!-- wrapper -->
 
 	<!-- libraries
 	<script
@@ -91,6 +134,7 @@
 	<script src="js/handles.js"></script>
 	<script src="js/npc-handles.js"></script>
 	<script src="js/entities.js"></script>
+	<script src="js/npc-enemy-list.js"></script>
 	<script src="js/room.js"></script>
 	<script src="js/engine.js"></script>
 

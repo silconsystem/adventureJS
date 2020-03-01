@@ -18,14 +18,13 @@ var id,							// set room id
 //
 // 								____room
 var room_objects = [];
+var npc_objects = [];
 
 //								____player
 // global variables
 var playerName,
 	playerClass,
 	playerWeapon,
-	playerHealth,
-	playerMagic,
 	playerExp,
 	playerLevel,
 	spellBook,
@@ -34,10 +33,6 @@ var playerName,
 	inventory_spell_H	= [],
 	inventory_spell_D 	= [],
 	inventory_skill 	= [];
-// 								____enemies_npc's
-// global variables
-var experience_rewarded;
-
 //								____rooms
 // global variables
 var entered,
@@ -47,10 +42,12 @@ var entered,
 //								____player_objects_arrays
 // stat objects
 var	playerStats = {
-	STR : 1,
-	INT : 1,
-	EVD : 1,
-	LUC : 1
+	HP 	: 100,
+	MP 	: 0,
+	STR : 10,
+	INT : 10,
+	EVD : 10,
+	LUC : 10
 };
 
 // player skills
@@ -77,20 +74,23 @@ var attack_spells = [
 	],
 	restore_spells = [
 		"none", "cure", "cure_all", "life", "antidote"
-	];
+];
 
 spellBook = [attack_spells, restore_spells];
 
-// 								____enemies_objects_arrays
+// 								____enemies_npc's_objects_arrays
 // enemy stats
 var	enemyStats = {
-	STR : 1,
-	INT : 1,
-	EVD : 1,
-	LUC : 1
+	HP 	: 100,
+	MP 	: 0,
+	STR : 10,
+	INT : 10,
+	EVD : 10,
+	LUC : 10
 };
 
 // enemy state
+// array holding tested argument values
 var action_state = [
 		["aware"	, "unaware"],			// enemy attack on entry or ignores entry
 		["attack"	, "passive"], 			// attack on look or ignore look
@@ -153,11 +153,15 @@ var enemyFinalWord = [
 
 // npc names
 var npc_objects = [
+	"NPC",
 	"harold"
 ];
 
 // enemy names
-var enemy_names = [];
+var enemy_names = [
+	"ENEMY",
+	"lisa"
+];
 
 //								____rooms_objects_arrays
 // scenes

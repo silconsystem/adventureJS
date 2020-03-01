@@ -2,7 +2,7 @@
  *
  *
  *			player objects, enemy objects, etc
- */
+ *//*
  // player object
  class playerObj {
 
@@ -39,7 +39,7 @@
 	 	this.skill1 = skill1;
 	 	this.skill2 = skill2;
 	 }
-};
+};*/
 // room class
 var room = {
 
@@ -64,8 +64,8 @@ var player = {
  	name 	   : playerName,
  	class 	   : playerClass,
  	weapon 	   : playerWeapon,
- 	HP 		   : playerHealth,
- 	MP 		   : playerMagic,
+ 	HP 		   : playerStats.HP,
+ 	MP 		   : playerStats.MP,
  	exp 	   : playerExp,
  	lvl 	   : playerLevel,
  	str 	   : playerStats.STR,
@@ -85,47 +85,96 @@ var player = {
 		skill 	: inventory_skill 		= []
 	}
 };
+
+function enemy(
+				name, e_class, lvl, state,
+				desc, txt, hp, mp, 
+				str, int, evd, luc,
+				m_def, m_heal, skills, exp,
+				drop_m, drop_i, drop_h, st_fx,
+				st_F_P, final
+				)
+{
+
+ 	this.name 			= name;			// name
+ 	this.class			= e_class;		// class
+ 	this.level 			= lvl;			// level
+ 	this.state 			= state;		// [aware 0/1; attk on entry 0/1; leave room 0/1]
+ 	this.description 	= desc;			// describe enemy
+ 	this.text 			= txt; 			// says stuff
+ 	this.HP 			= hp;			// HP to take away
+ 	this.MP 			= mp;			// MP to do spells or to take away
+ 	this.str 			= str;			// str
+ 	this.int  			= int;			// int
+ 	this.evd 			= evd;			// evd
+ 	this.luc 			= luc;			// luc
+ 	this.M_def 			= m_def;		// defensive spells
+ 	this.M_heal 		= m_heal;		// healing spells
+ 	this.skills 		= skills;		// special skills
+ 	this.exp_RW 		= exp;			// what you gain from a kill
+ 	this.drop_M 		= drop_m;		// could drop magic spell
+ 	this.drop_I 		= drop_i;		// could drop item
+ 	this.drop_H 		= drop_h;		// could drop healing magic/items
+ 	this.statFX 		= st_fx;		// can be afflicted with= enemyStatEffect
+ 	this.statF_P 		= st_F_P;		// can give you playerStatEffect
+ 	this.final 			= final;		// last attack when HP/MP is: something
+}
 // enemy base object
-var enemy = {
+/*var enemy = {
 
  	name 		: "enemyName",			// name
  	class		: "enemy",				// class
  	level 		: "enemyLevel",			// level
  	state 		: null ,				// [aware 0/1, attk on entry 0/1, leave room 0/1]
- 	description : "empty",				//describe enemy
+ 	description : "empty",				// describe enemy
  	text 		: "empty", 				// says stuff
- 	HP 			: "enemyHealth",			// HP to take away
- 	MP 			: "enemyMagic",			// MP to do spells or to take away
- 	str 		: "enemyStats.STR",		// str
- 	int  		: "enemyStats.INT",		// int
- 	evd 		: "enemyStats.EVD",		// evd
- 	luc 		: "enemyStats.LUC",		// luc
+ 	HP 			: 0,					// HP to take away
+ 	MP 			: 0,					// MP to do spells or to take away
+ 	str 		: 0,					// str
+ 	int  		: 0,					// int
+ 	evd 		: 0,					// evd
+ 	luc 		: 0,					// luc
  	M_def 		: enemySpellBook[0][0],	// defensive spells
  	M_heal 		: enemySpellBook[1][0],	// healing spells
  	skills 		: enemySkills.none,		// special skills
- 	exp_RW 		: experience_rewarded,	// what you gain from a kill
+ 	exp_RW 		: 0,					// what you gain from a kill
  	drop_M 		: enemyLootMagic[0],	// could drop magic spell
  	drop_I 		: enemyLootItem[0],		// could drop item
  	drop_H 		: enemyLootHeal[0],		// could drop healing magic/items
  	statFX 		: enemyStatEffect[0],	// can be afflicted with: enemyStatEffect
  	statF_P 	: playerStatEffect[0],	// can give you playerStatEffect
  	final 		: enemyFinalWord[0],	// last attack when HP/MP is: something
-};
-
-var npc = Object.create(enemy);
-	npc.name 		= "";					// name
- 	npc.class		= "npc";				// class
- 	npc.description = ""; 					// describe npc
- 	npc.text 		= "";					// says stuff
- 	npc.state 		= action_state;			// [aware 0/1, attk on entry 0/1, leave room 0/1]
- 	npc.drop_M 		= enemyLootMagic[0];	// could drop magic spell
- 	npc.drop_I 		= enemyLootItem[0];		// could drop item
- 	npc.drop_H 		= enemyLootHeal[0];		// could drop healing magic/items
- 	npc.statF_P 	= playerStatEffect[0];	// can give you playerStatEffect
-
-const harold = Object.create(npc);
-	harold.name 		= "harold";
-	harold.class 		= "npc";
-	harold.description 	= "serious looking old and intimidating man";
-	harold.text 		= "no lingering";
-	harold.state 		= actionState('aware','speak','nodrop',null);
+}
+/*
+var npc = {
+	npc.name 		: "empty",						// name
+ 	npc.n_class		: "npc",						// class
+ 	npc.description : "empty",						// describe npc
+ 	npc.text 		: "empty",						// says stuff
+ 	npc.state 		: "empty",						// enemy behaviour flags
+ 	npc.drop_M 		: enemyLootMagic[0],			// could drop magic spell
+ 	npc.drop_I 		: enemyLootItem[0],				// could drop item
+ 	npc.drop_H 		: enemyLootHeal[0],				// could drop healing magic/items
+ 	npc.statF_P 	: playerStatEffect[0]			// can give you playerStatEffect
+}
+*/
+function npc(
+			name,
+			n_class,
+			desc,
+			txt,
+			state,
+			drop_m,
+			drop_h,
+			st_F_P
+			) 
+{
+	this.name 			= name;
+	this.class 			=  n_class;
+	this.description 	= desc;
+	this.text 			= txt;
+	this.state 			= state;
+	this.drop_m 		= enemyLootMagic[0];
+	this.drop_h 		= enemyLootItem[0];
+	this.st_F_P 		= playerStatEffect[0];
+}
