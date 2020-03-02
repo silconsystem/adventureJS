@@ -106,8 +106,10 @@ charSelMenu.onchange = function(event) {
 			case "Thief":
 				// class info
 				writeHTML('char-class', 'you chose to play as a ' + playerClass);
-				writeHTML('arm-name', playerSkills.first_attack);
+				writeHTML('skills', playerSkills.first_attack);
 				writeHTML('class-image', '<img src="../img/thief.png" style="width : 100px; height : 100px; text-align: center;">');
+				// TODO: .GIF looks pixelated but animations could be added otherwise
+				//writeHTML('class-image', '<img src="../img/thief_anim.gif" style="width : 100px; height : 100px; text-align: center;">');
 				break;
 			case "Warrior":
 				// class info
@@ -424,7 +426,3 @@ itemBtn.onclick = function(event) {
 	document.getElementById('describe').innerHTML = room.item_2;
 	console.log('looking for items');
 }
-
-
-
-

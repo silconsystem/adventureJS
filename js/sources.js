@@ -32,7 +32,8 @@ var playerName,
 	inventory_weapons 	= [],
 	inventory_spell_H	= [],
 	inventory_spell_D 	= [],
-	inventory_skill 	= [];
+	inventory_skill 	= [],
+	playerAction;
 //								____rooms
 // global variables
 var entered,
@@ -53,11 +54,11 @@ var	playerStats = {
 
 // player skills
 var playerSkills = {
-	none 			: "Rookie<br>Nothing yet",
-	first_attack 	: "Sneak<br>50% chance of 1st strike",
-	scan_enemy		: "Scanner<br>Show enemy stats",
-	use_magic		: "Learned Magic<br>magic enabled",
-	berserker 		: "berseker<br>Strong attack after no. of hits"
+	none 			: "Rookie: Nothing yet",
+	first_attack 	: "Sneak: 50% chance of 1st strike",
+	scan_enemy		: "Scanner: Show enemy stats",
+	use_magic		: "Learned Magic: magic enabled",
+	berserker 		: "berseker: Strong attack after no. of hits"
 };
 
 // status effects player 
@@ -252,9 +253,12 @@ var startBtn 	= document.getElementById('start-btn'),
 	westBtn		= document.getElementById('west'),
 	lookBtn		= document.getElementById('look'),
 	weaponBtn 	= document.getElementById('weapon'),
-	itemBtn 	= document.getElementById('item');
+	itemBtn 	= document.getElementById('item'),
+	actionInput = document.getElementById('action-text'),
+	actionBtn 	= document.getElementById('action-button'),
+	actionOut	= document.getElementById('action-display');
 
 // html elements
 var char_name 	= 'char-name';
-
+// room elements
 var roomContent = document.getElementById('room-content');

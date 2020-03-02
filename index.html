@@ -47,7 +47,26 @@
 		    </select>
 		    	<br><br>
 		    <button id="start-btn" name="start" value="start">create character</button>
-		    	<br>		
+		    	<br>
+		    <div id="input-values" class="character-build">
+					<table id="player-info" class="character-build">
+						<tr>
+							<td><h3>PLAYER NAME</h3></td>
+							<td><span id="char-name" 	class="character-build">name</td>
+						</tr>
+						<tr>
+							<td><h3>PLAYER SKILLS</h3></td>
+							<td><span id="skills" 		class="character-build">skills</td>
+						</tr>
+						<tr>
+							<td><h3>PLAYER CLASS</h3></td>
+							<td><span id="char-class" 	class="character-build">class</td>
+						</tr>
+							<td><h3>PLAYER WEAPON</h3></td>
+							<td><span id="arm-name" 	class="character-build">weapon</td>
+						</tr>
+					</table>
+				</div>		
 		</div>
 
 		<div id="player-stats" class="player-stats">
@@ -97,28 +116,37 @@
 					</table>
 				</div>
 
-				<div id="input-values" class="character-build">
-					<table id="player-info" class="character-build">
-						<tr>
-							<td><span id="char-name" 	class="character-build"></td>
-						</tr>
-						<tr>
-							<td><span id="skills" 		class="character-build"></td>
-						</tr>
-						<tr>
-							<td><span id="char-class" 	class="character-build"></td>
-						</tr>
-							<td><span id="arm-name" 	class="character-build"></td>
-						</tr>
-					</table>
-			</div>
+			<span id="action-display" class="action-display">
+				player actions
+			</span>				
 
 			<div id="room">
-			 	<span id="room-name">still cilling, doing your thing..</span><br>
-				<h2 id="room-text">your location</h2>
-			 	<span id="describe">you are nowhere yet !</span><br>
-			 	<span id="direction"></span><br>
-			 	
+				<table id="room-display" class="room-display">
+					<tr>
+						<td>
+							<h2 class="-room-display">room name</h2>
+						</td>
+						<td>
+							<span id="room-name" class="-room-display">still chilling at home, </span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h2>information</h2>
+						</td>
+						<td>
+							<span id="describe" class="-room-display">you are nowhere yet !</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h2 id="room-text" class="-room-display">doing your thing..</h2>
+						</td>
+						<td>
+							<span id="direction" class="-room-display"></span>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 
@@ -126,16 +154,24 @@
 			<!--<input type="text" id="move-value" placeholder="move N/S/E/W" autocomplete="off">
 			  <button id="move-submit">submit</button>-->
 			  <div id="control-buttons">
-					<h1>N = up | S = down |	W = left | E = right</h1>
-					<button id="north" 	value="n">N</button>
-					<button id="east" 	value="e">E</button>
-					<button id="south" 	value="s">S</button>
-					<button id="west" 	value="w">W</button>
-					<br>
-					<button id="look" 	value="look-ctrl">look</button>
-					<button id="weapon" value="weapon-ctrl">weapon</button>
-					<button id="item" 	value="item-ctrl">item</button>
-				  <br><br>
+				<h1>N = up | S = down |	W = left | E = right</h1>
+				<button id="north" 	value="n">N</button>
+				<button id="east" 	value="e">E</button>
+				<button id="south" 	value="s">S</button>
+				<button id="west" 	value="w">W</button>
+				<br>
+				<button id="look" 	value="look-ctrl">look</button>
+				<button id="weapon" value="weapon-ctrl">weapon</button>
+				<button id="item" 	value="item-ctrl">item</button>
+			  	<br><br>
+			  	<input type="text" name="actions" id="action-text" class="action-text" placeholder="your action?" ></input>
+			  	<button id="action-button" class="action-button" value="do">DO !!</button>
+			  	<br>
+			  	<h1> take + item | drop + item | attack + NPC <br>
+			  	 leave + NPC | talk + NPC <br></h1>
+			  	 <h1 class="class-dependant">
+			  	 	magic Def | magic Heal | skill + name
+			  	 </h1>
 			  </div>
 			 <div id="room-content" class="room-content"></div> 	
 		</div>
@@ -157,6 +193,7 @@
 	<script src="js/npc-enemy-list.js"></script>
 	<script src="js/room.js"></script>
 	<script src="js/engine.js"></script>
+	<script src="js/action-handles.js"></script>
 
 </body>
 </html>
