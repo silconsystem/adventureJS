@@ -100,7 +100,10 @@ var action_state = [
 		["speak"	, "mute"],				// interacts or silent
 		["drop"		, "nodrop"], 			// drops inventory items or nothing
 		["boss"		, "noboss"]				// boss enemy or not
-];
+	],
+	player_input_action =[
+		"take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill"
+	];
 
 // enemy spells
 var enemySpellBook = [attack_spells, restore_spells];
