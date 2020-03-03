@@ -43,7 +43,7 @@ function textParser(txt) {
 		cmd_exists 		= false,
 		I_obj_exists	= false,
 		W_obj_exists	= false,
-		type;
+		type 			= "none";
 
 	//				TODO: spaghetti code:
 	//				make more compact functions
@@ -57,15 +57,19 @@ function textParser(txt) {
 		if (npc_objects.includes(t)) {
 
 			target 	= t;
+			type 	= "npc";
 		} else if (enemy_names.includes(t)) {
 
 			target 	= t;
+			type 	= "enemy";
 		} else {
 
-			target 	= null;		
+			target 	= null;
+			type 	= null;
+			return false;
 		}
 		console.log('found npc: ', target);
-		return target;
+		return true;
 	}
 
 	// get target if it exists and set type 'weapon_cmd'
@@ -90,10 +94,12 @@ function textParser(txt) {
 			} else {
 
 				target 	= null;
+				return false;
 			}
 		}
+		type = "weapons";
 		console.log('found weapon: ', target);
-		return target;
+		return false;
 	}
 
 	// get command if it exists and set type 'item_cmd'
@@ -104,23 +110,78 @@ function textParser(txt) {
 			target = t;
 		} else {
 			target 	= null;
+			return false
 		}
+		type = "items";
 		console.log('found item: ', target);
-		return target;
+		return true;
 	}
 	/* 												____logic 				*/
 	// test if cmd, target and opt. special
 	if (player_input_action.includes(cmd)) {
 		cmd = cmd;
 		console.log('command: ', cmd, ' found');
+		
+		if (itemValue(target)) {  						// if true take or drop item
+
+			switch (cmd) {
+				case "take":
+
+					// add item to inventory
+					manInventory(0, type, target);
+					console.log('added ', type, ' ', target, ' to inventory');
+					break;
+
+				case "drop":
+					// remove item from inventory
+					manInventory(1, type, target);
+					console.log('added ', type, ' ', target, ' to inventory');
+					break;
+			}
+		} else if (weaponValue(target)) {
+			
+			switch (cmd) {
+				case "take":
+
+					// add item to inventory
+					manInventory(0, type, target);
+					console.log('added ', type, ' ', target, ' to inventory');
+					break;
+					
+				case "drop":
+					// remove item from inventory
+					manInventory(1, type, target);
+					console.log('added ', type, ' ', target, ' to inventory');
+					break;
+			}
+		} else if (npcValue(target)) {
+			
+			// TODO: handle npc / enemy encounters
+			switch (type) {
+				case "npc":
+
+					// handle npc player interaction
+					console.log('encounters npc ', target);
+					break;
+				case "enemy":
+
+					// handle enemy player interaction
+					console.log('encounters enemy', target);
+					break;
+			}
+		} else {
+
+			console.log('unknown values');
+			return false;
+		}
 	} else {
 		cmd = null;
 		console.log('unknown value: ', cmd);
 	}
-
+/*
 	// test if item exists
 	if (itemValue(target)) {
-		target 	= weaponValue(target);
+		target 	= itemValue(target);
 		type 	= "item_cmd";
 	} else {
 		target 	= null;
@@ -141,9 +202,11 @@ function textParser(txt) {
 	} else {
 		target 	= null;
 	}
+*/
 
 	// TODO : get extra target 
 	console.log('player action: ', cmd, ' target: ', target, ' type: ', type);
+	return [target, type];
 }
 
 /* 								____player action parser input */

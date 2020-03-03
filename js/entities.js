@@ -58,7 +58,7 @@ var room = {
 	
 };
 
-// player object TODO: maybe above is better ?
+// player object TODO: maybe function is better ?
 var player = {
 
  	name 	   : playerName,
@@ -86,16 +86,17 @@ var player = {
 	}
 };
 
-function enemy(
-				name, e_class, lvl, state,
-				desc, txt, hp, mp, 
+// enemy
+function enemy (
+				id, name, e_class, lvl,
+				state, desc, txt, hp, mp, 
 				str, int, evd, luc,
 				m_def, m_heal, skills, exp,
 				drop_m, drop_i, drop_h, st_fx,
 				st_F_P, final
 				)
 {
-
+	this.id 			= id; 			// id
  	this.name 			= name;			// name
  	this.class			= e_class;		// class
  	this.level 			= lvl;			// level
@@ -119,46 +120,10 @@ function enemy(
  	this.statF_P 		= st_F_P;		// can give you playerStatEffect
  	this.final 			= final;		// last attack when HP/MP is: something
 }
-// enemy base object
-/*var enemy = {
 
- 	name 		: "enemyName",			// name
- 	class		: "enemy",				// class
- 	level 		: "enemyLevel",			// level
- 	state 		: null ,				// [aware 0/1, attk on entry 0/1, leave room 0/1]
- 	description : "empty",				// describe enemy
- 	text 		: "empty", 				// says stuff
- 	HP 			: 0,					// HP to take away
- 	MP 			: 0,					// MP to do spells or to take away
- 	str 		: 0,					// str
- 	int  		: 0,					// int
- 	evd 		: 0,					// evd
- 	luc 		: 0,					// luc
- 	M_def 		: enemySpellBook[0][0],	// defensive spells
- 	M_heal 		: enemySpellBook[1][0],	// healing spells
- 	skills 		: enemySkills.none,		// special skills
- 	exp_RW 		: 0,					// what you gain from a kill
- 	drop_M 		: enemyLootMagic[0],	// could drop magic spell
- 	drop_I 		: enemyLootItem[0],		// could drop item
- 	drop_H 		: enemyLootHeal[0],		// could drop healing magic/items
- 	statFX 		: enemyStatEffect[0],	// can be afflicted with: enemyStatEffect
- 	statF_P 	: playerStatEffect[0],	// can give you playerStatEffect
- 	final 		: enemyFinalWord[0],	// last attack when HP/MP is: something
-}
-/*
-var npc = {
-	npc.name 		: "empty",						// name
- 	npc.n_class		: "npc",						// class
- 	npc.description : "empty",						// describe npc
- 	npc.text 		: "empty",						// says stuff
- 	npc.state 		: "empty",						// enemy behaviour flags
- 	npc.drop_M 		: enemyLootMagic[0],			// could drop magic spell
- 	npc.drop_I 		: enemyLootItem[0],				// could drop item
- 	npc.drop_H 		: enemyLootHeal[0],				// could drop healing magic/items
- 	npc.statF_P 	: playerStatEffect[0]			// can give you playerStatEffect
-}
-*/
+// npc
 function npc(
+			id,
 			name,
 			n_class,
 			desc,
@@ -169,8 +134,9 @@ function npc(
 			st_F_P
 			) 
 {
+	this.id 			= id;
 	this.name 			= name;
-	this.class 			=  n_class;
+	this.class 			= n_class;
 	this.description 	= desc;
 	this.text 			= txt;
 	this.state 			= state;

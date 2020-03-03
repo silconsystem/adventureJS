@@ -17,17 +17,36 @@
 			padding: 0;
 			font-weight: bold;
 			font-size: 20px;
-			color: #fff;
+			color: #000;
 		}
 	</style>
 
-
-
 </head>
-	<body onload="onload();">
+	<body onload="onload();" class="room-body">
 		
 		<!-- content -->
 		<data id="room-002" value="room two">room-two</data>
+
+
+		<script type="text/javascript">
+			var Room_ONE = [
+
+				[sceneObject.describe_001,	look_001], 
+				[exitObject.exits_room_001,	exitObject.exits_room_001],
+				[npcObject.npc_001, 		npcObject.npc_001_n],
+				[enemyObject.enemy_001		enemyObject.enemy_001_n],
+				[itemObject.item_001, 		itemObject.item_001_f],
+				[weaponObject.weapon__001, 	weaponObject.weapon__001_f]
+
+			];
+
+			function returnRoomObjects(room) {
+				// return this rooms objects 
+				return room;
+			}
+			returnRoomObjects(Room_ONE);
+
+		</script>
 
 	</body>
 

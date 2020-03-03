@@ -47,7 +47,8 @@ function makeExit(mov) {
 
 // scenes
 var sceneObject = {
-	describe_001 	: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room"
+	describe_001 	: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room",
+	look_001 		: "you spot something resembling a pistol, and a box of sorts"
 }
 // exits
 var exitObject = {
@@ -62,12 +63,19 @@ var exitObject = {
 }
 // npc's
 var npcObject = {
-	npc_001			: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you..."
+	npc_001			: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you...",
+	npc_001_n		: "harold"
 	//				____002____ TODO: dont forget comma above !
+}
+// enemies
+var enemyObject = {
+	enemy_001       : "Do you have an appointment ?",
+	enemy_001_n 	:
 }
 // weapons
 var weaponObject = {
-	weapon__001 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says..."
+	weapon__001 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says...",
+	weapon__001_f 	: 0 		// flag: 1 = can take, 0 = cant take
 	// 				____002____ TODO: dont forget comma above !
 
 }
@@ -75,7 +83,7 @@ var weaponObject = {
 var itemObject = {
 	item_001		: "You manage to take a potion from this chest when the man looks for his keys",
 	item_001_name 	: "potion",
-	item_001_flag 	: "taken"
+	item_001_f	 	: 1 		// // flag: 1 = can take, 0 = cant take
 	// 				____002____ TODO: dont forget comma above !
 }
 // traps 
