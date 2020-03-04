@@ -196,6 +196,7 @@ startBtn.onclick = function(event) {
 
 		var htmlString,
 			targetElement = 'stats';
+
 	let new_stats 	= document.querySelectorAll("#game-stats");
 
 		for (let i = 0; i < new_stats.length; i++) {
@@ -284,6 +285,8 @@ startBtn.onclick = function(event) {
 
 		switch (playerClass) {
 			case "Thief":
+				player.state 	= "alive";
+		 		player.coins 	= 0;
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -303,6 +306,8 @@ startBtn.onclick = function(event) {
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
 			case "Warrior":
+				player.state 	= "alive";
+		 		player.coins 	= 0;
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -321,6 +326,8 @@ startBtn.onclick = function(event) {
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
 			case "Rogue":
+				player.state 	= "alive";
+		 		player.coins 	= 0;
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -338,7 +345,9 @@ startBtn.onclick = function(event) {
 				writeHTML(targetElement, htmlString);
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
-			case "Mage":			
+			case "Mage":
+				player.state 	= "alive";
+		 		player.coins 	= 0;			
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;

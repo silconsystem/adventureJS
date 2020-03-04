@@ -70,14 +70,13 @@ var npcObject = {
 // enemies
 var enemyObject = {
 	enemy_001       : "Do you have an appointment ?",
-	enemy_001_n 	:
 }
 // weapons
 var weaponObject = {
 	weapon__001 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says...",
 	weapon__001_f 	: 0 		// flag: 1 = can take, 0 = cant take
-	// 				____002____ TODO: dont forget comma above !
 
+	// 				____002____ TODO: dont forget comma above !
 }
 // treasure
 var itemObject = {

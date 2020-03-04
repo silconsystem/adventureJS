@@ -94,16 +94,18 @@ var	enemyStats = {
 // enemy state
 // array holding tested argument values
 var action_state = [
+	[
 		["aware"	, "unaware"],			// enemy attack on entry or ignores entry
 		["attack"	, "passive"], 			// attack on look or ignore look
 		["leave"	, "defeat"],			// no exit before defeat
 		["speak"	, "mute"],				// interacts or silent
 		["drop"		, "nodrop"], 			// drops inventory items or nothing
 		["boss"		, "noboss"]				// boss enemy or not
-	],
-	player_input_action =[
-		"take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill"
-	];
+	]
+];
+var player_actions = [
+	"take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill"
+];
 
 // enemy spells
 var enemySpellBook = [attack_spells, restore_spells];
@@ -216,11 +218,16 @@ var weapon = [
 ];
 
 var items = [
-	"nothing",
-	"potion",
-	"ether",
-	"revive",
-	"helmet"
+	[	["nothing"		,"none"				,"none"		,"none"],
+		["potion"		,"small boost"		,"HP +10"	,"#"],
+		["ether"		,"MP boost"			,"MP +10"	,"#"],
+		["revive"		,"alive"			,"HP +100"	,"#"],
+		["helmet"		,"protect head"		,"evd +3"	,"#"],		
+		["coins",		,"player coin"		,"coins +10","#"],	
+		["medals",		,"luck plus"		,"luc +5"	,"#"],
+		["crown",		,"strenght plus"	,"str +5"	,"#"],
+		["robes"		,"strenght plus"	,"str +1"	,"#"]
+	]
 ];
 
 var traps = [
