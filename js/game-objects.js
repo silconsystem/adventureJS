@@ -2,15 +2,15 @@ const game_obj = [			/* 			This is the new way I'm gonna structure the data(if i
 	{
 		item: 
 		[
-			{name:"nothing",	 description:"none",			 game:"none",	 	url:'#'},
-			{name:"potion",		 description:"small boost",		 game:"HP +10",	 	url:'#'},
-			{name:"ether",		 description:"MP boost",		 game:"MP +10",	 	url:'#'},
-			{name:"revive",		 description:"alive",			 game:"HP +100", 	url:'#'},
-			{name:"helmet",		 description:"protect head",	 game:"evd +3",	 	url:'#'},
-			{name:"coins",		 description:"player coin",		 game:"coins +10", 	url:'#'},
-			{name:"medals",		 description:"luck plus",		 game:"luc +5", 	url:'#'},
-			{name:"crown",		 description:"strenght plus",	 game:"str +5", 	url:'#'},
-			{name:"robes",		 description:"strenght plus",	 game:"str +1", 	url:'#'}
+			{name:"nothing",	 description:"none",			 game:"none",	 	url: "../img/weapons/nothing.png"},
+			{name:"potion",		 description:"small boost",		 game:"HP +10",	 	url: "../img/items/item/potion.png"},
+			{name:"ether",		 description:"MP boost",		 game:"MP +10",	 	url: "../img/items/item/ether.png"},
+			{name:"revive",		 description:"alive",			 game:"HP +100", 	url: "../img/items/item/revive.png"},
+			{name:"helmet",		 description:"protect head",	 game:"evd +3",	 	url: "../img/items/item/helmet.png"},
+			{name:"coins",		 description:"player coin",		 game:"coins +10", 	url: "../img/items/item/coins.png"},
+			{name:"medals",		 description:"luck plus",		 game:"luc +5", 	url: "../img/items/item/medals.png"},
+			{name:"crown",		 description:"strenght plus",	 game:"str +5", 	url: "../img/items/item/crown.png"},
+			{name:"robes",		 description:"strenght plus",	 game:"str +1", 	url: "../img/items/item/robes.png"}
 		]
 	},
 	{

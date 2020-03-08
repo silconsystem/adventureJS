@@ -247,6 +247,7 @@ function textParser(txt) {
 					case "item":
 						// statements_1
 						document.getElementById('item-image').innerHTML = '<img src=\"' + itemObj.url + '\">';	
+						console.log(itemObj.url);
 						break;
 					case "weapon":
 
@@ -257,10 +258,24 @@ function textParser(txt) {
 
 				break;
 			case "drop":
-				
+
 				// drop item from inventory
 				manInventory(1, itemObj.type, itemObj);
-				document.getElementById('inventory-weapon').innerHTML = '<img src=\"../img/weapons/nothing.png\">';
+				
+				switch (itemObj.type) {
+					case "item":
+						// statements_1
+						document.getElementById('item-image').innerHTML = '';
+						document.getElementById('item-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';	
+						break;
+					case "weapon":
+
+						// statements_def
+						document.getElementById('weapon-image').innerHTML = '';
+						document.getElementById('weapon-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';
+						break;
+				}
+				
 				break;
 			default:
 
