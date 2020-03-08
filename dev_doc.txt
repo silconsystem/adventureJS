@@ -38,7 +38,8 @@ TODO: change layout	if previous fields are all set with valid values
       - onload return room objects 
       - write description
 TODO: create text parser                                                          !_TODO_!
-  -> test if string values exist and extract command and item                     ! DONE !
+
+  -> test if string values exist and extract command and item and if 3rd strVal   ! DONE !
   -> test if if object to add exists in room & take = 1                           ! DONE !
     -> NPC, enemy handler:                                                        !_TODO_!
       -> if NPC: get desription and responses                                     !_TODO_!
@@ -56,5 +57,14 @@ TODO: create text parser                                                        
 
 TODO: create room loading logic:
   -> movement buttons.onload(): get objects inside room by retuning html.elem.    !_TODO_!
+
+WORK TODO:
+
+I've changed the game_objects array structure hopefully this will make sorting easier.
+the current solution has had some helpfull pointers and solutions by these great
+coders who took the time to awnser my questions;
+https://stackoverflow.com/questions/60577735/access-to-object-arrasy-and-values-with-loops
+
+Abdullah Abid, Josh Wulf, ffflabs thank you !!
 
 -----------------------------------------------------------------------------------------------------------

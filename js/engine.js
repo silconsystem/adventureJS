@@ -8,13 +8,20 @@ function getPlayerClass(p_class) {
 	var i;
 
 
-	switch (p_class) {
+	switch (p_class) { //TODO: cannot exeed 5 !
 
 		case "Thief":
 			// fill weapon menu array for Thief class
-			for (i = 1; i <= armSelMenu.options.length; i++) {
+			for (var i = 0; i < armSelMenu.options.length; i++) {
 
-				armSelMenu.options[i].innerHTML = weapon[0][i][0];
+				if (game_obj[1].weapon[0].thief[i].name === undefined) {
+					break;
+				} else {
+					console.log(game_obj[1].weapon[0].thief[i].name);
+					if (i > 0) {
+						armSelMenu.options[i].innerHTML = game_obj[1].weapon[0].thief[i].name;
+					}
+				}
 			}
 
 			console.log('arms select for thief');
@@ -22,9 +29,16 @@ function getPlayerClass(p_class) {
 
 		case "Warrior":
 			// fill weapon menu array for Warrior class
-			for (var i = 1; i <= armSelMenu.options.length; i++) {
+			for (var i = 0; i <= armSelMenu.options.length; i++) {
 				
-				armSelMenu.options[i].innerHTML = weapon[1][i][0];
+				if (game_obj[1].weapon[1].warrior[i].name === undefined) {
+					break;
+				} else {
+					console.log(game_obj[1].weapon[1].warrior[i].name);
+					if (i > 0) {
+						armSelMenu.options[i].innerHTML = game_obj[1].weapon[1].warrior[i].name;
+					}
+				}
 			}
 
 			console.log('arms select for warrior');
@@ -32,9 +46,16 @@ function getPlayerClass(p_class) {
 
 		case "Rogue":
 			// fill weapon menu array for Rogue class
-			for (var i = 1; i <= armSelMenu.options.length; i++) {
+			for (var i = 0; i <= armSelMenu.options.length; i++) {
 				
-				armSelMenu.options[i].innerHTML = weapon[2][i][0];
+				if (game_obj[1].weapon[2].rogue[i].name === undefined) {
+					break;
+				} else {
+					console.log(game_obj[1].weapon[2].rogue[i].name);
+					if (i > 0) {
+						armSelMenu.options[i].innerHTML = game_obj[1].weapon[2].rogue[i].name;
+					}
+				}
 			}
 
 			console.log('arms select for rogue');
@@ -42,11 +63,18 @@ function getPlayerClass(p_class) {
 
 		case "Mage":
 			// fill weapon menu array for Mage class
-			for (var i = 1; i <= armSelMenu.options.length; i++) {
+			for (var i = 0; i <= armSelMenu.options.length; i++)  {
 				
-				armSelMenu.options[i].innerHTML = weapon[3][i][0];
+				if (game_obj[1].weapon[3].mage[i].name === undefined) {
+					break;
+				} else {
+					console.log(game_obj[1].weapon[3].mage[i].name);
+					if (i > 0) {
+						armSelMenu.options[i].innerHTML = game_obj[1].weapon[3].mage[i].name;
+					}
+				}
 			}
-
+			
 			console.log('arms select for mage');
 			break;	
 	}
