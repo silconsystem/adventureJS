@@ -1,20 +1,41 @@
 /*		helper functions   			*/
 // get input val
-function getInputValue(in_loc, out_loc, func){
+function getInputValue(func, argOne, argTwo) {
 
-	// in_loc 	= HTML id element value
-	// out_loc 	= HTML_id
-	// func 	= select funtion to call
+	var matchedValue;
 
-    // Selecting the input element and get its value 
-    var text = document.getElementById(in_loc).value;    
+	// func 	= 0 : writeHTML() 			| func 		= 1 : get array value
+	// argOne	= HTML id element value 	| argOne 	= array name
+	// argTwo	= HTML_id 					| argTwo 	= value to match   
 
-    // func 1 :
     // Displaying the value
-    if (func == 1) {
-    	writeHTML(out_loc, text);
-    }
+    switch (func) {							// ____func 0 writeHTML 
+    	case 0: 							
 
+    		// Selecting the input element and get its value 
+    		var text = document.getElementById(argOne.value); 
+
+    		// write 'text' to 'out_loc'
+    		writeHTML(argTwo, text);
+    		console.log('writing text: ', text, 'from: ', argOne, ' to element id: ', argTwo);
+    		break;
+    	case 1:
+
+    		// get array value
+    		if (argOne.includes(argTwo)) {
+    			matchedValue = argTwo;
+    			console.log('found match with: ', argOne,' :: ', matchedValue, ' in array: ', argOne);
+    		} else {
+    			console.log(argOne, ' array doesn\'t contain: ', argTwo);
+    		}
+    		return matchedValue;
+    		break;
+    	default:
+
+    		// write error to console
+    		console.log('values: ', func, ' : ', argOne, ' : ', argTwo,' not valid or used wrong !')
+    		break;
+    }
 }
 // write html
 function writeHTML(location, text) {
@@ -29,7 +50,7 @@ function manInventory(func, id, item) {
 		func 1 	: remove
 
 		id 		: type of inventory item 
-				0	"items"
+				0	"item"
 				1	"weapon"
 				2	"magic_H"
 				3	"magic_D"
@@ -46,136 +67,92 @@ function manInventory(func, id, item) {
 
 			TODO: get array  id and push given value 
 				or remove
-	*//* TODO less code with function
-	function itemTest(id) {
-				for (var i = 0; i > id.length; i++) {
+	*/
+	// if func argument = 0 add to player inventory
+	if (func == 0) {
 
-					if (item == id[i]) {
-
-						item = id[i];
-						player.inventory.id.push(item);	// add to inventory
-						console.log('item: ' + item + 'exists, added to player inventory');
-					} else {
-						console.log('item doesn\'t exist, error');
-					}
-				}
-			}
-			*/
-	if (func == 0) {	
+		console.log('add to array: '. id);	
 
 		switch (id) {
-			case "items":
-				player.inventory.items.push(item);	// add to inventory
-				/*itemTest(id);*/
+			case "item":
+
+				// add to inventory
+				player.inventory.items.push(item);				
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "weapon":
-				player.inventory.weapon.push(item);	// add to inventory
+
+				// add to inventory
+				player.inventory.weapon.push(item);	
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "spell_H":
-				player.inventory.spell_H.push(item);	// add to inventory
+
+				// add to inventory
+				player.inventory.spell_H.push(item);
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "spell_D":
-				break;
-				player.inventory.spell_D.push(item);	// add to inventory
+
+				// add to inventory
+				player.inventory.spell_D.push(item);	
 				console.log('added ' + item + ' to: ' + id);
+
+				break;
 			case "skill":
-				player.inventory.skill.push(item);	// add to inventory
+
+				// add to inventory
+				player.inventory.skill.push(item);
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			default:
 
-				// statements_def
+				// unknown statements
+				console.log('unknown values, nothing added');
 				break;
 		}
+
+	// if func argument = 1 	
+	} else if (func == 1) {
+
+		console.log('remove from array: ', id);
+
+		switch (id) {
+			case "item":
+
+				// remove 'item' argument from array 'id'
+				var index = player.inventory.items.indexOf(item);
+				player.inventory.items.splice(index,1);
+				break;
+			case "weapon":
+				// statements_def
+				var index = player.inventory.weapon.indexOf(item);
+				player.inventory.weapon.splice(index,1);
+				break;
+			case "spell_H":
+				// statements_def
+				var index = player.inventory.spell_H.indexOf(item);
+				player.inventory.spell_H.splice(index,1);
+				break;
+			case "spell_D":
+				// statements_def
+				var index = player.inventory.spell_D.indexOf(item);
+				player.inventory.spell_D.splice(index,1);
+				break;
+			case "skill":
+				// statements_def
+				var index = player.inventory.skill.indexOf(item);
+				player.inventory.skill.splice(index,1);
+				break;
+		}
+
 	} else {
 		console.log('unknown value');
 	}
 }
 
-/*
-// fill weapon options when class is selected
-function getPlayerClass(p_class) {
-
-	var i;
-
-
-	switch (p_class) {
-
-		case "Thief":
-			// fill weapon menu array for Thief class
-			for (i = 1; i <= armSelMenu.options.length; i++) {
-
-				armSelMenu.options[i].innerHTML = weapon[0][i][0];
-			}
-
-			console.log('arms select for thief');
-			break;
-
-		case "Warrior":
-			// fill weapon menu array for Warrior class
-			for (var i = 1; i > armSelMenu.options.length; i++) {
-				
-				armSelMenu.options[i].innerHTML = weapon[1][i][0];
-			}
-
-			console.log('arms select for warrior');
-			break;
-
-		case "Rogue":
-			// fill weapon menu array for Rogue class
-			for (var i = 1; i <= armSelMenu.options.length; i++) {
-				
-				armSelMenu.options[i].innerHTML = weapon[2][i][0];
-			}
-
-			console.log('arms select for rogue');
-			break;
-
-		case "Mage":
-			// fill weapon menu array for Mage class
-			for (var i = 1; i <= armSelMenu.options.length; i++) {
-				
-				armSelMenu.options[i].innerHTML = weapon[3][i][0];
-			}
-
-			console.log('arms select for mage');
-			break;	
-	}
-}*/
-/*
-// check if data field is empty*
-function checkInputValue(field, button) {
-    var val = document.getElementById(field).value;
-        var submit = true;
-
-    if (val.length == 0) {
-           submit = false;
-    }
-
-    if (submit == false) {
-      document.getElementById(button).onchange = null;
-
-      console.log('no value, button disabled');
-    } else if (submit == true) {
-    	document.getElementById(button)
-    }
-
-};*/
-
-// create room descriptions
-function getRoomText(rm_nm) {
-	/* 
-		rm_nm: 	room name
-	 */
-	 // TODO:
-
-}
-
 // call if html page is loaded
-function onload() {
+function onload(rm_name) {
 		
 	var rm_name = document.getElementsByTagName('data')[0].value;
 
@@ -264,7 +241,7 @@ function loadRoom(count, dir) {
 			console.log(ex[i]);
 		}
 		return room_exits;
-	} 				
+	} 	
 
     fetch(pageUrl /*, options */)
     .then((response) => response.text())

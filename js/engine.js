@@ -8,13 +8,17 @@ function getPlayerClass(p_class) {
 	var i;
 
 
-	switch (p_class) {
+	switch (p_class) { //TODO: cannot exeed 5 !
 
 		case "Thief":
 			// fill weapon menu array for Thief class
-			for (i = 1; i <= armSelMenu.options.length; i++) {
+			for (var i = 1; i <= armSelMenu.options.length; i++) {
 
-				armSelMenu.options[i].innerHTML = weapon[0][i][0];
+				if (i < 5) {
+
+					console.log(game_obj[1].weapon[0].thief[i].name);
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[0].thief[i].name;
+				}
 			}
 
 			console.log('arms select for thief');
@@ -24,7 +28,11 @@ function getPlayerClass(p_class) {
 			// fill weapon menu array for Warrior class
 			for (var i = 1; i <= armSelMenu.options.length; i++) {
 				
-				armSelMenu.options[i].innerHTML = weapon[1][i][0];
+				if (i < 5) {
+
+					console.log(game_obj[1].weapon[1].warrior[i].name);
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[1].warrior[i].name;
+				}
 			}
 
 			console.log('arms select for warrior');
@@ -34,7 +42,11 @@ function getPlayerClass(p_class) {
 			// fill weapon menu array for Rogue class
 			for (var i = 1; i <= armSelMenu.options.length; i++) {
 				
-				armSelMenu.options[i].innerHTML = weapon[2][i][0];
+				if (i < 5) {
+
+					console.log(game_obj[1].weapon[2].rogue[i].name);
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[2].rogue[i].name;
+				}
 			}
 
 			console.log('arms select for rogue');
@@ -42,11 +54,15 @@ function getPlayerClass(p_class) {
 
 		case "Mage":
 			// fill weapon menu array for Mage class
-			for (var i = 1; i <= armSelMenu.options.length; i++) {
+			for (var i = 1; i <= armSelMenu.options.length; i++)  {
 				
-				armSelMenu.options[i].innerHTML = weapon[3][i][0];
-			}
+				if (i < 5) {
 
+					console.log(game_obj[1].weapon[3].mage[i].name);
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[3].mage[i].name;
+				} 
+			}
+			
 			console.log('arms select for mage');
 			break;	
 	}
@@ -106,8 +122,10 @@ charSelMenu.onchange = function(event) {
 			case "Thief":
 				// class info
 				writeHTML('char-class', 'you chose to play as a ' + playerClass);
-				writeHTML('arm-name', playerSkills.first_attack);
+				writeHTML('skills', playerSkills.first_attack);
 				writeHTML('class-image', '<img src="../img/thief.png" style="width : 100px; height : 100px; text-align: center;">');
+				// TODO: .GIF looks pixelated but animations could be added otherwise
+				//writeHTML('class-image', '<img src="../img/thief_anim.gif" style="width : 100px; height : 100px; text-align: center;">');
 				break;
 			case "Warrior":
 				// class info
@@ -194,6 +212,7 @@ startBtn.onclick = function(event) {
 
 		var htmlString,
 			targetElement = 'stats';
+
 	let new_stats 	= document.querySelectorAll("#game-stats");
 
 		for (let i = 0; i < new_stats.length; i++) {
@@ -282,6 +301,8 @@ startBtn.onclick = function(event) {
 
 		switch (playerClass) {
 			case "Thief":
+				player.state 	= "alive";
+		 		player.coins 	= 0;
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -301,6 +322,8 @@ startBtn.onclick = function(event) {
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
 			case "Warrior":
+				player.state 	= "alive";
+		 		player.coins 	= 0;
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -319,6 +342,8 @@ startBtn.onclick = function(event) {
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
 			case "Rogue":
+				player.state 	= "alive";
+		 		player.coins 	= 0;
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -336,7 +361,9 @@ startBtn.onclick = function(event) {
 				writeHTML(targetElement, htmlString);
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
-			case "Mage":			
+			case "Mage":
+				player.state 	= "alive";
+		 		player.coins 	= 0;			
 				player.name 	= playerName;
 				player.class 	= playerClass;
 				player.weapon 	= playerWeapon;
@@ -368,10 +395,6 @@ startBtn.onclick = function(event) {
 		console.log('character created');
 
 		hideHTML('player-content');
-		hideHTML("char-name");
-		hideHTML("char-class");
-		hideHTML("arm-name");
-		hideHTML("skills");
 	}
 }
 
@@ -424,7 +447,3 @@ itemBtn.onclick = function(event) {
 	document.getElementById('describe').innerHTML = room.item_2;
 	console.log('looking for items');
 }
-
-
-
-

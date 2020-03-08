@@ -35,7 +35,7 @@ var harold = Object.create(npc);
 			st_F_P
 			)
 */
-harold = new npc('harold', 'npc', 'serious looking old and intimidating man',
+harold = new npc('npc_001', 'harold', 'npc', 'serious looking old and intimidating man',
 				 'no lingering', actionState('aware', 'passive', 'none', 'speak','nodrop', 'noboss'),
 				 enemyLootMagic[0], enemyLootItem[0], playerStatEffect[0]);
 
@@ -53,7 +53,7 @@ npc_objects.push(harold.name);
 			st_F_P, final
 			)
 */
-lisa = new enemy('lisa', 'enemy', 1, actionState('aware','attack','defeat', 'speak', 'drop', 'noboss'),
+lisa = new enemy('enemy_001', 'lisa', 'enemy', 1, actionState('aware','attack','defeat', 'speak', 'drop', 'noboss'),
 				'this fragile women doesn\'t look very intimidating, but attacks you anyway',
 				'you don\'t have an appointment, and now you\'ll be sorry that you ever came here !',
 				95, 0, 12, 10, 6, 10, 0, 0, enemySkills.back_attack, playerExp + 10,

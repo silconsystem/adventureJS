@@ -1,0 +1,70 @@
+*********** javascript adventure game project
+*********** 2020
+*********** R van Ardenne
+
+
+
+start with ask name in <DIV> name-input			        __> write name to <DIV> player-stats <SPAN> char-name
+	_> nameBtn.onclick: 
+		_> set var playerName;
+		_> player.name = playerName;
+		_> write html;
+
+select player Class in <SELECT> character-menu	    __> write class to <DIV> player-stats <SPAN> char-class
+	_> charSelMenu.onchange:
+	_> set var playerClass;
+	_> player.class = playerClass;
+
+select player arms in <SELECT> weapon-menu		      __> write choice to <DIV> player-stats <SPAN> arm-name
+	_> set var playerWeapon if playerClass is set;
+  _> player.weapon = playerWeapon;
+  _> write html; 
+  _> add image to inventory;                        __> textparser depend  T_P**
+  _> add item to player.inventory.items array       __> textparser depend  T_P**  !_TODO_! 
+
+if character created: enable movement buttons       __>                           !_TODO_!
+  _> load room: room_00(counter_$)
+    _> room returns: objects (after room one: remove old objects)                 !_TODO_!
+    _> handle player interaction:
+      _> items    >> take | drop to/from player.inventory.items            T_P**  ! DONE !
+      _> weapons  >> take | drop to/from player.inventory.items            T_P**  ! DONE !
+-----------------------------------------------------------------------------------------------------------
+  :: submit ::
+-----------------------------------------------------------------------------------------------------------
+TODO: change layout	if previous fields are all set with valid values
+  -> character stats visible after user input fields submitted                    ! DONE !
+  -> load room html                                                               ! DONE !
+  -> create room object handler,                                                  !_TODO_!
+      - onload return room objects 
+      - write description
+TODO: create text parser                                                          !_TODO_!
+
+  -> test if string values exist and extract command and item and if 3rd strVal   ! DONE !
+  -> test if if object to add exists in room & take = 1                           ! DONE !
+    -> NPC, enemy handler:                                                        !_TODO_!
+      -> if NPC: get desription and responses                                     !_TODO_!
+      -> if enemy: get desription and responses:
+        -> CMD == attack >> to battleSystem() logic                         (!! BIG TODO !!)
+
+        NOTICE CREATE NEW ARRAY STRUCTURE SO EVERY OBJECT NAME
+        CAN BE FOUND WITH ONE IDENTIFIER :
+          objects {
+            type: array[name,description,game,img_url]
+          }
+        i.e: objects.type[0] = array[0](name);
+
+  ____ADD MAGIC AND SKILL WHEN TEXT PARSER AND ROOM LOGIC IS DONE____             !_TODO_!
+
+TODO: create room loading logic:
+  -> movement buttons.onload(): get objects inside room by retuning html.elem.    !_TODO_!
+
+WORK TODO:
+
+I've changed the game_objects array structure hopefully this will make sorting easier.
+the current solution has had some helpfull pointers and solutions by these great
+coders who took the time to awnser my questions;
+https://stackoverflow.com/questions/60577735/access-to-object-arrasy-and-values-with-loops
+
+Abdullah Abid, Josh Wulf, ffflabs thank you !!
+
+-----------------------------------------------------------------------------------------------------------

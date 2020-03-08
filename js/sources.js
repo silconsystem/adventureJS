@@ -15,10 +15,6 @@ var id,							// set room id
 	intro = false,				// set move to n on first page room_001
 	entry_flag = false,
 	Room_1;
-//
-// 								____room
-var room_objects = [];
-var npc_objects = [];
 
 //								____player
 // global variables
@@ -32,7 +28,8 @@ var playerName,
 	inventory_weapons 	= [],
 	inventory_spell_H	= [],
 	inventory_spell_D 	= [],
-	inventory_skill 	= [];
+	inventory_skill 	= [],
+	playerAction;
 //								____rooms
 // global variables
 var entered,
@@ -53,11 +50,11 @@ var	playerStats = {
 
 // player skills
 var playerSkills = {
-	none 			: "Rookie<br>Nothing yet",
-	first_attack 	: "Sneak<br>50% chance of 1st strike",
-	scan_enemy		: "Scanner<br>Show enemy stats",
-	use_magic		: "Learned Magic<br>magic enabled",
-	berserker 		: "berseker<br>Strong attack after no. of hits"
+	none 			: "Rookie: Nothing yet",
+	first_attack 	: "Sneak: 50% chance of 1st strike",
+	scan_enemy		: "Scanner: Show enemy stats",
+	use_magic		: "Learned Magic: magic enabled",
+	berserker 		: "berseker: Strong attack after no. of hits"
 };
 
 // status effects player 
@@ -93,12 +90,17 @@ var	enemyStats = {
 // enemy state
 // array holding tested argument values
 var action_state = [
+	[
 		["aware"	, "unaware"],			// enemy attack on entry or ignores entry
 		["attack"	, "passive"], 			// attack on look or ignore look
 		["leave"	, "defeat"],			// no exit before defeat
 		["speak"	, "mute"],				// interacts or silent
 		["drop"		, "nodrop"], 			// drops inventory items or nothing
 		["boss"		, "noboss"]				// boss enemy or not
+	]
+];
+var player_actions = [
+	"take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill"
 ];
 
 // enemy spells
@@ -184,8 +186,8 @@ var treasure = [
 ];
 
 var weapon = [
-		// name			// description 		// damage 	//img url	
-	[	["nothing"		,"unarmed"			,"HP -5"	, "none"],
+		// name			// description 		// damage 	//img url + type id
+	[	["nothing"		,"unarmed"			,"HP -5"	, "weapon"],
 		["stick"		,"a strong stick"	,"HP -6"	, "../img/weapons/thief/stick.png"],
 		["throwknife"	,"small and deadly"	,"HP -7"	, "../img/weapons/thief/throwknife.png"],
 		["cane"			,"pointy cane"		,"HP -8"	, "../img/weapons/thief/cane.png"],
@@ -212,11 +214,16 @@ var weapon = [
 ];
 
 var items = [
-	"nothing",
-	"potion",
-	"ether",
-	"revive",
-	"helmet"
+	[	["nothing"		,"none"				,"none"		,"item"],
+		["potion"		,"small boost"		,"HP +10"	,"#"],
+		["ether"		,"MP boost"			,"MP +10"	,"#"],
+		["revive"		,"alive"			,"HP +100"	,"#"],
+		["helmet"		,"protect head"		,"evd +3"	,"#"],		
+		["coins"		,"player coin"		,"coins +10","#"],	
+		["medals"		,"luck plus"		,"luc +5"	,"#"],
+		["crown"		,"strenght plus"	,"str +5"	,"#"],
+		["robes"		,"strenght plus"	,"str +1"	,"#"]
+	]
 ];
 
 var traps = [
@@ -235,7 +242,12 @@ var secret = [
 	"HP & MP full"
 ];
 
-var roomItems = [treasure, weapon, items];
+// 								____room objects
+var room_objects = {
+	item_obj 	: items,
+	weapon_obj 	: weapon
+};						// NOTICE TODO: IS DOUBLE?
+var npc_objects = [];
 
 //								____enemies
 
@@ -250,11 +262,14 @@ var startBtn 	= document.getElementById('start-btn'),
 	eastBtn		= document.getElementById('east'),
 	southBtn	= document.getElementById('south'),
 	westBtn		= document.getElementById('west'),
-	lookBtn		= document.getElementById('look'),
-	weaponBtn 	= document.getElementById('weapon'),
-	itemBtn 	= document.getElementById('item');
+	lookBtn		= document.getElementById('look-btn'),
+	weaponBtn 	= document.getElementById('weapon-btn'),
+	itemBtn 	= document.getElementById('item-btn'),
+	actionInput = document.getElementById('action-text'),
+	actionBtn 	= document.getElementById('action-button'),
+	actionOut	= document.getElementById('action-display');
 
 // html elements
 var char_name 	= 'char-name';
-
+// room elements
 var roomContent = document.getElementById('room-content');

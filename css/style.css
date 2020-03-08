@@ -13,9 +13,18 @@ h1 {
 	font-size: 10px;
 }
 
+h1.class-dependant {
+	color: #ff4242;
+}
+
 h2 {
 	font-size: 11px;
 	font-weight: normal;
+}
+
+h3 {
+	font-family: 'Press Start 2P';
+	font-size: 8px;
 }
 
 body {
@@ -39,16 +48,11 @@ input[type=text] {
 	border-radius: 6px;
 	color: #fff;
 	font-family: 'Press Start 2P';
-	font-size: 14px;
+	font-size: 12px;
 	width: 175px;
 	height: 30px;
 }
 
-.character-build {
-	font-family: 'Lacquer';
-	font-weight: bold;
-	font-synthesis: all;
-}
 /* 								____DOM		*/
 .content-wrapper {
 	position: absolute;
@@ -75,11 +79,40 @@ div#player-content {
 	font-weight: bold;
 	border: 1px dotted #fa7d7d;
 	width: 300px;
-	height: 640px;
+	height: 590px;
 	left: 0px;
 	top: 50px;
 	padding: 10px;
 	color: #fff;
+}
+
+div#input-values {
+	position: absolute;
+	border: 1px dotted red;
+	height: 300px;
+	width: 300px;
+	top: 270px;
+	left: 0px;
+	text-align: left;
+	font-family: 
+}
+
+.character-build {
+	font-family: 'Press Start 2P';
+	font-size: 10px;
+}
+
+table.character-build {
+    table-layout: fixed;
+    padding-left: auto;
+    padding-right: auto;
+    width: 100%;
+    height: 100%; 
+}
+td.character-build {
+	width: 100%;
+	height: 100%;
+	border: 1px dotted red;
 }
 
 span#stats.character-build {
@@ -93,7 +126,7 @@ div#player-stats {
 	position: absolute;
 	border: 1px dotted #fa7d7d;
 	width: 424px;
-	height: 640px;
+	height: 590px;
 	left: 300px;
 	top: 50px;
 	color: #fff;
@@ -106,6 +139,29 @@ div#player-stats {
 	height: 450px;
 	top: 10px;
 	color: #fff;
+}
+
+.action-display {
+	position: absolute;
+	margin-left: 50%;
+	padding-top: 5px;
+	left: -125px;
+	text-align: center; 
+	bottom: 0px;
+	width: 250px;
+	height: 50px;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2de2d6+0,7db9e8+100&0.3+1,0+100 */
+	background: -moz-linear-gradient(top,  rgba(45,226,214,0.3) 0%, rgba(46,226,214,0.3) 1%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(45,226,214,0.3) 0%,rgba(46,226,214,0.3) 1%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(45,226,214,0.3) 0%,rgba(46,226,214,0.3) 1%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d2de2d6', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+	border-radius: 6px;
+	color: #fff;
+	font-family: 'Press Start 2P';
+	font-size: 12px;
+	border: 2px solid #fff;
+	border-radius: 6px; 
+	background-color: #000;
 }
 
 /* 									____INVENTORY 	*/
@@ -171,7 +227,7 @@ div#game-content {
 	position: absolute;
 	border: 1px dotted #fa7d7d;
 	width: 300px;
-	height: 640px;
+	height: 590px;
 	left: 422px;
 	top: 0px;
 }
@@ -194,4 +250,8 @@ div#room-content.room-content {
 	font-weight: bold;
 	font-size: 20px;
 	color: #fff;
+}
+
+.action-text {
+	width: 200px;
 }
