@@ -120,7 +120,14 @@ span#stats.character-build {
 	min-width: 280px;
 	height: 70%;
 }
-
+/*
+div#save-game {
+	visibility: hidden;
+	position: absolute;
+	top: 590px;
+	width: 300px;
+}
+*/
 /*							___DOM -- player-stats	*/
 div#player-stats {
 	position: absolute;

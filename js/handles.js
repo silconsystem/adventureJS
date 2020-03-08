@@ -42,6 +42,10 @@ function writeHTML(location, text) {
 	document.getElementById(location).innerHTML = text;
 }
 
+function replaceHTML(target, source) {
+  document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
+}
+
 //  get player inventory
 function manInventory(func, id, item) {
 	
@@ -305,6 +309,8 @@ function hideHTML(id) {
 
 // change css elements
 function changeCSSStyle(id,arg,val) {
+
+	// element: id 'el-d', arg: 'width', val: '10000px' 
 
 	var style = function() {
 

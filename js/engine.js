@@ -213,7 +213,7 @@ startBtn.onclick = function(event) {
 		var htmlString,
 			targetElement = 'stats';
 
-	let new_stats 	= document.querySelectorAll("#game-stats");
+	let new_stats = document.querySelectorAll("#game-stats");
 
 		for (let i = 0; i < new_stats.length; i++) {
 
@@ -227,8 +227,15 @@ startBtn.onclick = function(event) {
 
 			console.log('style changed: ' + new_stats[0].id);
 		}
+/* 			TODO: save object states
+	let new_save = document.querySelectorAll("#save-game");
 
-	let new_img 	= document.querySelectorAll("#class-image");
+		for (let i = 0; i < new_save.length; i++) {
+
+			new_save[i].style.visibility 	= 'visible';
+		}
+*/
+	let new_img = document.querySelectorAll("#class-image");
 
 		for (let i = 0; i < new_img.length; i++) {
 
@@ -239,7 +246,7 @@ startBtn.onclick = function(event) {
 			console.log('style changed: ' + new_stats[0].id);
 	}
 
-	let new_W_img 	= document.querySelectorAll("#weapon-image");
+	let new_W_img = document.querySelectorAll("#weapon-image");
 
 		for (let i = 0; i < new_img.length; i++) {
 
@@ -447,3 +454,15 @@ itemBtn.onclick = function(event) {
 	document.getElementById('describe').innerHTML = room.item_2;
 	console.log('looking for items');
 }
+
+/* save game object states
+saveBtn.onclick = function(event) {
+	save(player);
+	console.log('file saved');
+}
+loadBtn.onclick = function(event) {
+
+	if (c_created == false) {
+		load();
+	}
+}*/
