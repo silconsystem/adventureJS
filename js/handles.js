@@ -50,7 +50,7 @@ function manInventory(func, id, item) {
 		func 1 	: remove
 
 		id 		: type of inventory item 
-				0	"items"
+				0	"item"
 				1	"weapon"
 				2	"magic_H"
 				3	"magic_D"
@@ -74,7 +74,7 @@ function manInventory(func, id, item) {
 		console.log('add to array: '. id);	
 
 		switch (id) {
-			case "items":
+			case "item":
 
 				// add to inventory
 				player.inventory.items.push(item);				
@@ -118,7 +118,7 @@ function manInventory(func, id, item) {
 		console.log('remove from array: ', id);
 
 		switch (id) {
-			case "items":
+			case "item":
 
 				// remove 'item' argument from array 'id'
 				var index = player.inventory.items.indexOf(item);

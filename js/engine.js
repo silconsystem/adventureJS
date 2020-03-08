@@ -12,15 +12,12 @@ function getPlayerClass(p_class) {
 
 		case "Thief":
 			// fill weapon menu array for Thief class
-			for (var i = 0; i < armSelMenu.options.length; i++) {
+			for (var i = 1; i <= armSelMenu.options.length; i++) {
 
-				if (game_obj[1].weapon[0].thief[i].name === undefined) {
-					break;
-				} else {
+				if (i < 5) {
+
 					console.log(game_obj[1].weapon[0].thief[i].name);
-					if (i > 0) {
-						armSelMenu.options[i].innerHTML = game_obj[1].weapon[0].thief[i].name;
-					}
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[0].thief[i].name;
 				}
 			}
 
@@ -29,15 +26,12 @@ function getPlayerClass(p_class) {
 
 		case "Warrior":
 			// fill weapon menu array for Warrior class
-			for (var i = 0; i <= armSelMenu.options.length; i++) {
+			for (var i = 1; i <= armSelMenu.options.length; i++) {
 				
-				if (game_obj[1].weapon[1].warrior[i].name === undefined) {
-					break;
-				} else {
+				if (i < 5) {
+
 					console.log(game_obj[1].weapon[1].warrior[i].name);
-					if (i > 0) {
-						armSelMenu.options[i].innerHTML = game_obj[1].weapon[1].warrior[i].name;
-					}
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[1].warrior[i].name;
 				}
 			}
 
@@ -46,15 +40,12 @@ function getPlayerClass(p_class) {
 
 		case "Rogue":
 			// fill weapon menu array for Rogue class
-			for (var i = 0; i <= armSelMenu.options.length; i++) {
+			for (var i = 1; i <= armSelMenu.options.length; i++) {
 				
-				if (game_obj[1].weapon[2].rogue[i].name === undefined) {
-					break;
-				} else {
+				if (i < 5) {
+
 					console.log(game_obj[1].weapon[2].rogue[i].name);
-					if (i > 0) {
-						armSelMenu.options[i].innerHTML = game_obj[1].weapon[2].rogue[i].name;
-					}
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[2].rogue[i].name;
 				}
 			}
 
@@ -63,16 +54,13 @@ function getPlayerClass(p_class) {
 
 		case "Mage":
 			// fill weapon menu array for Mage class
-			for (var i = 0; i <= armSelMenu.options.length; i++)  {
+			for (var i = 1; i <= armSelMenu.options.length; i++)  {
 				
-				if (game_obj[1].weapon[3].mage[i].name === undefined) {
-					break;
-				} else {
+				if (i < 5) {
+
 					console.log(game_obj[1].weapon[3].mage[i].name);
-					if (i > 0) {
-						armSelMenu.options[i].innerHTML = game_obj[1].weapon[3].mage[i].name;
-					}
-				}
+					armSelMenu.options[i].innerHTML = game_obj[1].weapon[3].mage[i].name;
+				} 
 			}
 			
 			console.log('arms select for mage');
@@ -407,10 +395,6 @@ startBtn.onclick = function(event) {
 		console.log('character created');
 
 		hideHTML('player-content');
-		hideHTML("char-name");
-		hideHTML("char-class");
-		hideHTML("arm-name");
-		hideHTML("skills");
 	}
 }
 

@@ -169,6 +169,13 @@ function textParser(txt) {
 		console.log('getItemValue: target name:', action_obj.type);
 		console.log('getItemValue: target name:', action_obj.handler);
 		console.log('getItemValue: target name:', action_obj.exists);
+
+		if (handleInventory(cmd, action_obj)) {
+
+			console.log('item', action_obj.name,'succesfully added to player inventory');
+			console.log(player.inventory.items);
+		}
+
 	} else if (getWeaponValue(target)) {
 
 		action_obj = getWeaponValue(target);
@@ -177,6 +184,13 @@ function textParser(txt) {
 		console.log('getWeaponValue: target name:', action_obj.type);
 		console.log('getWeaponValue: target name:', action_obj.handler);
 		console.log('getWeaponValue: target name:', action_obj.exists);
+
+		if (handleInventory(cmd, action_obj)) {
+
+			console.log('item', action_obj.name,'succesfully added to player inventory');
+			console.log(player.inventory.items);
+		}
+		
 	} else {
 		
 		console.log('getItemValue returned false');
@@ -201,8 +215,36 @@ function textParser(txt) {
 	function cmdExists(c) {	
 	}
 
+	// handle the take and drop command with the found item
+	function handleInventory(cmdStr, itemObj) {
 
+		console.log('handleInventory: command is:', cmdStr);
+		console.log('handleInventory: item object:', itemObj);
+		console.log(itemObj.name);
+		console.log(itemObj.type);
+		console.log(itemObj.exists);
 
+		// take or add 
+		switch (cmdStr) {
+			case "take":
+
+				// add item to inventory
+				manInventory(0, itemObj.type, itemObj.name);
+				break;
+			case "drop":
+				
+				// drop item from inventory
+				manInventory(1, itemObj.type, itemObj.name);
+				break;
+			default:
+
+				// return false if command is not valid
+				if (cmdStr != "take" || "drop");
+				console.log('not an inventory command');
+				return false;
+		}
+
+	}
 }
 /* 											____submit action command text */
 actionBtn.onclick = function(event) {
