@@ -1,4 +1,11 @@
 /*		helper functions   			*/
+// increment a value
+var increment = (function(n) {
+	return function() {
+	  n += 1;
+	  return n;
+	}
+  }(0));
 // get input val
 function getInputValue(func, argOne, argTwo) {
 

@@ -72,6 +72,89 @@ function textParser(txt) {
 	/*
 		helper functions, find 2nd arguments type and return 'action_obj'
 	*/
+	// handle the take and drop command with the found item
+	function handleInventory(cmdStr, itemObj) {
+
+		console.log('handleInventory: command is:', cmdStr);
+		console.log('handleInventory: item object:', itemObj);
+		console.log(itemObj.name);
+		console.log(itemObj.type);
+		console.log(itemObj.url);
+		console.log(itemObj.exists);
+
+	// add new <section> to html page
+	function newrow(i_obj) {
+
+		var imgUrl = i_obj.url; 					// strip "../" from image url 
+		
+		var pageUrl = imgUrl.substring(3);			// ready for use in index.html
+
+		var itemName = i_obj.name;
+
+		var	id = increment();
+
+		console.log(pageUrl);
+
+		document.getElementById("item-image").innerHTML += "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
+	}
+
+	// take or add 
+	switch (cmdStr) {
+		case "take":
+
+			// add item to inventory
+			manInventory(0, itemObj.type, itemObj);
+
+			switch (itemObj.type) {
+				case "item":
+					// create item list, scroll through
+					newrow(action_obj);
+					console.log(itemObj.url);
+
+					break;
+				case "weapon":
+
+					// player weapon
+					document.getElementById('weapon-image').innerHTML = '<img name =\"' + itemObj.name + '\"src=\"' + itemObj.url + '\">';
+					break;
+			}
+
+			break;
+		case "drop":
+
+			// drop item from inventory
+			manInventory(1, itemObj.type, itemObj);
+			
+			switch (itemObj.type) {
+				case "item":
+
+					// ---------------------------------------------------------->>>>>TODO: deletes all !!!
+
+					// check if elements with name 'object.name' exist
+					// 	if exists is true
+					//	delete the div element with this name
+
+					document.getElementsByName(itemObj.name).innerHTML = '';
+					break;
+				case "weapon":
+
+					// statements_def
+					document.getElementById('weapon-image').innerHTML = '';
+					document.getElementById('weapon-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';
+					break;
+			}
+			
+			break;
+		default:
+
+			// return false if command is not valid
+			if (cmdStr != "take" || "drop");
+			console.log('not an inventory command');
+			return false;
+		}
+
+	}
+
 	// search in weapon array
 	function getWeaponValue(itm) {
 
@@ -79,38 +162,44 @@ function textParser(txt) {
 			handler,
 			url;
 
+			let l = game_obj[1].weapon[0].thief.length;
+
 		for (let i in game_obj[1].weapon[0].thief[0].name) {
 
-			// compare weapon names of each class and return new item_obj
-			// or leave obj_exists false and pass the argument to another function
-			if (game_obj[1].weapon[0].thief[i].name.includes(itm)) {
+			console.log('i value:',i);
 
-				obj_exists 	= true;
-				handler 	= 'thief';
-				url 		= game_obj[1].weapon[0].thief[i].url;
-				result 		= game_obj[1].weapon[0].thief[i].name;
-				break;				
-			} else if (obj_exists == false) {
+			if (i <= l) {
+				// compare weapon names of each class and return new item_obj
+				// or leave obj_exists false and pass the argument to another function
+				if (game_obj[1].weapon[0].thief[i].name.includes(itm)) {
 
-				obj_exists 	= true;
-				handler 	= 'warrior';
-				url 		= game_obj[1].weapon[1].warrior[i].url;
-				result 		= game_obj[1].weapon[1].warrior[i].name;
-				break;
-			} else if (game_obj[1].weapon[2].rogue[i].name.includes(itm)) {
-				
-				obj_exists 	= true;
-				handler 	= 'rogue';
-				url 		= game_obj[1].weapon[2].rogue[i].url;
-				result 		= game_obj[1].weapon[2].rogue[i].name;
-				break;
-			} else if (game_obj[1].weapon[3].mage[i].name.includes(itm)) {
-				
-				obj_exists 	= true;
-				handler 	= 'mage';				
-				url 		= game_obj[1].weapon[3].mage[i].url;
-				result 		= game_obj[1].weapon[3].mage[i].name;
-				break;
+					obj_exists 	= true;
+					handler 	= 'thief';
+					url 		= game_obj[1].weapon[0].thief[i].url;
+					result 		= game_obj[1].weapon[0].thief[i].name;
+					break;				
+				} else if (obj_exists == false) {
+
+					obj_exists 	= true;
+					handler 	= 'warrior';
+					url 		= game_obj[1].weapon[1].warrior[i].url;
+					result 		= game_obj[1].weapon[1].warrior[i].name;
+					break;
+				} else if (game_obj[1].weapon[2].rogue[i].name.includes(itm)) {
+					
+					obj_exists 	= true;
+					handler 	= 'rogue';
+					url 		= game_obj[1].weapon[2].rogue[i].url;
+					result 		= game_obj[1].weapon[2].rogue[i].name;
+					break;
+				} else if (game_obj[1].weapon[3].mage[i].name.includes(itm)) {
+					
+					obj_exists 	= true;
+					handler 	= 'mage';				
+					url 		= game_obj[1].weapon[3].mage[i].url;
+					result 		= game_obj[1].weapon[3].mage[i].name;
+					break;
+				}
 			}
 		}
 		// if obj_exists still false return false and leave 'itm' unchanged
@@ -204,6 +293,7 @@ function textParser(txt) {
 
 	} else {
 		
+		writeHTML('action-display', 'unknown text command, check your input');
 		console.log('getItemValue returned false');
 	}
 
@@ -226,66 +316,7 @@ function textParser(txt) {
 	function cmdExists(c) {	
 	}
 
-	// handle the take and drop command with the found item
-	function handleInventory(cmdStr, itemObj) {
-
-		console.log('handleInventory: command is:', cmdStr);
-		console.log('handleInventory: item object:', itemObj);
-		console.log(itemObj.name);
-		console.log(itemObj.type);
-		console.log(itemObj.url);
-		console.log(itemObj.exists);
-
-		// take or add 
-		switch (cmdStr) {
-			case "take":
-
-				// add item to inventory
-				manInventory(0, itemObj.type, itemObj);
-
-				switch (itemObj.type) {
-					case "item":
-						// statements_1
-						document.getElementById('item-image').innerHTML = '<img src=\"' + itemObj.url + '\">';	
-						console.log(itemObj.url);
-						break;
-					case "weapon":
-
-						// statements_def
-						document.getElementById('weapon-image').innerHTML = '<img src=\"' + itemObj.url + '\">';
-						break;
-				}
-
-				break;
-			case "drop":
-
-				// drop item from inventory
-				manInventory(1, itemObj.type, itemObj);
-				
-				switch (itemObj.type) {
-					case "item":
-						// statements_1
-						document.getElementById('item-image').innerHTML = '';
-						document.getElementById('item-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';	
-						break;
-					case "weapon":
-
-						// statements_def
-						document.getElementById('weapon-image').innerHTML = '';
-						document.getElementById('weapon-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';
-						break;
-				}
-				
-				break;
-			default:
-
-				// return false if command is not valid
-				if (cmdStr != "take" || "drop");
-				console.log('not an inventory command');
-				return false;
-		}
-
-	}
+	
 }
 /* 											____submit action command text */
 actionBtn.onclick = function(event) {

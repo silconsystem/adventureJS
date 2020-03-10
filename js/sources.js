@@ -5,6 +5,7 @@
 //								____logic
 // global variables
 var id,							// set room id
+	itemIndex = 0, 				// use for add|remove from index
 	move,						// holds move direction
 	moved = ["entry", "exit"],	// check if room is done and stop submit if false
 	moveCount = 0,				// count = room-no
