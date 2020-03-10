@@ -341,13 +341,13 @@ function loadWeaponImg(cl, wp) {
 			// find selected weapon
 			console.log('matched thief class');
 			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[0].length; i++) {		// iterate through class assigned weapons
+			for (var i = 0; i < game_obj[1].weapon[0].thief.length; i++) {		// iterate through class assigned weapons
 
-				if (weapon[0][i][0] == wp) {					// if match
+				if (game_obj[1].weapon[0].thief[i].name == wp) {					// if match
 
-					wp_name = weapon[0][i][0]; 					// set name as var
-					wp_url 	= weapon[0][i][3];					// set url as var
-					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+					wp_name = game_obj[1].weapon[0].thief[i].name; 					// set name as var
+					wp_url 	= game_obj[1].weapon[0].thief[i].url;					// set url as var
+					wp_name = wp_name.toLowerCase();								// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
@@ -362,13 +362,13 @@ function loadWeaponImg(cl, wp) {
 			// find selected weapon
 			console.log('matched warrior class');
 			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[1].length; i++) {		// iterate through class assigned weapons
+			for (var i = 0; i < game_obj[1].weapon[1].warrior.length; i++) {		// iterate through class assigned weapons
 
-				if (weapon[1][i][0] == wp) {					// if match
+				if (game_obj[1].weapon[1].warrior[i].name == wp) {					// if match
 
-					wp_name = weapon[1][i][0];					// set var
-					wp_url 	= weapon[1][i][3];					// set url as var
-					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+					wp_name = game_obj[1].weapon[1].warrior[i].name;				// set var
+					wp_url 	= game_obj[1].weapon[1].warrior[i].url;					// set url as var
+					wp_name = wp_name.toLowerCase();								// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
 					// write the element and url in html page 
@@ -383,12 +383,12 @@ function loadWeaponImg(cl, wp) {
 			// find selected weapon
 			console.log('matched rogue class');
 			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[2].length; i++) {		// iterate through class assigned weapons
+			for (var i = 0; i < game_obj[1].weapon[2].rogue.length; i++) {		// iterate through class assigned weapons
 
-				if (weapon[2][i][0] == wp) {					// if match
+				if (game_obj[1].weapon[2].rogue[i].name == wp) {					// if match
 
-					wp_name = weapon[2][i][0];					// set var
-					wp_url 	= weapon[2][i][3];					// set url as var
+					wp_name = game_obj[1].weapon[2].rogue[i].name;					// set var
+					wp_url 	= game_obj[1].weapon[2].rogue[i].url;					// set url as var
 					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
@@ -404,12 +404,12 @@ function loadWeaponImg(cl, wp) {
 			// find selected weapon
 			console.log('matched mage class');
 			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[3].length; i++) {		// iterate through class assigned weapons
+			for (var i = 0; i < game_obj[1].weapon[3].mage.length; i++) {		// iterate through class assigned weapons
 
-				if (weapon[3][i][0] == wp) {					// if match
+				if (game_obj[1].weapon[3].mage[i].name == wp) {					// if match
 
-					wp_name = weapon[3][i][0];					// set var
-					wp_url 	= weapon[3][i][3];					// set url as var
+					wp_name = game_obj[1].weapon[3].mage[i].name;					// set var
+					wp_url 	= game_obj[1].weapon[3].mage[i].url;					// set url as var
 					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
 
 					console.log(cl_name + ' weapon: ' + wp_name);
@@ -421,5 +421,16 @@ function loadWeaponImg(cl, wp) {
 				}
 			}
 			break;
+	}
+}
+
+// check if array has value 
+function checkIfEmpty(a) {
+
+	// check if array length is not 0
+	if (a.length > 0) {
+		return true;
+	} else {
+		return false;
 	}
 }

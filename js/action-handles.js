@@ -102,6 +102,12 @@ function textParser(txt) {
 	switch (cmdStr) {
 		case "take":
 
+			if (checkIfEmpty(player.inventory.items) == false) {
+
+				document.getElementById('item-list').src= 'img/weapons/active.png';
+
+			}
+
 			// add item to inventory
 			manInventory(0, itemObj.type, itemObj);
 
@@ -109,6 +115,7 @@ function textParser(txt) {
 				case "item":
 					// create item list, scroll through
 					newrow(action_obj);
+
 					console.log(itemObj.url);
 
 					break;
@@ -291,6 +298,8 @@ function textParser(txt) {
 			console.log(player.inventory.items);
 		}
 
+	} else if(getMagicHValue(target)) {
+
 	} else {
 		
 		writeHTML('action-display', 'unknown text command, check your input');
@@ -298,8 +307,43 @@ function textParser(txt) {
 	}
 
 	// search in white magic array
-	function magicHValue(itm) { 
+	function getMagicHValue(itm) { 
+
 		// magic heal item 
+		var result,
+			url;
+
+		// find match and set obj_exists to true
+		for (let i in game_obj[2].magic_H[0].name) {
+
+			console.log(game_obj[2].magic_H[i].name);
+		    if (game_obj[2].magic_H[i].name.includes(itm)) {
+
+		    	obj_exists 	= true;
+		    	url 		= game_obj[2].magic_H[i].url;
+		    	result 		= game_obj[2].magic_H[i].name;
+		        break;
+		    } 
+		}
+
+		// if false return false and leave 'itm' unchanged
+		if (obj_exists == false) {
+
+			itm = itm;
+			console.log('getItemValue: target not found:', itm, 'checking if type weapon');
+			return false;
+
+		} else {
+
+			handler 	= 'player';
+			obj_type 	= 'magic_H';
+			url 		= url;
+	        itm = new item_obj(result, obj_type, handler, url, obj_exists);
+	        console.log('getItemValue: target found, input:', itm.name, 'result:', result);
+	        console.log('getItemValue: returning new object:', itm);
+		}
+		console.log('getItemValue: returning input:', itm, 'of type:',obj_type);
+		return itm;	
 	}
 
 	// search in black magic array
@@ -315,6 +359,49 @@ function textParser(txt) {
 	// test the action exists
 	function cmdExists(c) {	
 	}
+
+	/* TODO: refactor into one function and use the arguments to point at the array.property and test an argument against it
+	
+	function getObjectValue(obj_array, itm) { 
+
+		// magic heal item 
+		var result,
+			url,
+			type,
+			handler,
+			obj;
+
+		// find match and set obj_exists to true
+		for (let i in obj_array[0].name) {
+
+			console.log(obj_array[i].name);
+		    if (obj_array[i].name.includes(itm)) {
+
+		    	obj_exists 	= true;
+		    	url 		= obj_array[i].url;
+				result 		= obj_array[i].name;
+				type 		= obj_array[0].name;
+				handler 	= obj_array[0].description
+
+				obj = new item_obj(result, type, handler, url, obj_exists);
+
+
+				console.log('getItemValue: returning input:', obj, 'of type:',type);
+				return obj;				
+		    } else {
+
+				itm = itm;
+				console.log('getItemValue: target not found:', itm, 'checking other type');
+				return false;
+			}
+		}
+	}
+
+	if (getObjectValue(game_obj[0].item, target)) {
+
+		action_obj = getObjectValue(game_obj[0].item, target
+
+	}*/
 
 	
 }
