@@ -423,14 +423,3 @@ function loadWeaponImg(cl, wp) {
 			break;
 	}
 }
-
-// check if array has value 
-function checkIfEmpty(a) {
-
-	// check if array length is not 0
-	if (a.length > 0) {
-		return true;
-	} else {
-		return false;
-	}
-}
