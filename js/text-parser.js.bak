@@ -1,0 +1,63 @@
+/**
+ * 
+ *      text parser js
+ *      handle text input
+ * 
+ */
+class textParser {
+
+    /*
+		use: func('action string')
+		test if valid action
+		test if valid object
+		set actions for each command
+		commands:
+		1. take + item:
+			take object from room if present
+		2. drop + item
+			drop item from inventory if present
+		3. attack + enemy
+			attack enemy if present
+			start battle function 					TODO: battle function
+		4. leave + enemy
+			leave room without fighting
+		5. talk + npc
+			talk to npc if present
+													TODO: battle function	
+		6. magic def + enemy
+			attack enemy >> in battle mode
+		7. magic heal + player
+			HP + with item or enemy event >> in battle mode
+		8. skill + player || npc
+			use skill on player or enemy >> in battle mode
+    */
+    
+    constructor (actionStr, actionCmd, objectCmd, targetCmd) {
+        this.actionStr = actionStr;
+        this.actionCmd = actionCmd;
+        this.objectCmd = objectCmd;
+        this.targetCmd = targetCmd;
+    }
+
+    // separate string into test arguments
+    get actionStrings(actionStr) {
+
+        const strArray = [];
+
+        // split strings at ' ' space delimiter
+        strArray		= actionStr.split(" "),		        // split on space delimiter
+        this.actionCmd  = strArray[0];                      // "i.e. 'take'".....
+        this.objectCmd  = strArray[1];                      // ............."i.e. 'gold'"
+        this.targetCmd  = function(strArray) {              // use as: "attack".."lisa".."plague" -->> 3rd argument found = handler(arg) {do horrible stuff !}
+            if (strArray[2] != undefined || null) {			// if more than 2 words found in string	set targetCmd
+
+                this.targetCmd 	= strArray[2];				// create extra variable 
+                console.log('extra action string found: ', this.targetCmd);
+
+                return this.targetCmd;
+            }
+        }
+    }
+
+    
+}

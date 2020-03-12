@@ -78,7 +78,7 @@ var player = {
  	M_heal 	   	: spellBook[1][0],
  	skill_1	   	: playerSkills.none,
  	skill_2    	: playerSkills.none,
- 	inventory  	: inventory = {
+ 	inventory  	: inventory = {							
 		items 	: inventory_items 		= [],
 		weapon	: inventory_weapons 	= [],
 		spell_H	: inventory_spell_H		= [],

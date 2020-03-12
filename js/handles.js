@@ -1,4 +1,11 @@
 /*		helper functions   			*/
+// increment a value
+var increment = (function(n) {
+	return function() {
+	  n += 1;
+	  return n;
+	}
+  }(0));
 // get input val
 function getInputValue(func, argOne, argTwo) {
 
@@ -327,98 +334,54 @@ function changeCSSStyle(id,arg,val) {
 	return true;
 }
 
-// load weapon image
-function loadWeaponImg(cl, wp) {
-	// cl = player.class
-	// wp = player.weapon
-	var cl_name,
-		wp_name,
-		wp_url;
+/*load weapon image
+function loadObjectImg(objArr, objName) {
+	
+	// compare object array 'obj_array' (game_objects[0..3].name) to argument 'wp_name';
+	objName	= objName.toLowerCase();
 
-	switch (cl) {
-		case "Thief":
-			// find selected weapon
-			console.log('matched thief class');
-			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[0].length; i++) {		// iterate through class assigned weapons
+	console.log('loadWeaponImg: testing array:', obj_arr)
 
-				if (weapon[0][i][0] == wp) {					// if match
+	var item_obj_name,
+		item_obj_url,
+		item_obj_type;
 
-					wp_name = weapon[0][i][0]; 					// set name as var
-					wp_url 	= weapon[0][i][3];					// set url as var
-					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
+	for (var i in obj_array) {
 
-					console.log(cl_name + ' weapon: ' + wp_name);
-					// write the element and url in html page 
-					writeHTML('weapon-image', '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
+		// compare name argument to object list name property
+		if (obj_arr[0].item[i].name.includes(wp_name)) {
 
-				} else {
-					console.log('no matching values found!, check input');
-				}
-			}
+			// set url variable if matched with 'wp_name' in this array
+			wp_name = obj_arr[0].item[i].name;
+			wp_url 	= obj_arr[0].item[i].url;
+			console.log('loadWeaponImg: found item:',wp_name)
 			break;
-		case "Warrior":
-			// find selected weapon
-			console.log('matched warrior class');
-			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[1].length; i++) {		// iterate through class assigned weapons
-
-				if (weapon[1][i][0] == wp) {					// if match
-
-					wp_name = weapon[1][i][0];					// set var
-					wp_url 	= weapon[1][i][3];					// set url as var
-					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
-
-					console.log(cl_name + ' weapon: ' + wp_name);
-					// write the element and url in html page 
-					writeHTML('weapon-image',  '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
-
-				} else {
-					console.log('no matching values found!, check input');
-				}
-			}
-			break;
-		case "Rogue":
-			// find selected weapon
-			console.log('matched rogue class');
-			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[2].length; i++) {		// iterate through class assigned weapons
-
-				if (weapon[2][i][0] == wp) {					// if match
-
-					wp_name = weapon[2][i][0];					// set var
-					wp_url 	= weapon[2][i][3];					// set url as var
-					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
-
-					console.log(cl_name + ' weapon: ' + wp_name);
-					// write the element and url in html page 
-					writeHTML('weapon-image',  '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
-
-				} else {
-					console.log('no matching values found!, check input');
-				}
-			}
-			break;
-		case "Mage":
-			// find selected weapon
-			console.log('matched mage class');
-			cl_name = cl.toLowerCase();							// force lowercase on class name for html string
-			for (var i = 0; i < weapon[3].length; i++) {		// iterate through class assigned weapons
-
-				if (weapon[3][i][0] == wp) {					// if match
-
-					wp_name = weapon[3][i][0];					// set var
-					wp_url 	= weapon[3][i][3];					// set url as var
-					wp_name = wp_name.toLowerCase();			// var to lowercase for html string
-
-					console.log(cl_name + ' weapon: ' + wp_name);
-					// write the element and url in html page 
-					writeHTML('weapon-image',  '<img src="' + wp_url + '" style="width : 40px; height : 40px;">');
-
-				} else {
-					console.log('no matching values found!, check input');
-				}
-			}
-			break;
+		} else if (obj_arr[1].weapon[i].name.includes(wp_name)) {
+			
+			// set url variable if matched with 'wp_name' in this array
+			wp_name = obj_arr[1].weapon[i].name;
+			wp_url 	= obj_arr[1].weapon[i].url;
+			break;	
+		} else if (obj_arr[2].magic[i]name.includes(wp_name)) {
+			
+			// set url variable if matched with 'wp_name' in this array
+			wp_name = obj_arr[2].magic[i].name;
+			wp_url 	= obj_arr[2].magic[i].url;
+			break;	
+		} else if (obj_arr[3].skills[i].name.includes(wp_name)) {
+			
+			// set url variable if matched with 'wp_name' in this array
+			wp_name = obj_arr[1].skills[i].name;
+			wp_url 	= obj_arr[3].skills[i].url;
+			break;	
+		}
 	}
+	console.log('loadWeaponImg: found match for arg:' wp, 'in object array:', obj_array, '\nreturning url string:', wp_url);
 }
+
+	TODO: 
+	this function returns the url of give object,
+	use separate function to write the html with found 'url'
+	must be reusable for add|drop from player.inventory
+*/
+// write or remove object image from inventory dispay

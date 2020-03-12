@@ -5,6 +5,7 @@
 //								____logic
 // global variables
 var id,							// set room id
+	itemIndex = 0, 				// use for add|remove from index
 	move,						// holds move direction
 	moved = ["entry", "exit"],	// check if room is done and stop submit if false
 	moveCount = 0,				// count = room-no
@@ -102,7 +103,7 @@ var action_state = [
 	]
 ];
 var player_actions = [
-	"take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill"
+	"take", "drop", "attack", "leave", "talk", "magic_D", "magic_H", "skill"
 ];
 
 // enemy spells

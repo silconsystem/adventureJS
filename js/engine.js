@@ -3,68 +3,97 @@
  *			game logic, get&set functions
  */
 // fill weapon options when class is selected
-function getPlayerClass(p_class) {
+function getClassWeaponOptions(p_class) {
 
-	var i;
+	var weaponsList = [];
+
+	// get the weapons belonging to the class
+	function listWeapons(cl) {
+
+		var weapons = [];
+
+		for (let i in game_objects[1].weapon) {
+
+			if (game_objects[1].weapon[i].handler == cl) {
+				weapons.push(game_objects[1].weapon[i].name);
+			}
+		}
+		return weapons;
+	}
+
+	p_class = p_class.toLowerCase();
+
+	console.log('getClassWeaponOptions: class name:', p_class);	
 
 
 	switch (p_class) { //TODO: cannot exeed 5 !
 
-		case "Thief":
+		case "thief":
+
 			// fill weapon menu array for Thief class
+			weaponsList = listWeapons(p_class);
+
 			for (var i = 1; i <= armSelMenu.options.length; i++) {
 
 				if (i < 5) {
 
-					console.log(game_obj[1].weapon[0].thief[i].name);
-					armSelMenu.options[i].innerHTML = game_obj[1].weapon[0].thief[i].name;
+					console.log(game_objects[1].weapon[i].name);
+					armSelMenu.options[i].innerHTML = weaponsList[i];
 				}
 			}
 
 			console.log('arms select for thief');
 			break;
 
-		case "Warrior":
+		case "warrior":
+
 			// fill weapon menu array for Warrior class
+			weaponsList = listWeapons(p_class);
+
 			for (var i = 1; i <= armSelMenu.options.length; i++) {
-				
+
 				if (i < 5) {
 
-					console.log(game_obj[1].weapon[1].warrior[i].name);
-					armSelMenu.options[i].innerHTML = game_obj[1].weapon[1].warrior[i].name;
+					console.log(game_objects[1].weapon[i].name);
+					armSelMenu.options[i].innerHTML = weaponsList[i];
 				}
 			}
 
 			console.log('arms select for warrior');
 			break;
 
-		case "Rogue":
+		case "rogue":
 			// fill weapon menu array for Rogue class
+			weaponsList = listWeapons(p_class);
+
 			for (var i = 1; i <= armSelMenu.options.length; i++) {
-				
+
 				if (i < 5) {
 
-					console.log(game_obj[1].weapon[2].rogue[i].name);
-					armSelMenu.options[i].innerHTML = game_obj[1].weapon[2].rogue[i].name;
+					console.log(game_objects[1].weapon[i].name);
+					armSelMenu.options[i].innerHTML = weaponsList[i];
 				}
 			}
 
 			console.log('arms select for rogue');
 			break;
 
-		case "Mage":
+		case "mage":
+
 			// fill weapon menu array for Mage class
-			for (var i = 1; i <= armSelMenu.options.length; i++)  {
-				
+			weaponsList = listWeapons(p_class);
+
+			for (var i = 1; i <= armSelMenu.options.length; i++) {
+
 				if (i < 5) {
 
-					console.log(game_obj[1].weapon[3].mage[i].name);
-					armSelMenu.options[i].innerHTML = game_obj[1].weapon[3].mage[i].name;
-				} 
+					console.log(game_objects[1].weapon[i].name);
+					armSelMenu.options[i].innerHTML = weaponsList[i];
+				}
 			}
-			
+
 			console.log('arms select for mage');
-			break;	
+			break;
 	}
 }
 // get player name
@@ -148,7 +177,7 @@ charSelMenu.onchange = function(event) {
 				break;
 		}
 
-		getPlayerClass(playerClass);											
+		getClassWeaponOptions(playerClass);											
 		console.log('created class');
 
 		return true;
@@ -158,6 +187,8 @@ charSelMenu.onchange = function(event) {
 
 // get selected weapon
 armSelMenu.onchange = function(event) {
+
+	var pl_weaponObj;
 
 	event.preventDefault();
 	playerWeapon 	= document.getElementById('weapon-menu').value;
@@ -187,14 +218,19 @@ armSelMenu.onchange = function(event) {
 		return false;
 	} else {
 
-		player.weapon = playerWeapon;
-		writeHTML('arm-name' ,'weapon selected: ' + playerWeapon);
+		c_created = true;												// set created flag flag
+		pl_weaponObj = objArray('weapon', playerWeapon);
+		playerWeapon = pl_weaponObj;
+																		// TODO: cannot use textParser if false
+		player.weapon = playerWeapon;									// set player.weapon
+		writeHTML('arm-name' ,'weapon selected: ' + playerWeapon);		// write name to HTML
 
-		loadWeaponImg(player.class, player.weapon);
+		//pl_weaponObj = objArray('weapon', playerWeapon);
 
-		c_created = true;
+		newrow(pl_weaponObj);
 
-		console.log('weapon: ' + playerWeapon);
+		console.log('player weapon: ' + playerWeapon);
+		console.log('weapon object: ' + pl_weaponObj);
 
 		return true;
 	}
@@ -325,6 +361,8 @@ startBtn.onclick = function(event) {
 				htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>M_DEF: " + player.M_def + "</td></tr><tr><td>M_Heal: " + player.M_heal + "</td></tr><tr><td>skill one: " + player.skill_1 + "</td></tr><tr><td>skill two: " + player.skill_2 + "</td></tr></table>";
 		
 				writeHTML(targetElement, htmlString);
+
+				//manInventory(0, pl_weaponObj.type, pl_weaponObj);
 
 				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
 				break;
