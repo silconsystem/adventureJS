@@ -95,29 +95,31 @@
 						</tr>
 						<tr>
 							<td>
-								<span id="weapon-image" class="inventory-table">
+								<div id="weapon-image" class="inventory-table">
 									<img src="img/weapons/nothing.png">
-								</span>
+								</div>
 							</td>
 							<td>
-								<span id="item-image" class="inventory-table">
-									<img src="img/weapons/nothing.png">
-								</span>
+								<div id="item-image" class="inventory-table" style="scroll-snap-type: y mandatory;">
+									<div id="section-one" class="inventory-thumbs">
+										<img id="item-list" src="img/weapons/nothing.png">
+									</div>
+								</div>
 							</td>
 							<td>
-								<span id="magic-H-image" class="inventory-table">
+								<div id="magic-H-image" class="inventory-table">
 									<img src="img/weapons/nothing.png">
-								</span>
+								</div>
 							</td>
 							<td>
-								<span id="magic-D-image" class="inventory-table">
+								<div id="magic-D-image" class="inventory-table">
 									<img src="img/weapons/nothing.png">
-								</span>
+								</div>
 							</td>
 							<td>
-								<span id="skill-image" class="inventory-table">
+								<div id="skill-image" class="inventory-table">
 									<img src="img/weapons/nothing.png">
-								</span>
+								</div>
 							</td>
 						</tr>
 					</table>
@@ -131,10 +133,10 @@
 				<table id="room-display" class="room-display">
 					<tr>
 						<td>
-							<h2 class="-room-display">room name</h2>
+							<h2 class="room-display">room name</h2>
 						</td>
 						<td>
-							<span id="room-name" class="-room-display">still chilling at home, </span>
+							<span id="room-name" class="room-display">still chilling at home, </span>
 						</td>
 					</tr>
 					<tr>
@@ -142,15 +144,15 @@
 							<h2>information</h2>
 						</td>
 						<td>
-							<span id="describe" class="-room-display">you are nowhere yet !</span>
+							<span id="describe" class="room-display">you are nowhere yet !</span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<h2 id="room-text" class="-room-display">doing your thing..</h2>
+							<h2 id="room-text" class="room-display">doing your thing..</h2>
 						</td>
 						<td>
-							<span id="direction" class="-room-display"></span>
+							<span id="direction" class="room-display"></span>
 						</td>
 					</tr>
 				</table>
@@ -200,9 +202,15 @@
 	<script src="js/entities.js"></script>
 	<script src="js/npc-enemy-list.js"></script>
 	<script src="js/room.js"></script>
+<<<<<<< HEAD
 	<script src="js/engine.js"></script>
 	<script src="js/action-handles.js"></script>
 	<script src="js/save.js"></script>
+=======
+	<script src="js/engine.js"></script>\
+	<script src="js/text-parser.js"></script>				<!-- TODO: create a better approach, reusable functions -->
+	<script src="js/action-handles.js"></script>			<!-- TODO: class with getters and setters -->
+>>>>>>> 25d2bfc152d73f53a2104677fca721ee1967a49f
 
 </body>
 </html>

@@ -32,21 +32,18 @@ function textParser(txt) {
 			use skill on player or enemy >> in battle mode
 	*/
 	// private variables
-	
+	var string 			= txt,						// player action input string
+		strArray		= string.split(" "),		// split on space delimiter
 		cmd 			= strArray[0],				// 1st argument: action command
 		target 			= strArray[1], 				// 2nd argument: target item object 
 		target_sp,									// if 3rd string exists set value
 		action_obj;									// if found create 'item_obj' for further sorting
 
-
-	
-
 	let itemArray 		= game_objects[0].item;		// search object array lists 
 	let weaponArray 	= game_objects[1].weapon;
 	let magicArray 		= game_objects[2].magic;
 	let skillArray 		= game_objects[3].skills;
-	
-	}
+
 	/* create a base object from found item to use for later handling
 	function item_obj(name, type, handler, url, exists) {
 		this.name 		= name;						// name
@@ -54,7 +51,7 @@ function textParser(txt) {
 		this.handler 	= handler;					// used by actor: player|thief|warrior|rogue|mage
 		this.url 		= url;						// the image url
 
-	}
+	}*/
 
 	console.log('input text:', txt, '\ncmd:', cmd, '\n', target);	// log
 	console.log('player action is: ', cmd);							// log
@@ -67,7 +64,7 @@ function textParser(txt) {
 			3rd argument: 		action | target | event/object
 								  cmd  | target |  target_sp
 			usage example: 		attack | harold | 	fire	
-	
+	*/
 	if (strArray[2] != undefined || null) {			// if more than 2 words found in string	
 
 		target_sp 	= strArray[2];					// create extra variable 
@@ -75,7 +72,7 @@ function textParser(txt) {
 	}
 	/*
 		helper functions, find 2nd arguments type and return 'action_obj'
-	
+	*/
 	// add new <div> to html page
 	function newrow(i_obj) {
 
@@ -424,15 +421,13 @@ function textParser(txt) {
 actionBtn.onclick = function(event) {
 
 	event.preventDefault();
-	var string,						// player action input string
-		stringArray;//	= string.split(" "),		// split on space delimiter
-
+	
 	playerAction = actionInput.value;					// set value as variable
-
 	console.log('player submitted string: ' + playerAction + '\nwrite to id: \'action-display\'');		// log
 
 	writeHTML('action-display',playerAction);			// write to display
 
 	// handle the input value 			TODO: create a handler
-	textParserString(playerAction);
+	//textParser(playerAction);
+
 }
