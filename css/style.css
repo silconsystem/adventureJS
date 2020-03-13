@@ -139,25 +139,6 @@ div#player-stats {
 	color: #fff;
 }
 
-#item-image {
-	min-width: 40px;
-	min-height: 40px;
-	width: 40px;
-	height: 40px;
-}
-/*
-select#item-image::-ms-expand {
-    display: none;
-	background: url('../img/weapons/nothing.png');
-}
-*/
-select#item-image,option {
-	min-width: 40px;
-	min-height: 40px;
-	width: 40px;
-	height: 40px;
-}
-
 .descriptions {
 	position: relative;
 	margin: 0 auto;
@@ -205,12 +186,31 @@ select#item-image,option {
 }
 
 div#item-image {
+	min-width: 40px;
+	min-height: 40px;
 	height: 40px;
 	width: 40px;
 	overflow-y: auto;
 	scroll-snap-align: center;
 }
+/*
+#item-image {
+	width: 40px;
+	height: 40px;
+}
 
+select#item-image::-ms-expand {
+    display: none;
+	background: url('../img/weapons/nothing.png');
+}
+
+select#item-image,option {
+	min-width: 40px;
+	min-height: 40px;
+	width: 40px;
+	height: 40px;
+}
+*/
 td.inventory {
 	width: 80px;
 	text-align: center;
