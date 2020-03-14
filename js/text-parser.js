@@ -14,12 +14,12 @@ function textParserActions(actCmd, actObj) {
         case "take":
             // add obj to inventory and set image
             manInventory(0, actObj.type, actObj);
-            newrow(actObj);
+            newrow(0, actObj);
             break;
         case "drop":
             // drop obj from inventory and remove image
-            manInventory(0, actObj.type, actObj);
-            newrow(actObj);
+            manInventory(1, actObj.type, actObj);
+            newrow(1, actObj);
             break;
         case "attack":
             // statements_1

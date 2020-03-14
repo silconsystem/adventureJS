@@ -96,22 +96,82 @@ function objArray(type, name) {
 }
 
 // add new <div> to html page
-function newrow(i_obj) {
+function newrow(func, i_obj) {
 
-	var imgUrl 		= i_obj.url; 					// strip "../" from image url		
-	var pageUrl 	= imgUrl.substring(3);			// ready for use in index.html
-	var itemName 	= i_obj.name;
-	var htmlId 		= (i_obj.type + "-image");
-	var	id 			= increment();
+	var action		= function(func) { 			// 0|1 add or remove
+						let str;	if (func == 0) {str = 'add'}
+						else if (func == 1) {str = 'remove'}
+						return str;
+					};										
 
-	console.log(pageUrl);
+	var	imgUrl 		= i_obj.url, 					// strip "../" from image url		
+		pageUrl 	= imgUrl.substring(3),			// ready for use in index.html
+		itemName 	= i_obj.name,
+		htmlId 		= (i_obj.type + "-image"),
+		id 			= increment();
 
-	if (i_obj.type == 'weapon') {
-
-		document.getElementById(htmlId).innerHTML = "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
-	} else {
-		document.getElementById("item-image").innerHTML += "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
+	/**
+	 * 		helper functions
+	 */
+	Element.prototype.remove = function() {
+		this.parentElement.removeChild(this);
 	}
+	NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+		for(var i = this.length - 1; i >= 0; i--) {
+			if(this[i] && this[i].parentElement) {
+				this[i].parentElement.removeChild(this[i]);
+			}
+		}
+	}
+	// log
+	console.log('newrow: given object is \"' + i_obj.name + '\" of type \"' + i_obj.type + '\" function: ' + action(func));
+
+	switch(func) {
+
+		// add items to html inventory display
+		case 0:
+
+			console.log('newrow: add html element');
+
+			// if 'weapon' only 1 img in display
+			if (i_obj.type != 'weapon') {
+
+				// add a row with each taken item
+				document.getElementById(htmlId).innerHTML += "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
+				console.log('newrow: added', itemName, 'to', i_obj.type, 'in page element:', htmlId);
+			} else if (i_obj.type == 'weapon'){
+
+				// other item types can become lists
+				document.getElementById(htmlId).innerHTML = "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";			
+				console.log('newrow: weapon added', itemName, 'to', i_obj.type, 'in page element:', htmlId);
+			}				
+			break;
+		// remove items from inventory display
+		case 1:
+
+			var elements = document.getElementsByClassName("inventory-thumbs"),
+				elementId;
+			
+
+			console.log('newrow: remove html element');
+			
+			for (let i = 0; i <= elements.length;i++) {
+
+				if (elements[i].id.includes(itemName)) {
+
+					elementId = elements[i].id;
+
+					console.log(elementId);
+					document.getElementById(elementId).remove();
+					break;
+				}
+			}
+
+			console.log('newrow: removed element:', element, 'successfully')
+			break;
+	}
+
+	
 }
 // check if array has value 
 function checkIfEmpty(a) {
