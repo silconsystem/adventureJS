@@ -167,7 +167,7 @@ function newrow(func, i_obj) {
 				}
 			}
 
-			console.log('newrow: removed element:', element, 'successfully')
+			console.log('newrow: removed element:', elementId, 'successfully')
 			break;
 	}
 

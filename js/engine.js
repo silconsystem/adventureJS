@@ -26,7 +26,7 @@ function getClassWeaponOptions(p_class) {
 	console.log('getClassWeaponOptions: class name:', p_class);	
 
 
-	switch (p_class) { //TODO: cannot exeed 5 !
+	switch (p_class) {
 
 		case "thief":
 
@@ -227,7 +227,7 @@ armSelMenu.onchange = function(event) {
 
 		//pl_weaponObj = objArray('weapon', playerWeapon);
 
-		newrow(pl_weaponObj);
+		newrow(0, pl_weaponObj);
 
 		console.log('player weapon: ' + playerWeapon);
 		console.log('weapon object: ' + pl_weaponObj);
