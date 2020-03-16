@@ -97,23 +97,23 @@ function manInventory(func, id, item) {
 				player.inventory.weapon.push(item);	
 				console.log('added ' + item + ' to: ' + id);
 				break;
-			case "spell_H":
+			case "magic_H":
 
 				// add to inventory
-				player.inventory.spell_H.push(item);
+				player.inventory.magic_H.push(item);
 				console.log('added ' + item + ' to: ' + id);
 				break;
-			case "spell_D":
+			case "magic_D":
 
 				// add to inventory
-				player.inventory.spell_D.push(item);	
+				player.inventory.magic_D.push(item);	
 				console.log('added ' + item + ' to: ' + id);
 
 				break;
-			case "skill":
+			case "skills":
 
 				// add to inventory
-				player.inventory.skill.push(item);
+				player.inventory.skills.push(item);
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			default:
@@ -143,14 +143,14 @@ function manInventory(func, id, item) {
 			case "spell_H":
 				// statements_def
 				var index = player.inventory.spell_H.indexOf(item);
-				player.inventory.spell_H.splice(index,1);
+				player.inventory.magic_H.splice(index,1);
 				break;
 			case "spell_D":
 				// statements_def
 				var index = player.inventory.spell_D.indexOf(item);
-				player.inventory.spell_D.splice(index,1);
+				player.inventory.magic_D.splice(index,1);
 				break;
-			case "skill":
+			case "skills":
 				// statements_def
 				var index = player.inventory.skill.indexOf(item);
 				player.inventory.skill.splice(index,1);

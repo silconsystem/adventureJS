@@ -27,9 +27,9 @@ var playerName,
 	spellBook,
 	inventory_items 	= [],
 	inventory_weapons 	= [],
-	inventory_spell_H	= [],
-	inventory_spell_D 	= [],
-	inventory_skill 	= [],
+	inventory_magic_H	= [],
+	inventory_magic_D 	= [],
+	inventory_skills 	= [],
 	playerAction;
 //								____rooms
 // global variables

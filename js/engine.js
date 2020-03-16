@@ -2,6 +2,23 @@
  *
  *			game logic, get&set functions
  */
+// 
+function inventoryInfo(invObj) {
+
+	var info = {};
+
+	if (invObj) {
+		
+		console.log('inventoryInfo: extracting info from object:', invObj, '\n', invObj.name, '\n', invObj.type, '\n', invObj.description, '\n');
+	
+		info = {
+			invObjectName: invObj.name,
+			invObjectType: invObj.type,
+			invObjectDesc: invObj.description
+		}
+	}	
+}
+
 // fill weapon options when class is selected
 function getClassWeaponOptions(p_class) {
 
@@ -191,9 +208,10 @@ armSelMenu.onchange = function(event) {
 	var pl_weaponObj;
 
 	event.preventDefault();
+
 	playerWeapon 	= document.getElementById('weapon-menu').value;
 	playerWeapon  	= playerWeapon.trim();
-
+/*
 	if (playerWeapon == undefined || playerWeapon == "") {
 
 		playerWeapon = undefined;
@@ -217,231 +235,170 @@ armSelMenu.onchange = function(event) {
 
 		return false;
 	} else {
+*/
+//	if (playerWeapon) {
 
-		c_created = true;												// set created flag flag
+		c_created = true;													// set created flag flag
 		pl_weaponObj = objArray('weapon', playerWeapon);
 		playerWeapon = pl_weaponObj;
-																		// TODO: cannot use textParser if false
-		player.weapon = playerWeapon;									// set player.weapon
-		writeHTML('arm-name' ,'weapon selected: ' + playerWeapon);		// write name to HTML
+																			// TODO: cannot use textParser if false
+		player.weapon = playerWeapon;										// set player.weapon
+		writeHTML('arm-name' ,'weapon selected: ' + playerWeapon.name);		// write name to HTML
 
-		//pl_weaponObj = objArray('weapon', playerWeapon);
-
-		newrow(0, pl_weaponObj);
-
-		console.log('player weapon: ' + playerWeapon);
-		console.log('weapon object: ' + pl_weaponObj);
-
-		return true;
-	}
+		console.log('player weapon: ' + playerWeapon.name);
+		console.log('weapon object: ' + pl_weaponObj.name);
+//	}
 }
 
 // create character
 startBtn.onclick = function(event) {
-	event.preventDefault();
 
-	if (c_created == false) {
-		console.log('first fill out all the fields in order');
+	event.preventDefault();		
+		
+	var targetElement = 'stats';
+	
+	let new_stats 	= document.querySelectorAll("#game-stats");
+	let new_img 	= document.querySelectorAll("#class-image");
+	let new_W_img 	= document.querySelectorAll("#weapon-image");
 
-		return false;
-	} else {
+	manInventory(0, playerWeapon.type, playerWeapon)
+	newrow(0, playerWeapon);
 
-		var htmlString,
-			targetElement = 'stats';
+	for (let i = 0; i < new_stats.length; i++) {
 
-	let new_stats = document.querySelectorAll("#game-stats");
+		new_stats[i].style.visibility 	= 'visible';
+		new_stats[i].style.position 	= "absolute";
+		new_stats[i].style.width 		= "300px";
+		new_stats[i].style.height 		= "640px";
+		new_stats[i].style.left 		= "0px";
+		new_stats[i].style.top 			= "50px";
+		new_stats[i].style.border 		= "1px solid #000";
 
-		for (let i = 0; i < new_stats.length; i++) {
+		console.log('style changed: ' + new_stats[0].id);
+	}	
 
-			new_stats[i].style.visibility 	= 'visible';
-			new_stats[i].style.position 	= "absolute";
-			new_stats[i].style.width 		= "300px";
-			new_stats[i].style.height 		= "640px";
-			new_stats[i].style.left 		= "0px";
-			new_stats[i].style.top 			= "50px";
-			new_stats[i].style.border 		= "1px solid #000";
+	for (let i = 0; i < new_img.length; i++) {
 
-			console.log('style changed: ' + new_stats[0].id);
-		}
-/* 			TODO: save object states
-	let new_save = document.querySelectorAll("#save-game");
+		new_img[i].style.position 		= "relative";
+		new_img[i].style.top 			= "5px";
+		new_img[i].style.margin 	 	= "0 auto";
 
-		for (let i = 0; i < new_save.length; i++) {
-
-			new_save[i].style.visibility 	= 'visible';
-		}
-*/
-	let new_img = document.querySelectorAll("#class-image");
-
-		for (let i = 0; i < new_img.length; i++) {
-
-			new_img[i].style.position 		= "relative";
-			new_img[i].style.top 			= "5px";
-			new_img[i].style.margin 	 	= "0 auto";
-
-			console.log('style changed: ' + new_stats[0].id);
+		console.log('style changed: ' + new_stats[0].id);
 	}
 
-	let new_W_img = document.querySelectorAll("#weapon-image");
+	for (let i = 0; i < new_img.length; i++) {
 
-		for (let i = 0; i < new_img.length; i++) {
+		new_W_img[i].style.position 	= "relative";
+		new_W_img[i].style.top 			= "0px";
+		new_W_img[i].style.left 		= "0px";
+		new_W_img[i].style.width	 	= "40px";
+		new_W_img[i].style.height 		= "40px";
 
-			new_W_img[i].style.position 	= "relative";
-			new_W_img[i].style.top 			= "0px";
-			new_W_img[i].style.left 		= "0px";
-			new_W_img[i].style.width	 	= "40px";
-			new_W_img[i].style.height 		= "40px";
-
-			console.log('style changed: ' + new_stats[0].id);
+		console.log('style changed: ' + new_stats[0].id);
 	}
-/*
-		let new_content = document.querySelectorAll(".player-content");
-		let new_stats 	= document.querySelectorAll(".player-stats");
-		let new_game 	= document.querySelectorAll(".game-content");
-		let new_img 	= document.querySelectorAll(".class-image");
 
-			for (let i = 0; i < new_content.length; i++) {
+	switch (playerClass) {
 
-				new_content[i].style.visibility = 'hidden';
-				new_content[i].style.position 	= 'absolute';
-				new_content[i].style.height 	= '0px';
-				new_content[i].style.width 		= '0px';
+		case "Thief":
+			player.state 	= "alive";
+	 		player.coins 	= 100;
+			player.name 	= playerName;
+			player.class 	= playerClass;
+			player.weapon 	= playerWeapon.name;
+			player.HP 		= playerStats.HP 	+ 12;
+			player.MP  		= playerStats.MP 	= 0;
+			player.str 		= playerStats.STR 	+ 6;
+			player.int 		= playerStats.INT 	+ 6;
+			player.evd 		= playerStats.EVD 	+ 4;
+			player.luc 		= playerStats.STR 	+ 11;
 
-				console.log('style changed: ' + new_content[0].id);
+			manInventory(0, game_objects[4].skills[1].type, game_objects[4].skills[1]);
+			newrow(0, game_objects[4].skills[1]);
 
-				for (let i = 0; i < new_stats.length; i++) {
+			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
-					new_stats[i].style.position 	= "absolute";
-					new_stats[i].style.height 		= "550px";
-					new_stats[i].style.width 		= "250px";
-					new_stats[i].style.left 		= "0px";
-					new_stats[i].style.top 			= "90px";
+			writeHTML(targetElement, htmlString);
 
-					console.log('style changed: ' + new_stats[0].id);
-					for (let i = 0; i < new_game.length; i++) {
+			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+			break;
+		case "Warrior":
+			player.state 	= "alive";
+	 		player.coins 	= 100;
+			player.name 	= playerName;
+			player.class 	= playerClass;
+			player.weapon 	= playerWeapon.name;
+			player.HP 		= playerStats.HP 	+ 20;
+			player.MP  		= playerStats.MP 	= 0;
+			player.str 		= playerStats.STR 	+ 10;
+			player.int 		= playerStats.INT 	+ 2;
+			player.evd 		= playerStats.EVD 	+ 6;
+			player.luc 		= playerStats.STR 	+ 5;
 
-						new_game[i].style.position 		= 'absolute';
-						new_game[i].style.width 		= '300px';
-						new_game[i].style.height 		= '450px';
-						new_game[i].style.left 			= '724px';
-						new_game[i].style.top 			= '0px';
+			manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
+			newrow(0, game_objects[4].skills[4]);
 
-						console.log('style changed: ' + new_game[0].id);
+			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
-						for (let i = 0; i < new_img.length; i++) {
+			writeHTML(targetElement, htmlString);
+			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+			break;
+		case "Rogue":
+			player.state 	= "alive";
+	 		player.coins 	= 100;
+			player.name 	= playerName;
+			player.class 	= playerClass;
+			player.weapon 	= playerWeapon.name;
+			player.HP 		= playerStats.HP 	+ 15;
+			player.MP  		= playerStats.MP 	= 0;
+			player.str 		= playerStats.STR 	+ 7;
+			player.int 		= playerStats.INT 	+ 10;
+			player.evd 		= playerStats.EVD 	+ 7;
+			player.luc 		= playerStats.STR 	+ 7;
 
-							new_img[i].style.top 	= "-220px";
-							new_img[i].style.left 	= "455px";
+			manInventory(0, game_objects[4].skills[2].type, game_objects[4].skills[2]);
+			newrow(0, game_objects[4].skills[2]);
 
-							console.log('style changed: ' + new_stats[0].id);
-						}
-					}
-				}
-			}
-*/
-		// TODO new position
-		// TODO add rogue and mage img
+			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
-		switch (playerClass) {
-			case "Thief":
-				player.state 	= "alive";
-		 		player.coins 	= 0;
-				player.name 	= playerName;
-				player.class 	= playerClass;
-				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 6;
-				player.int 		= player.int = 6;
-				player.evd 		= player.evd = 4;
-				player.luc 		= player.luc = 11;
-				player.M_def 	= spellBook[0][0];
-				player.M_heal 	= spellBook[1][0];
-				player.skill_1 	= playerSkills.first_attack;
-				player.skill_2 	= playerSkills.scan_enemy;
+			writeHTML(targetElement, htmlString);
+			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+			break;
+		case "Mage":
+			player.state 	= "alive";
+	 		player.coins 	= 100;			
+			player.name 	= playerName;
+			player.class 	= playerClass;
+			player.weapon 	= playerWeapon.name;
+			player.HP 		= playerStats.HP 	+ 5;
+			player.MP  		= playerStats.MP 	= 20;
+			player.str 		= playerStats.STR 	+ 6;
+			player.int 		= playerStats.INT 	+ 20;
+			player.evd 		= playerStats.EVD 	+ 15;
+			player.luc 		= playerStats.STR 	+ 7;
 
-				htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>M_DEF: " + player.M_def + "</td></tr><tr><td>M_Heal: " + player.M_heal + "</td></tr><tr><td>skill one: " + player.skill_1 + "</td></tr><tr><td>skill two: " + player.skill_2 + "</td></tr></table>";
-		
-				writeHTML(targetElement, htmlString);
+			manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
+			newrow(0, game_objects[4].skills[4]);
 
-				//manInventory(0, pl_weaponObj.type, pl_weaponObj);
+			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
-				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-				break;
-			case "Warrior":
-				player.state 	= "alive";
-		 		player.coins 	= 0;
-				player.name 	= playerName;
-				player.class 	= playerClass;
-				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 11;
-				player.int 		= player.int = 2;
-				player.evd 		= player.evd = 3;
-				player.luc 		= player.luc = 4;
-				player.M_def 	= spellBook[0][0];
-				player.M_heal 	= spellBook[1][0];
-				player.skill_1 	= playerSkills.berserker;
-				player.skill_2 	= playerSkills.none;
-
-				htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>M_DEF: " + player.M_def + "</td></tr><tr><td>M_Heal: " + player.M_heal + "</td></tr><tr><td>skill one: " + player.skill_1 + "</td></tr><tr><td>skill two: " + player.skill_2 + "</td></tr></table>";
-		
-				writeHTML(targetElement, htmlString);
-				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-				break;
-			case "Rogue":
-				player.state 	= "alive";
-		 		player.coins 	= 0;
-				player.name 	= playerName;
-				player.class 	= playerClass;
-				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 6;
-				player.int 		= player.int = 11;
-				player.evd 		= player.evd = 7;
-				player.luc 		= player.luc = 6;
-				player.M_def 	= spellBook[0][4];
-				player.M_heal 	= spellBook[1][1];
-				player.skill_1 	= playerSkills.scan_enemy;
-				player.skill_2 	= playerSkills.use_magic;
-
-				htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>M_DEF: " + player.M_def + "</td></tr><tr><td>M_Heal: " + player.M_heal + "</td></tr><tr><td>skill one: " + player.skill_1 + "</td></tr><tr><td>skill two: " + player.skill_2 + "</td></tr></table>";
-		
-				writeHTML(targetElement, htmlString);
-				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-				break;
-			case "Mage":
-				player.state 	= "alive";
-		 		player.coins 	= 0;			
-				player.name 	= playerName;
-				player.class 	= playerClass;
-				player.weapon 	= playerWeapon;
-				player.str 		= player.str = 4;
-				player.int 		= player.int = 11;
-				player.evd 		= player.evd = 7;
-				player.luc 		= player.luc = 6;
-				player.M_def 	= spellBook[0][3];
-				player.M_heal 	= spellBook[1][1];
-				player.skill_1 	= playerSkills.use_magic;
-				player.skill_2 	= playerSkills.none;
-
-				htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>M_DEF: " + player.M_def + "</td></tr><tr><td>M_Heal: " + player.M_heal + "</td></tr><tr><td>skill one: " + player.skill_1 + "</td></tr><tr><td>skill two: " + player.skill_2 + "</td></tr></table>";
-		
-				writeHTML(targetElement, htmlString);
-				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-				break;
-			}
-		// TODO: change to class to use less code !
-		
-		changeCSSStyle("input-values", "height", "0px");
-
-		writeHTML('char-name', '');
-		writeHTML('char-class', ''),
-		writeHTML('arm-name', '');
-		writeHTML('skills', '');
-		writeHTML('describe','you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !');
-
-		console.log('character created');
-
-		hideHTML('player-content');
+			writeHTML(targetElement, htmlString);
+			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+			break;
 	}
+		
+	changeCSSStyle("input-values", "height", "0px");
+
+	writeHTML('char-name', '');
+	writeHTML('char-class', '');
+	writeHTML('arm-name', '');
+	writeHTML('skills', '');
+	writeHTML('describe','you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !');
+
+	console.log('character created');
+
+	hideHTML('player-content');
 }
+
 
 // get movement variables
 northBtn.onclick = function(event) {

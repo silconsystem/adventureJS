@@ -40,9 +40,9 @@ var player = {
  	inventory  	: inventory = {							
 		items 	: inventory_items 		= [],
 		weapon	: inventory_weapons 	= [],
-		spell_H	: inventory_spell_H		= [],
-		spell_D : inventory_spell_D 	= [],
-		skill 	: inventory_skill 		= []
+		magic_H	: inventory_magic_H		= [],
+		magic_D : inventory_magic_D 	= [],
+		skills 	: inventory_skills 		= []
 	}
 };
 

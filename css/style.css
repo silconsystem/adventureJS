@@ -58,6 +58,7 @@ input[type=text] {
 	position: absolute;
 	width: 1024px;
 	height: 640px;
+
 	/*background-color: #c1c9b9;*/
 	background-image: url('../img/wrap-bg.png');
 }
@@ -185,32 +186,18 @@ div#player-stats {
 	text-align: center;
 }
 
-div#item-image {
+div#item-image,
+	#weapon-image,
+	#magic_H-image,
+	#magic_D-image,
+	#skills-image {
 	min-width: 40px;
 	min-height: 40px;
 	height: 40px;
 	width: 40px;
-	overflow-y: auto;
+	overflow-y: scroll;
 	scroll-snap-align: center;
 }
-/*
-#item-image {
-	width: 40px;
-	height: 40px;
-}
-
-select#item-image::-ms-expand {
-    display: none;
-	background: url('../img/weapons/nothing.png');
-}
-
-select#item-image,option {
-	min-width: 40px;
-	min-height: 40px;
-	width: 40px;
-	height: 40px;
-}
-*/
 td.inventory {
 	width: 80px;
 	text-align: center;
@@ -251,7 +238,7 @@ div#room {
 	top: 5px;
 	margin-left: 0 auto;
 }
-
+/*
 #weapon-image {
 	position: absolute;
 	width: 40px;
@@ -259,7 +246,7 @@ div#room {
 	top: 240px;
 	left: 115px;
 	justify-content: center;
-}
+}*/
 /* 									____DOM - game-content 	*/
 div#game-content {
 	/*visibility: hidden;*/

@@ -67,7 +67,7 @@ const game_objects = [
 		]
 	},
 	{
-		magic:
+		magic_D:
 		[
 			/**	
 			 * 		magic defense object array
@@ -77,7 +77,14 @@ const game_objects = [
 			{name: "ice", 			description: "ice spell", 		game: "HP -10", 	url: "../img/magic/magic_D/ice.png",			type: "magic_D", 	handler: "player|NPC"},
 			{name: "bolt", 			description: "thunder spell", 	game: "HP -11", 	url: "../img/magic/magic_D/bolt.png",			type: "magic_D", 	handler: "player|NPC"},
 			{name: "plague", 		description: "poison spell", 	game: "HP -1", 		url: "../img/magic/magic_D/plague.png",			type: "magic_D", 	handler: "player|NPC"},
-			/**		magic heal object array */
+		]
+	},
+	{
+		magic_H:
+		[
+			/**		
+			 *		magic heal object array 
+			 */
 			{name: "Magic_H", 		description: "player-magic-h", 	game: "HP -0", 		url: "../img/weapons/nothing.png",				type: "magic_H", 	handler: "player|NPC"},
 			{name: "cure", 			description: "cure HP spell",	game: "HP + 20",	url: "../img/magic/magic_H/cure.png",			type: "magic_H", 	handler: "player|NPC"},
 			{name: "cure-all", 		description: "cure all spell",	game: "HP + 20",	url: "../img/magic/magic_H/cure-all.png",		type: "magic_H", 	handler: "player|NPC"},

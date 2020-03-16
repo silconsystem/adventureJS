@@ -10,16 +10,30 @@ function textParserActions(actCmd, actObj) {
     //  "take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill" ​
     actCmd = actCmd.toLowerCase();
 
-    switch (actCmd) {
+    console.log('textParserActions: player command:', actCmd, '\ntarget object:', actObj.name);
+
+    if (actCmd && actObj) {
+
+        console.log('textParserActions: testing values action command: \'' + actCmd + '\'for matching player action command');
+        console.log('textParserActions: object item to handle: \'' + actObj.name + '\'');
+        switch (actCmd) {
+
         case "take":
+
             // add obj to inventory and set image
             manInventory(0, actObj.type, actObj);
             newrow(0, actObj);
+            console.log('textParserActions: action: \'' + actCmd + '\'');
+            console.log('textParserActions: added:', actObj.name, 'object to:', actObj.type, 'inventory array and created html element');
             break;
         case "drop":
+
             // drop obj from inventory and remove image
+            console.log('textParserActions: action: \'' + actCmd + '\'');
             manInventory(1, actObj.type, actObj);
             newrow(1, actObj);
+            console.log('textParserActions: action: \'' + actCmd + '\'');
+            console.log('textParserActions: removed:', actObj.name, 'object from:', actObj.type, 'inventory array and removed html element');
             break;
         case "attack":
             // statements_1
@@ -39,7 +53,9 @@ function textParserActions(actCmd, actObj) {
         case "skill":
             // statements_1
             break;
+        }
     }
+    
 } 
 
  // set up the values for further handling
@@ -64,22 +80,8 @@ function textParserString(str) {
 	 *							  cmd  | target |  target_sp
 	 *		usage example: 		attack | harold | 	fire   
      */
-    // variables
-    let cmdString = [];                                 // empty array
-
-    cmdString   = str.split(" ");                       // divide at space deliminator
-
-    var command = actionCheck(cmdString[0]);            // 1st argument: action command
-    var target  = setObjectType(cmdString[1]);
-    var thrdArg = ifThird(cmdString[2]);
-
-    const action_obj = target;
-
-    console.log('textParserString: user input:', str);    
-    console.log('textParserString: user command string:', command);
-    console.log('textParserString: user target object:', target);
-    console.log('textParserString: user 3rd argument:', thrdArg);
-    console.log('textParserString: variable action_obj:', action_obj);
+    var cmdString   = str.split(" ");
+    var foundObj;
 
     // check if action input is valid  
     function actionCheck(c) {                       
@@ -101,23 +103,41 @@ function textParserString(str) {
     // check for third action argument     
     function ifThird(c) {                        // if 3rd string exists set value
 	
-        if (c != undefined || null) {		// if more than 2 words found in string	
+        if (c) {		// if more than 2 words found in string	
 
-            thrdArg 	= c;					// create extra variable 
+            thrdArg = c;					// create extra variable 
+            console.log('extra action string found: ', thrdArg);
+            return thrdArg;
+        } else if (!c) {
+
+            thrdArg = null;
         }
-        console.log('extra action string found: ', thrdArg);
-        return thrdArg;
     }
-    // check if item exists, set type, url, add or remove from inventory and display on screen
+    
     // find the second string argument and set type
-	function findObject(arr, itm) {
-	
+    function findObject(arr, itm) {
+    
+        var found;
+        console.log('findObject: searching for:',itm);
+    
+        for(let i in arr) {
+            for (let j in arr[i])
+                if (arr[i][j].name.includes(itm)) {
+              
+                found = arr[i][j];
+            }
+        }
+        itm = found;
+        return itm;
+    }
+ /*   function findObject(arr, itm) {
+    
         console.log('findObject: searching for:',itm);
             
         for(let i in arr) {
             if (arr[i].name.includes(itm)) {
                     
-                console.log('findObject: item index:',i );		
+                console.log('findObject: item index:',i );      
                 console.log('findObject: item name:', arr[i].name);
                 console.log('findObject: item type:', arr[i].type);
                 console.log('findObject: item url:', arr[i].url);
@@ -126,17 +146,16 @@ function textParserString(str) {
             } 
         }
         return itm;
-    }
-
-    // get and set type of object
+   }
+ */
+    // check if item exists, set type, url, add or remove from inventory and display on screen
     function setObjectType(itm) {
 
-        var foundObj;
-
-        let itemArray 		= game_objects[0].item;		// search object array lists 
-        let weaponArray 	= game_objects[1].weapon;
-        let magicArray 		= game_objects[2].magic;
-        let skillArray 		= game_objects[3].skills;
+        var itemArray  = [game_objects[0].item,     // search object array lists 
+                    game_objects[1].weapon,
+                    game_objects[2].magic_D,
+                    game_objects[3].magic_H,
+                    game_objects[4].skills];
 
         // find the object in the list and get its type
         if (findObject(itemArray, itm)) {
@@ -145,28 +164,21 @@ function textParserString(str) {
 
             console.log('setObjectType: object is of type \'item\'');
             console.log('setObjectType: action obj =',foundObj);
-        } else if (findObject(weaponArray, target)) {
-
-            foundObj = findObject(weaponArray, itm);
-
-            console.log('setObjectType: object is of type \'weapon\'');
-            console.log('setObjectType: action obj =',foundObj);
-        } else if (findObject(magicArray, target)) {
-
-            foundObj = findObject(magicArray, itm);
-
-            console.log('setObjectType: object is of type \'magic\'');
-            console.log('setObjectType: action obj =',foundObj);
-        } else if (findObject(skillArray, target)) {
-
-            foundObj = findObject(skillArray, itm);
-
-            console.log('setObjectType: object is of type \'magic\'');
-            console.log('setObjectType: action obj =',foundObj);
-        }
-        return foundObj;
+        } 
+        return foundObj;     
     }
+    
+    command     = actionCheck(cmdString[0]);            // 1st argument: action command
+    target      = setObjectType(cmdString[1]);
+    thrdArg     = ifThird(cmdString[2]);
 
-    textParserActions(command, action_obj);
-        
+    var action_obj  = target;
+    var action_cmd  = command;
+
+    console.log('textParserString: input string is:', str, '\ncommand:', command, '\ntarget:', target, '\nthird argument:', thrdArg);
+
+    console.log('textParserString: action_obj variable is:', action_obj);
+    console.log('textParserString: calling textParserActions(' +command+ ', ' +action_obj+ ');');
+
+    textParserActions(action_cmd, action_obj);
 }

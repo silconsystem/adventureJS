@@ -74,17 +74,25 @@ function objArray(type, name) {
       console.log('targetObj weapon:',targetObj);
       console.log('targetUrl weapon:',targetObj.url);
       break;
-    case "magic":
+    case "magic_D":
       
-      typeArray = game_objects[2].magic;
+      typeArray = game_objects[2].magic_D;
       var targetObj = objectUrlByName(typeArray, name);
       
-      console.log('targetObj magic:',targetObj);
-      console.log('targetUrl magic:',targetObj.url);
+      console.log('targetObj magic_D:',targetObj);
+      console.log('targetUrl magic_D:',targetObj.url);
+      break;
+    case "magic_H":
+      
+      typeArray = game_objects[3].magic_H;
+      var targetObj = objectUrlByName(typeArray, name);
+      
+      console.log('targetObj magic_H:',targetObj);
+      console.log('targetUrl magic_H:',targetObj.url);
       break;
     case "skills":
       
-      typeArray = game_objects[3].skills;
+      typeArray = game_objects[4].skills;
       var targetObj = objectUrlByName(typeArray, name);
       
       console.log('targetObj skills:',targetObj);
@@ -97,18 +105,32 @@ function objArray(type, name) {
 
 // add new <div> to html page
 function newrow(func, i_obj) {
+	
+	/*
+		func 0 = add | func 1 = remove
+		i_obj = item object, we can use its properties to 
+	*/	
+	function action(func) {
 
-	var action		= function(func) { 			// 0|1 add or remove
-						let str;	if (func == 0) {str = 'add'}
-						else if (func == 1) {str = 'remove'}
-						return str;
-					};										
+		var act;
+
+		if (func == 0) {
+			act = 'add';
+		} else if (func == 1) {
+			act = 'remove';
+		}
+		return act;
+	}
+
+	console.log('newrow: function:', func, 'object:', i_obj);							
 
 	var	imgUrl 		= i_obj.url, 					// strip "../" from image url		
 		pageUrl 	= imgUrl.substring(3),			// ready for use in index.html
 		itemName 	= i_obj.name,
 		htmlId 		= (i_obj.type + "-image"),
 		id 			= increment();
+
+	console.log('newrow: object:', i_obj, '\nurl raw:', imgUrl, '\nstripped url:', pageUrl, '\nname:', itemName, '\nhtml element ID:', htmlId);
 
 	/**
 	 * 		helper functions
@@ -133,18 +155,15 @@ function newrow(func, i_obj) {
 
 			console.log('newrow: add html element');
 
-			// if 'weapon' only 1 img in display
-			if (i_obj.type != 'weapon') {
+			if (htmlId.includes("weapon")) {
+				var img = document.getElementById('weapon-thumb');
+				img.src = pageUrl;
+			} 
 
-				// add a row with each taken item
-				document.getElementById(htmlId).innerHTML += "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
-				console.log('newrow: added', itemName, 'to', i_obj.type, 'in page element:', htmlId);
-			} else if (i_obj.type == 'weapon'){
-
-				// other item types can become lists
-				document.getElementById(htmlId).innerHTML = "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";			
-				console.log('newrow: weapon added', itemName, 'to', i_obj.type, 'in page element:', htmlId);
-			}				
+			// add a row with each taken item
+			document.getElementById(htmlId).innerHTML += "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
+			console.log('newrow: added', itemName, 'to', i_obj.type, 'in page element:', htmlId);
+				
 			break;
 		// remove items from inventory display
 		case 1:
@@ -170,9 +189,8 @@ function newrow(func, i_obj) {
 			console.log('newrow: removed element:', elementId, 'successfully')
 			break;
 	}
-
-	
 }
+
 // check if array has value 
 function checkIfEmpty(a) {
 
@@ -195,7 +213,7 @@ function checkIfEmpty(a) {
 	}
 	return obj;
 }
-
+/*
 // handle inventory actions	
 function inventoryActions(cmdStr, invObj) {
 	
@@ -225,7 +243,8 @@ function inventoryActions(cmdStr, invObj) {
 				// player weapon
 				document.getElementById('weapon-image').innerHTML = '<img name =\"' + itemObj.name + '\"src=\"' + itemObj.url + '\">';
 				break;
-			}
+		}
+
 		case "drop":
 
 			// drop item from inventory
@@ -259,15 +278,13 @@ function inventoryActions(cmdStr, invObj) {
 			}
 		}
 	}
-
+*/
 
 
 /* 											____submit action command text */
 actionBtn.onclick = function(event) {
 
 	event.preventDefault();
-	var string,						// player action input string
-		stringArray;//	= string.split(" "),		// split on space delimiter
 
 	playerAction = actionInput.value;					// set value as variable
 
@@ -275,6 +292,47 @@ actionBtn.onclick = function(event) {
 
 	writeHTML('action-display',playerAction);			// write to display
 
-	// handle the input value 			TODO: create a handler
+	// handle the input value 	
+	console.log('actionBtn.onclick: calling textParserString(\'' +playerAction+ '\');');		
 	textParserString(playerAction);
 }
+
+var itemId = document.getElementById('item-image'),
+	weaponId = document.getElementById('weapon-image'),
+	magicDId = document.getElementById('magic_D-image'),
+	magicHId = document.getElementById('magic_H-image'),
+	skillsId = document.getElementById('skills-image');
+
+document.addEventListener('keyup', function (event) {
+    if (event.defaultPrevented) {
+        return;
+    }
+
+    var key = event.key || event.keyCode;
+
+    switch (event.keyCode) {
+    	case 49:
+    		// focus item div
+        	itemId.focus();
+        	console.log('key:', key, 'pressed, focus on:', itemId.id);
+    		break;
+    	case 50:
+    		// focus magic-h div
+        	magicHId.focus();
+        	console.log('key:', key, 'pressed, focus on:', magicHId.id);
+    		break;
+    	case 51:
+    		// focus magic-d div
+        	magicDId.focus();
+        	console.log('key:', key, 'pressed, focus on:', magicDId.id);
+    		break;
+    	case 52:
+    		// focus skills div
+    		skillsId.focus();
+    		console.log('key:', key, 'pressed, focus on:', skillsId.id);
+    	default:
+    		// statements_def
+    		break;
+    }
+
+});
