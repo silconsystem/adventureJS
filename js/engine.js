@@ -392,6 +392,8 @@ startBtn.onclick = function(event) {
 	writeHTML('char-class', '');
 	writeHTML('arm-name', '');
 	writeHTML('skills', '');
+
+	writeHTML('action-display', 'press any direction and you are off...');
 	writeHTML('describe','you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !');
 
 	console.log('character created');

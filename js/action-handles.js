@@ -213,73 +213,23 @@ function checkIfEmpty(a) {
 	}
 	return obj;
 }
-/*
-// handle inventory actions	
-function inventoryActions(cmdStr, invObj) {
-	
-	switch (cmdStr) {
 
-	case "take":
+// count duplicates
+function countDuplicates(arr) {
 
-		// set a ne image to display the list can be scrolled
-		if (checkIfEmpty(player.inventory.items) == false) {
+  let counts = {},
+    duplicate = 0;
+  arr.forEach(function(x) {
+    counts[x] = (counts[x] || 0) + 1;
+  });
 
-			document.getElementById('item-list').src = 'img/weapons/active.png';
-		}
-
-		// add item to inventory
-		manInventory(0, action_obj.type, action_obj);
-
-		switch (action_obj.type) {
-			case "item":
-				// create item list, scroll through
-				newrow(action_obj);
-
-				console.log(action_obj.url);
-
-				break;
-			case "weapon":
-
-				// player weapon
-				document.getElementById('weapon-image').innerHTML = '<img name =\"' + itemObj.name + '\"src=\"' + itemObj.url + '\">';
-				break;
-		}
-
-		case "drop":
-
-			// drop item from inventory
-			manInventory(1, itemObj.type, action_obj);
-			
-			switch (itemObj.type) {
-				case "item":
-
-					// ---------------------------------------------------------->>>>>TODO: deletes all !!!
-
-					// check if elements with name 'object.name' exist
-					// 	if exists is true
-					//	delete the div element with this name
-
-					document.getElementsByName(itemObj.name).innerHTML = '';
-					break;
-				case "weapon":
-
-					// statements_def
-					document.getElementById('weapon-image').innerHTML = '';
-					document.getElementById('weapon-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';
-					break;
-				
-				default:
-
-					// return false if command is not valid
-					if (cmdStr != "take" || "drop") {
-					console.log('not an inventory command');
-					return false;
-				}
-			}
-		}
-	}
-*/
-
+  for (var key in counts) {
+    if (counts.hasOwnProperty(key)) {
+      counts[key] > 1 ? duplicate++ : duplicate;
+    }
+  }
+  return [counts, key, duplicate];
+}
 
 /* 											____submit action command text */
 actionBtn.onclick = function(event) {
@@ -290,11 +240,17 @@ actionBtn.onclick = function(event) {
 
 	console.log('player submitted string: ' + playerAction + '\nwrite to id: \'action-display\'');		// log
 
-	writeHTML('action-display',playerAction);			// write to display
+	//writeHTML('action-display',playerAction);			// write to display
 
 	// handle the input value 	
-	console.log('actionBtn.onclick: calling textParserString(\'' +playerAction+ '\');');		
-	textParserString(playerAction);
+	console.log('actionBtn.onclick: calling textParserString(\'' +playerAction+ '\');');
+
+	if (playerAction.length > 0) {	
+		textParserString(playerAction);
+	} else {
+        console.log('no input');
+        writeHTML('action-display', 'type some command');
+	}
 }
 
 var itemId = document.getElementById('item-image'),
@@ -304,6 +260,18 @@ var itemId = document.getElementById('item-image'),
 	skillsId = document.getElementById('skills-image');
 
 document.addEventListener('keyup', function (event) {
+
+	function list(arr) {
+
+		let list = [];
+
+		for (let i in arr) {
+
+			list.push(arr[i].name);
+		}
+		return list;
+	}
+
     if (event.defaultPrevented) {
         return;
     }
@@ -330,6 +298,13 @@ document.addEventListener('keyup', function (event) {
     		// focus skills div
     		skillsId.focus();
     		console.log('key:', key, 'pressed, focus on:', skillsId.id);
+    	case 73:
+    		// show inventory
+    		var txt = list(player.inventory.items);
+
+    		console.log(txt);
+    		console.log('key:', key, 'pressed, showing inventory');
+    		writeHTML('action-display', '<ul>' + txt.join(",") + '</ul>');
     	default:
     		// statements_def
     		break;

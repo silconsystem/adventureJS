@@ -4,11 +4,20 @@
  *      handle text input
  * 
  */
+
 // handle the player actions
-function textParserActions(actCmd, actObj) {
+function textParserActions(actCmd, actObj, actSpc) {
 
     //  "take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill" ​
     actCmd = actCmd.toLowerCase();
+
+    if (!actSpc) {
+
+        actSpc = null;
+    } else {
+        
+        actSpc = actSpc.toLowerCase();
+    }
 
     console.log('textParserActions: player command:', actCmd, '\ntarget object:', actObj.name);
 
@@ -23,6 +32,8 @@ function textParserActions(actCmd, actObj) {
             // add obj to inventory and set image
             manInventory(0, actObj.type, actObj);
             newrow(0, actObj);
+            writeHTML('action-display', player.name + ' took the ' + actObj.name + ' and added it to the ' + actObj.type + ' inventory');            // write to display
+            
             console.log('textParserActions: action: \'' + actCmd + '\'');
             console.log('textParserActions: added:', actObj.name, 'object to:', actObj.type, 'inventory array and created html element');
             break;
@@ -130,24 +141,7 @@ function textParserString(str) {
         itm = found;
         return itm;
     }
- /*   function findObject(arr, itm) {
     
-        console.log('findObject: searching for:',itm);
-            
-        for(let i in arr) {
-            if (arr[i].name.includes(itm)) {
-                    
-                console.log('findObject: item index:',i );      
-                console.log('findObject: item name:', arr[i].name);
-                console.log('findObject: item type:', arr[i].type);
-                console.log('findObject: item url:', arr[i].url);
-            
-            itm = arr[i];
-            } 
-        }
-        return itm;
-   }
- */
     // check if item exists, set type, url, add or remove from inventory and display on screen
     function setObjectType(itm) {
 
@@ -172,13 +166,15 @@ function textParserString(str) {
     target      = setObjectType(cmdString[1]);
     thrdArg     = ifThird(cmdString[2]);
 
-    var action_obj  = target;
-    var action_cmd  = command;
+    var action_obj  = target,
+        action_cmd  = command,
+        action_spc  = thrdArg;
+
 
     console.log('textParserString: input string is:', str, '\ncommand:', command, '\ntarget:', target, '\nthird argument:', thrdArg);
 
     console.log('textParserString: action_obj variable is:', action_obj);
     console.log('textParserString: calling textParserActions(' +command+ ', ' +action_obj+ ');');
 
-    textParserActions(action_cmd, action_obj);
+    textParserActions(action_cmd, action_obj, action_spc);
 }
