@@ -20,7 +20,7 @@ select player arms in <SELECT> weapon-menu		      __> write choice to <DIV> play
   _> player.weapon = playerWeapon;
   _> write html; 
   _> add image to inventory;                        __> textparser depend  T_P**
-  _> add item to player.inventory.items array       __> textparser depend  T_P**  !_TODO_! 
+  _> add item to player.inventory.items array       __> textparser depend  T_P**  !_TODO_! ~~~~ NOTICE !
 
 if character created: enable movement buttons       __>                           !_TODO_!
   _> load room: room_00(counter_$)
@@ -29,7 +29,7 @@ if character created: enable movement buttons       __>                         
       _> items    >> take | drop to/from player.inventory.items            T_P**  ! DONE !
       _> weapons  >> take | drop to/from player.inventory.items            T_P**  ! DONE !
 -----------------------------------------------------------------------------------------------------------
-  :: submit ::
+  :: figuring out game logic ::
 -----------------------------------------------------------------------------------------------------------
 TODO: change layout	if previous fields are all set with valid values
   -> character stats visible after user input fields submitted                    ! DONE !
@@ -37,6 +37,7 @@ TODO: change layout	if previous fields are all set with valid values
   -> create room object handler,                                                  !_TODO_!
       - onload return room objects 
       - write description
+==========================================================================================    
 TODO: create text parser                                                          !_TODO_!
 
   -> test if string values exist and extract command and item and if 3rd strVal   ! DONE !
@@ -52,9 +53,30 @@ TODO: create text parser                                                        
             type: array[name,description,game,img_url]
           }
         i.e: objects.type[0] = array[0](name);
+==========================================================================================
+TODO: one function to set item image when added to inventory
+
+  if character weapon is chosen:
+    -> get the weapon object and set its variables
+      _> function loadImage(object.name, DOM.id) {
+
+        loop game_objects.name
+          compare -->> object[index].name
+          set inline variable -->> object[index].url
+      }
+      writeHTML(DOM.id, $_URL)
+
+  line 229: if you switch around stuff will keep adding to inventory
+    _> player.weapon should be set after character create
+
+  text-parser.js:
+    html is added, url is correct but no scrolling possible
+    weapon items dont work
+
+  action handles 83: faulty values, probably double
 
   ____ADD MAGIC AND SKILL WHEN TEXT PARSER AND ROOM LOGIC IS DONE____             !_TODO_!
-
+==========================================================================================
 TODO: create room loading logic:
   -> movement buttons.onload(): get objects inside room by retuning html.elem.    !_TODO_!
 

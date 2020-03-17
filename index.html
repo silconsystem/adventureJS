@@ -18,6 +18,13 @@
 
 		<div id="game-stats" class="game-stats">
 			<span id="stats" 		class="character-build"></span><br>
+
+			<!-- 
+				TODO: if character created true give save and load option
+					or preload using a splash screen with new game | load otption
+				<div id="save-game" class="save">
+				</div>
+			-->
 		</div><!-- game-stats -->
 
 		<div id="player-content" class="player-content">
@@ -82,35 +89,35 @@
 						<tr>
 							<td id="inventory-weapon">Weapon</td>
 							<td id="inventory-items">Items</td>
-							<td id="inventory-magic-h">M_Heal</td>
-							<td id="inventory-magic-d">M_Def</td>
-							<td id="inventory-skill">Skill</td>
+							<td id="inventory-magic_H">M_Heal</td>
+							<td id="inventory-magic_D">M_Def</td>
+							<td id="inventory-skills">Skill</td>
 						</tr>
 						<tr>
 							<td>
-								<span id="weapon-image" class="inventory-table">
-									<img src="img/weapons/nothing.png">
-								</span>
+								<div id="weapon-image" class="inventory-table">
+									<img id="weapon-thumb" src="img/weapons/nothing.png">
+								</div>
 							</td>
 							<td>
-								<span id="item-image" class="inventory-table">
-									<img src="img/weapons/nothing.png">
-								</span>
+								<div id="item-image" class="inventory-table">
+									<img id="item-list" src="img/weapons/nothing.png">
+								</div>
 							</td>
 							<td>
-								<span id="magic-H-image" class="inventory-table">
-									<img src="img/weapons/nothing.png">
-								</span>
+								<div id="magic_H-image" class="inventory-table">
+									<img id="magic-h-list" src="img/weapons/nothing.png">
+								</div>
 							</td>
 							<td>
-								<span id="magic-D-image" class="inventory-table">
-									<img src="img/weapons/nothing.png">
-								</span>
+								<div id="magic_D-image" class="inventory-table">
+									<img id="magic-d-list" src="img/weapons/nothing.png">
+								</div>
 							</td>
 							<td>
-								<span id="skill-image" class="inventory-table">
-									<img src="img/weapons/nothing.png">
-								</span>
+								<div id="skills-image" class="inventory-table">
+									<img id="skills-list" src="img/weapons/nothing.png">
+								</div>
 							</td>
 						</tr>
 					</table>
@@ -124,10 +131,10 @@
 				<table id="room-display" class="room-display">
 					<tr>
 						<td>
-							<h2 class="-room-display">room name</h2>
+							<h2 class="room-display">room name</h2>
 						</td>
 						<td>
-							<span id="room-name" class="-room-display">still chilling at home, </span>
+							<span id="room-name" class="room-display">still chilling at home, </span>
 						</td>
 					</tr>
 					<tr>
@@ -135,15 +142,15 @@
 							<h2>information</h2>
 						</td>
 						<td>
-							<span id="describe" class="-room-display">you are nowhere yet !</span>
+							<span id="describe" class="room-display">you are nowhere yet !</span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<h2 id="room-text" class="-room-display">doing your thing..</h2>
+							<h2 id="room-text" class="room-display">doing your thing..</h2>
 						</td>
 						<td>
-							<span id="direction" class="-room-display"></span>
+							<span id="direction" class="room-display"></span>
 						</td>
 					</tr>
 				</table>
@@ -195,6 +202,9 @@
 	<script src="js/room.js"></script>
 	<script src="js/engine.js"></script>
 	<script src="js/action-handles.js"></script>
+	<script src="js/engine.js"></script>
+	<script src="js/text-parser.js"></script>
+	<!-- <script src="js/save.js"></script> -->	
 
 </body>
 </html>

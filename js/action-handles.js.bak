@@ -1,0 +1,433 @@
+/*
+	action-handles.js
+	handler for the text input parser
+*/
+
+// handle text input 	
+function textParser(txt) {
+
+	/*
+		use: func('action string')
+		test if valid action
+		test if valid object
+		set actions for each command
+		commands:
+		1. take + item:
+			take object from room if present
+		2. drop + item
+			drop item from inventory if present
+		3. attack + enemy
+			attack enemy if present
+			start battle function 					TODO: battle function
+		4. leave + enemy
+			leave room without fighting
+		5. talk + npc
+			talk to npc if present
+													TODO: battle function	
+		6. magic def + enemy
+			attack enemy >> in battle mode
+		7. magic heal + player
+			HP + with item or enemy event >> in battle mode
+		8. skill + player || npc
+			use skill on player or enemy >> in battle mode
+	*/
+	// private variables
+	var string 			= txt,						// player action input string
+		strArray		= string.split(" "),		// split on space delimiter
+		cmd 			= strArray[0],				// 1st argument: action command
+		target 			= strArray[1], 				// 2nd argument: target item object 
+		target_sp,									// if 3rd string exists set value
+		action_obj;									// if found create 'item_obj' for further sorting
+
+	let itemArray 		= game_objects[0].item;		// search object array lists 
+	let weaponArray 	= game_objects[1].weapon;
+	let magicArray 		= game_objects[2].magic;
+	let skillArray 		= game_objects[3].skills;
+
+	/* create a base object from found item to use for later handling
+	function item_obj(name, type, handler, url, exists) {
+		this.name 		= name;						// name
+		this.type 		= type;						// type: item|weapon|magic|npc|enemy|event
+		this.handler 	= handler;					// used by actor: player|thief|warrior|rogue|mage
+		this.url 		= url;						// the image url
+
+	}*/
+
+	console.log('input text:', txt, '\ncmd:', cmd, '\n', target);	// log
+	console.log('player action is: ', cmd);							// log
+	console.log('item object is', target);							// log
+
+	/*
+			if not empty set 3rd string variable
+			"attack harold fire"
+
+			3rd argument: 		action | target | event/object
+								  cmd  | target |  target_sp
+			usage example: 		attack | harold | 	fire	
+	*/
+	if (strArray[2] != undefined || null) {			// if more than 2 words found in string	
+
+		target_sp 	= strArray[2];					// create extra variable 
+		console.log('extra action string found: ', target_sp);
+	}
+	/*
+		helper functions, find 2nd arguments type and return 'action_obj'
+	*/
+	// add new <div> to html page
+	function newrow(i_obj) {
+
+		var imgUrl = i_obj.url; 					// strip "../" from image url		
+		var pageUrl = imgUrl.substring(3);			// ready for use in index.html
+		var itemName = i_obj.name;
+		var	id = increment();
+
+		console.log(pageUrl);
+
+		document.getElementById("item-image").innerHTML += "<div id=\"" + itemName + "_" + id + "\" name=\"" + itemName + "\" class=\"inventory-thumbs\"><img src=\"" + pageUrl + "\"></div>";
+	}
+	// check if array has value 
+	function checkIfEmpty(a) {
+
+		// check if array length is not 0
+		if (a.length > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// find the second string argument and set type
+	function findObject(arr, itm) {
+	
+	console.log('findObject: searching for:',itm);
+		
+		for(let i in arr) {
+			if (arr[i].name.includes(itm)) {
+					
+				console.log('findObject: item index:',i );		
+				console.log('findObject: item name:', arr[i].name);
+				console.log('findObject: item type:', arr[i].type);
+				console.log('findObject: item url:', arr[i].url);
+			
+			itm = arr[i];
+			} 
+		}
+		return itm;
+	}
+
+	// get and set type of object
+	function setObjectType(itm) {
+
+		// find the object in the list and get its type
+		if (findObject(itemArray, itm)) {
+
+			action_obj = findObject(itemArray, itm);
+
+			console.log('setObjectType: object is of type \'item\'');
+			console.log('setObjectType: action obj =',action_obj);
+		} else if (findObject(weaponArray, target)) {
+
+			action_obj = findObject(weaponArray, itm);
+
+			console.log('setObjectType: object is of type \'weapon\'');
+			console.log('setObjectType: action obj =',action_obj);
+		} else if (findObject(magicArray, target)) {
+
+			action_obj = findObject(magicArray, itm);
+
+			console.log('setObjectType: object is of type \'magic\'');
+			console.log('setObjectType: action obj =',action_obj);
+		} else if (findObject(skillArray, target)) {
+
+			action_obj = findObject(skillArray, itm);
+
+			console.log('setObjectType: object is of type \'magic\'');
+			console.log('setObjectType: action obj =',action_obj);
+		}
+		return action_obj;
+	}
+
+	// take or add to  items inventory
+
+	action_obj = setObjectType(target);
+	
+	switch (cmdStr) {
+		case "take":
+
+			// set a ne image to display the list can be scrolled
+			if (checkIfEmpty(player.inventory.items) == false) {
+
+				document.getElementById('item-list').src= 'img/weapons/active.png';
+			}
+
+			// add item to inventory
+			manInventory(0, action_obj.type, action_obj);
+
+			switch (action_obj.type) {
+				case "item":
+					// create item list, scroll through
+					newrow(action_obj);
+
+					console.log(action_obj.url);
+
+					break;
+				case "weapon":
+
+					// player weapon
+					document.getElementById('weapon-image').innerHTML = '<img name =\"' + itemObj.name + '\"src=\"' + itemObj.url + '\">';
+					break;
+			}
+
+			break;
+		case "drop":
+
+			// drop item from inventory
+			manInventory(1, itemObj.type, action_obj);
+			
+			switch (itemObj.type) {
+				case "item":
+
+					// ---------------------------------------------------------->>>>>TODO: deletes all !!!
+
+					// check if elements with name 'object.name' exist
+					// 	if exists is true
+					//	delete the div element with this name
+
+					document.getElementsByName(itemObj.name).innerHTML = '';
+					break;
+				case "weapon":
+
+					// statements_def
+					document.getElementById('weapon-image').innerHTML = '';
+					document.getElementById('weapon-image').innerHTML = '<img src=\"../img/weapons/nothing.png\">';
+					break;
+			}
+			
+			break;
+		default:
+
+			// return false if command is not valid
+			if (cmdStr != "take" || "drop");
+			console.log('not an inventory command');
+			return false;
+		}
+	}
+	
+/*
+	// search in weapon array
+	function getWeaponValue(itm) {
+
+		var result,
+			handler,
+			url;
+
+			let l = game_obj[1].weapon[0].thief.length;
+
+		for (let i in game_obj[1].weapon[0].thief[0].name) {
+
+			console.log('i value:',i);
+
+			if (i <= l) {
+				// compare weapon names of each class and return new item_obj
+				// or leave obj_exists false and pass the argument to another function
+				if (game_obj[1].weapon[0].thief[i].name.includes(itm)) {
+
+					obj_exists 	= true;
+					handler 	= 'thief';
+					url 		= game_obj[1].weapon[0].thief[i].url;
+					result 		= game_obj[1].weapon[0].thief[i].name;
+					break;				
+				} else if (obj_exists == false) {
+
+					obj_exists 	= true;
+					handler 	= 'warrior';
+					url 		= game_obj[1].weapon[1].warrior[i].url;
+					result 		= game_obj[1].weapon[1].warrior[i].name;
+					break;
+				} else if (game_obj[1].weapon[2].rogue[i].name.includes(itm)) {
+					
+					obj_exists 	= true;
+					handler 	= 'rogue';
+					url 		= game_obj[1].weapon[2].rogue[i].url;
+					result 		= game_obj[1].weapon[2].rogue[i].name;
+					break;
+				} else if (game_obj[1].weapon[3].mage[i].name.includes(itm)) {
+					
+					obj_exists 	= true;
+					handler 	= 'mage';				
+					url 		= game_obj[1].weapon[3].mage[i].url;
+					result 		= game_obj[1].weapon[3].mage[i].name;
+					break;
+				}
+			}
+		}
+		// if obj_exists still false return false and leave 'itm' unchanged
+		if (obj_exists == false) {
+
+			itm = itm;
+			console.log('getItemValue: target not found:', itm, 'checking if type magic');
+			return false;
+
+		} else {
+
+			// set type and create new item_obj
+			obj_type = 'weapon';
+	        itm = new item_obj(result, obj_type, handler, url, obj_exists);
+		}
+		console.log('getItemValue: returning input:', itm, 'of type:',obj_type);
+		return itm;	
+	}
+
+	// test if target is an item or not
+	function getItemValue(itm) {
+
+		var result,
+			url;
+
+		// find match and set obj_exists to true
+		for (let i in game_obj[0].item[0].name) {
+
+			console.log(game_obj[0].item[i].name);
+		    if (game_obj[0].item[i].name.includes(itm)) {
+
+		    	obj_exists 	= true;
+		    	url 		= game_obj[0].item[i].url;
+		    	result 		= game_obj[0].item[i].name;
+		        break;
+		    } 
+		}
+
+		// if false return false and leave 'itm' unchanged
+		if (obj_exists == false) {
+
+			itm = itm;
+			console.log('getItemValue: target not found:', itm, 'checking if type weapon');
+			return false;
+
+		} else {
+
+			handler 	= 'player';
+			obj_type 	= 'item';
+			url 		= url;
+	        itm = new item_obj(result, obj_type, handler, url, obj_exists);
+	        console.log('getItemValue: target found, input:', itm.name, 'result:', result);
+	        console.log('getItemValue: returning new object:', itm);
+		}
+		console.log('getItemValue: returning input:', itm, 'of type:',obj_type);
+		return itm;	
+	}
+
+	// set object action_obj to the returned value if function returns true
+	if (getItemValue(target)) {
+
+		action_obj = getItemValue(target);
+		console.log('getItemValue: target value is now:'	, action_obj);
+		console.log('getItemValue: target name:'			, action_obj.name);
+		console.log('getItemValue: target type:'			, action_obj.type);
+		console.log('getItemValue: target handler:'			, action_obj.handler);
+		console.log('getItemValue: target url:'				, action_obj.url);
+		console.log('getItemValue: target exists:'			, action_obj.exists);
+
+		if (handleInventory(cmd, action_obj)) {
+
+			console.log('item', action_obj.name,'succesfully added to player inventory');
+			console.log(player.inventory.items);
+		}
+
+	} else if (getWeaponValue(target)) {
+
+		action_obj = getWeaponValue(target);
+		console.log('getWeaponValue: target value is now:'	, action_obj);
+		console.log('getWeaponValue: target name:'			, action_obj.name);
+		console.log('getWeaponValue: target type:'			, action_obj.type);
+		console.log('getWeaponValue: target handler:'		, action_obj.handler);
+		console.log('getWeaponValue: target url:'			, action_obj.url);
+		console.log('getWeaponValue: target exists:'		, action_obj.exists);
+
+		if (handleInventory(cmd, action_obj)) {
+
+			console.log('item', action_obj.name,'succesfully added to player inventory');
+			console.log(player.inventory.items);
+		}
+
+	} else if(getMagicHValue(target)) {
+
+	} else {
+		
+		writeHTML('action-display', 'unknown text command, check your input');
+		console.log('getItemValue returned false');
+	}
+
+	// search in white magic array
+	function getMagicHValue(itm) { 
+
+		// magic heal item 
+		var result,
+			url;
+
+		// find match and set obj_exists to true
+		for (let i in game_obj[2].magic_H[0].name) {
+
+			console.log(game_obj[2].magic_H[i].name);
+		    if (game_obj[2].magic_H[i].name.includes(itm)) {
+
+		    	obj_exists 	= true;
+		    	url 		= game_obj[2].magic_H[i].url;
+		    	result 		= game_obj[2].magic_H[i].name;
+		        break;
+		    } 
+		}
+
+		// if false return false and leave 'itm' unchanged
+		if (obj_exists == false) {
+
+			itm = itm;
+			console.log('getItemValue: target not found:', itm, 'checking if type weapon');
+			return false;
+
+		} else {
+
+			handler 	= 'player';
+			obj_type 	= 'magic_H';
+			url 		= url;
+	        itm = new item_obj(result, obj_type, handler, url, obj_exists);
+	        console.log('getItemValue: target found, input:', itm.name, 'result:', result);
+	        console.log('getItemValue: returning new object:', itm);
+		}
+		console.log('getItemValue: returning input:', itm, 'of type:',obj_type);
+		return itm;	
+	}
+
+	// search in black magic array
+	function magicDValue(itm) {
+		// magic defense item
+	}
+
+	// search in skill array
+	function skillValue(itm) {
+		// skill item 
+	}						
+
+	// test the action exists
+	function cmdExists(c) {	
+	}
+
+	// TODO: refactor into one function and use the arguments to point at the array.property and test an argument against it
+*/	
+
+
+
+/* 											____submit action command text */
+actionBtn.onclick = function(event) {
+
+	event.preventDefault();
+	
+	playerAction = actionInput.value;					// set value as variable
+	console.log('player submitted string: ' + playerAction + '\nwrite to id: \'action-display\'');		// log
+
+	writeHTML('action-display',playerAction);			// write to display
+
+	// handle the input value 			TODO: create a handler
+	//textParser(playerAction);
+
+}

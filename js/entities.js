@@ -2,44 +2,7 @@
  *
  *
  *			player objects, enemy objects, etc
- *//*
- // player object
- class playerObj {
-
- 	constructor(Name,
- 				Class,
- 				Health,
- 				Magic,
- 				Exp,
- 				Level,
- 				STR,
- 				INT,
- 				EVD,
- 				LUC,
- 				StatEffect,
- 				d_spell,
- 				h_spell,
- 				skill1,
- 				skill2
- 				) 
- 	{
-	 	this.name 	= Name;
-	 	this.class 	= Class;
-	 	this.HP 	= Health;
-	 	this.MP 	= Magic;
-	 	this.exp 	= Exp;
-	 	this.lvl 	= Level;
-	 	this.str 	= STR;
-	 	this.int  	= INT;
-	 	this.evd 	= EVD;
-	 	this.luc 	= LUC;
-	 	this.status = StatEffect;
-	 	this.M_def 	= d_spell;
-	 	this.M_heal = h_spell;
-	 	this.skill1 = skill1;
-	 	this.skill2 = skill2;
-	 }
-};*/
+ */
 // room class
 var room = {
 
@@ -58,7 +21,7 @@ var room = {
 	
 };
 
-// player object TODO: maybe function is better ?
+// player object 
 var player = {
 	state 		: "dead",
 	coins 		: 0,
@@ -74,16 +37,12 @@ var player = {
  	evd 	   	: playerStats.EVD,
  	luc 	   	: playerStats.LUC,
  	status 	   	: playerStatEffect,
- 	M_def 	   	: spellBook[0][0],
- 	M_heal 	   	: spellBook[1][0],
- 	skill_1	   	: playerSkills.none,
- 	skill_2    	: playerSkills.none,
- 	inventory  	: inventory = {
+ 	inventory  	: inventory = {							
 		items 	: inventory_items 		= [],
 		weapon	: inventory_weapons 	= [],
-		spell_H	: inventory_spell_H		= [],
-		spell_D : inventory_spell_D 	= [],
-		skill 	: inventory_skill 		= []
+		magic_H	: inventory_magic_H		= [],
+		magic_D : inventory_magic_D 	= [],
+		skills 	: inventory_skills 		= []
 	}
 };
 
@@ -141,7 +100,7 @@ function npc(
 	this.description 	= desc;
 	this.text 			= txt;
 	this.state 			= state;
-	this.drop_m 		= enemyLootMagic[0];
-	this.drop_h 		= enemyLootItem[0];
-	this.st_F_P 		= playerStatEffect[0];
+	this.drop_m 		= drop_m;
+	this.drop_h 		= drop_h;
+	this.st_F_P 		= st_F_P;
 }

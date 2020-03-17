@@ -5,6 +5,7 @@
 //								____logic
 // global variables
 var id,							// set room id
+	itemIndex = 0, 				// use for add|remove from index
 	move,						// holds move direction
 	moved = ["entry", "exit"],	// check if room is done and stop submit if false
 	moveCount = 0,				// count = room-no
@@ -26,9 +27,9 @@ var playerName,
 	spellBook,
 	inventory_items 	= [],
 	inventory_weapons 	= [],
-	inventory_spell_H	= [],
-	inventory_spell_D 	= [],
-	inventory_skill 	= [],
+	inventory_magic_H	= [],
+	inventory_magic_D 	= [],
+	inventory_skills 	= [],
 	playerAction;
 //								____rooms
 // global variables
@@ -36,7 +37,9 @@ var entered,
 	room_name,
 	room_no = 0;
 	room_exits = [];
-
+//
+// 								____gane save
+var saveGame;
 //								____player_objects_arrays
 // stat objects
 var	playerStats = {
@@ -66,16 +69,6 @@ var playerStatEffect = [
 	"the plague"
 ];
 
-// spells
-var attack_spells = [
-		"none", "fire", "ice", "bolt", "plague"
-	],
-	restore_spells = [
-		"none", "cure", "cure_all", "life", "antidote"
-];
-
-spellBook = [attack_spells, restore_spells];
-
 // 								____enemies_npc's_objects_arrays
 // enemy stats
 var	enemyStats = {
@@ -100,58 +93,7 @@ var action_state = [
 	]
 ];
 var player_actions = [
-	"take", "drop", "attack", "leave", "talk", "magic def", "magic heal", "skill"
-];
-
-// enemy spells
-var enemySpellBook = [attack_spells, restore_spells];
-
-// enemy skills
-var enemySkills = {
-	none 			: "none yet",
-	back_attack 	: "100% chance of 1st strike",
-	statFX_player	: "add status effects",
-	use_magic		: "magic enabled",
-	final_attack	: "strong last attack after no. of hits"
-};
-
-// enemy can drop magic
-var enemyLootMagic = [
-	"nothing",
-	"antidote",
-	"sadness",
-	"confuse",
-	"slow"
-];
-
-// enemy can drop item
-var enemyLootItem = [
-	"nothing",
-	"potion",
-	"ether",
-	"revive",
-	"light"
-
-]; 
-
-// enemy can drop healing prop
-var enemyLootHeal = [
-	"nothing",
-	"HP + 10",
-	"HP + 30",
-	"HP + 50",
-	"MP + 50"
-];
-
-// enemy can get sick like us
-var enemyStatEffect = playerStatEffect;
-
-var enemyFinalWord = [
-	"did not work, phew !",
-	"boom",
-	"poisoned",
-	"stoned",
-	"confused"
+	"take", "drop", "attack", "leave", "talk", "magic_D", "magic_H", "skill"
 ];
 
 // npc names
@@ -176,81 +118,6 @@ var scenes = [
 	"zombie stuff"
 ];
 
-// items treasure,weapons & items
-var treasure = [
-	"nothing",
-	"coins",
-	"medals",
-	"crown",
-	"robes"
-];
-
-var weapon = [
-		// name			// description 		// damage 	//img url + type id
-	[	["nothing"		,"unarmed"			,"HP -5"	, "weapon"],
-		["stick"		,"a strong stick"	,"HP -6"	, "../img/weapons/thief/stick.png"],
-		["throwknife"	,"small and deadly"	,"HP -7"	, "../img/weapons/thief/throwknife.png"],
-		["cane"			,"pointy cane"		,"HP -8"	, "../img/weapons/thief/cane.png"],
-		["whip"			,"longrange"		,"HP -10"	, "../img/weapons/thief/whip.png"]
-	],
-	[	["nothing" 		,"unarmed"			,"HP -5", 	,"none"],
-		["club"			,"a wood club"		,"HP -6"	,"../img/weapons/warrior/club.png"],	
-		["mace"			,"smash heads"		,"HP -7"	,"../img/weapons/warrior/mace.png"],
-		["chains"		,"brute force"		,"HP -8"	,"../img/weapons/warrior/chains.png"],
-		["trident"		,"shortrange"		,"HP -10"	,"../img/weapons/warrior/trident.png"]
-	],
-	[	["nothing"		,"unarmed"			,"HP -5"	,"none"],
-		["dagger"		,"simple dagger"	,"HP -6"	,"../img/weapons/rogue/dagger.png"],
-		["sword"		,"sharp and deadly"	,"HP -7"	,"../img/weapons/rogue/sword.png"],
-		["rapier"		,"elegance"			,"HP -8"	,"../img/weapons/rogue/rapier.png"],
-		["longsword"	,"more range"		,"HP -10"	,"../img/weapons/rogue/longsword.png"]
-	],
-	[	["nothing"		,"unarmed"			,"HP -5"	,"none"],
-		["woodstaff"	,"walking staff"	,"HP -6"	,"../img/weapons/mage/woodstaff.png"],
-		["copperstaff"	,"simple staff"		,"HP -7"	,"../img/weapons/mage/copperstaff.png"],
-		["ironstaff"	,"strong staff"		,"HP -8"	,"../img/weapons/mage/ironstaff.png"],
-		["silverstaff"	,"fancy staff"		,"HP -10"	,"../img/weapons/mage/silverstaff.png"]
-	]
-];
-
-var items = [
-	[	["nothing"		,"none"				,"none"		,"item"],
-		["potion"		,"small boost"		,"HP +10"	,"#"],
-		["ether"		,"MP boost"			,"MP +10"	,"#"],
-		["revive"		,"alive"			,"HP +100"	,"#"],
-		["helmet"		,"protect head"		,"evd +3"	,"#"],		
-		["coins"		,"player coin"		,"coins +10","#"],	
-		["medals"		,"luck plus"		,"luc +5"	,"#"],
-		["crown"		,"strenght plus"	,"str +5"	,"#"],
-		["robes"		,"strenght plus"	,"str +1"	,"#"]
-	]
-];
-
-var traps = [
-	"nothing",
-	"spikes",
-	"trapdoor",
-	"beartrap",
-	"sinkhole"
-];
-
-var secret = [
-	"nothing",
-	"gold",
-	"to room_four",
-	"str + 5",
-	"HP & MP full"
-];
-
-// 								____room objects
-var room_objects = {
-	item_obj 	: items,
-	weapon_obj 	: weapon
-};						// NOTICE TODO: IS DOUBLE?
-var npc_objects = [];
-
-//								____enemies
-
 // acces variables
 var startBtn 	= document.getElementById('start-btn'),
 	nameInput 	= document.getElementById('name-input'),
@@ -268,7 +135,8 @@ var startBtn 	= document.getElementById('start-btn'),
 	actionInput = document.getElementById('action-text'),
 	actionBtn 	= document.getElementById('action-button'),
 	actionOut	= document.getElementById('action-display');
-
+	saveBtn 	= document.getElementById('save-button');
+	loadBtn 	= document.getElementById('load-button');
 // html elements
 var char_name 	= 'char-name';
 // room elements
