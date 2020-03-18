@@ -169,7 +169,7 @@ function onload(rm_name) {
 
 	if (rm_name == "room one") {
 		intro = true;
-		document.getElementById('describe').innerHTML = "this is a creepy looking house over here,<br><br>do you really want to go on...";
+		//document.getElementById('describe').innerHTML = ;
 	} else {
 		intro = false;
 	}

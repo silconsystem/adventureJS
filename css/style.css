@@ -110,14 +110,17 @@ div#input-values {
 	font-size: 10px;
 }
 
-table.character-build {
+table#stat-table.character-build {
+	position: absolute;
     table-layout: fixed;
     padding-left: auto;
     padding-right: auto;
-    width: 100%;
-    height: 100%; 
+    width: 60%;
+    height: 40%; 
+    border: 3px solid #fff;
+    border-radius: 6px;
 }
-td.character-build {
+td#stat-table.character-build {
 	width: 100%;
 	height: 100%;
 	border: 1px dotted red;
@@ -128,14 +131,7 @@ span#stats.character-build {
 	min-width: 280px;
 	height: 70%;
 }
-/*
-div#save-game {
-	visibility: hidden;
-	position: absolute;
-	top: 590px;
-	width: 300px;
-}
-*/
+
 /*							___DOM -- player-stats	*/
 div#player-stats {
 	position: absolute;
@@ -240,6 +236,43 @@ div#room {
   	overflow-y: scroll;
   	display: flex;
 
+}
+
+#save-game {
+	position: absolute;
+	width: 168px;
+	height: 30px;
+	text-align: center;
+	top: 550px;
+	left: 470px;
+	margin-left: 0px;
+	z-index: 2;
+}
+.saveBtn {
+	display: inline-block;
+	width: 80px;
+	height: 20px;
+	border: 2px solid #808080;
+	border-radius: 8px;	
+	color: #000;
+	font-weight: bold;
+}
+
+button#save-button {
+	visibility: hidden;
+}
+
+button#save-button:hover {
+	border: 2px solid #000;
+	color: #ffa502;
+	box-shadow: 0 0 15px #66ffff;
+	text-shadow: 0 0 15px #d35400;
+}
+button#load-button:hover {
+	border: 2px solid #000;
+	color: #ffa502;
+	box-shadow: 0 0 15px #66ffff;
+	text-shadow: 0 0 15px #d35400;
 }
 /*
 #item-image:focus {

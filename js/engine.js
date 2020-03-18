@@ -304,7 +304,9 @@ startBtn.onclick = function(event) {
 	 		player.coins 	= 100;
 			player.name 	= playerName;
 			player.class 	= playerClass;
-			player.weapon 	= playerWeapon.name;
+			player.weapon 	= player.inventory.weapon[0].name;
+			player.exp 		= 100;
+			player.lvl 		= 1;
 			player.HP 		= playerStats.HP 	+ 12;
 			player.MP  		= playerStats.MP 	= 0;
 			player.str 		= playerStats.STR 	+ 6;
@@ -315,7 +317,7 @@ startBtn.onclick = function(event) {
 			manInventory(0, game_objects[4].skills[1].type, game_objects[4].skills[1]);
 			newrow(0, game_objects[4].skills[1]);
 
-			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp: " + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
 			writeHTML(targetElement, htmlString);
 
@@ -326,7 +328,9 @@ startBtn.onclick = function(event) {
 	 		player.coins 	= 100;
 			player.name 	= playerName;
 			player.class 	= playerClass;
-			player.weapon 	= playerWeapon.name;
+			player.weapon 	= player.inventory.weapon[0].name;
+			player.exp 		= 100;
+			player.lvl 		= 1;
 			player.HP 		= playerStats.HP 	+ 20;
 			player.MP  		= playerStats.MP 	= 0;
 			player.str 		= playerStats.STR 	+ 10;
@@ -337,7 +341,7 @@ startBtn.onclick = function(event) {
 			manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
 			newrow(0, game_objects[4].skills[4]);
 
-			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
 			writeHTML(targetElement, htmlString);
 			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
@@ -347,7 +351,9 @@ startBtn.onclick = function(event) {
 	 		player.coins 	= 100;
 			player.name 	= playerName;
 			player.class 	= playerClass;
-			player.weapon 	= playerWeapon.name;
+			player.weapon 	= player.inventory.weapon[0].name;
+			player.exp 		= 100;
+			player.lvl 		= 1;
 			player.HP 		= playerStats.HP 	+ 15;
 			player.MP  		= playerStats.MP 	= 0;
 			player.str 		= playerStats.STR 	+ 7;
@@ -358,7 +364,7 @@ startBtn.onclick = function(event) {
 			manInventory(0, game_objects[4].skills[2].type, game_objects[4].skills[2]);
 			newrow(0, game_objects[4].skills[2]);
 
-			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
 			writeHTML(targetElement, htmlString);
 			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
@@ -368,7 +374,9 @@ startBtn.onclick = function(event) {
 	 		player.coins 	= 100;			
 			player.name 	= playerName;
 			player.class 	= playerClass;
-			player.weapon 	= playerWeapon.name;
+			player.weapon 	= player.inventory.weapon[0].name;
+			player.exp 		= 100;
+			player.lvl 		= 1;
 			player.HP 		= playerStats.HP 	+ 5;
 			player.MP  		= playerStats.MP 	= 20;
 			player.str 		= playerStats.STR 	+ 6;
@@ -379,7 +387,7 @@ startBtn.onclick = function(event) {
 			manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
 			newrow(0, game_objects[4].skills[4]);
 
-			var	htmlString = "<table id=\"stat-table\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
 
 			writeHTML(targetElement, htmlString);
 			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
@@ -387,6 +395,7 @@ startBtn.onclick = function(event) {
 	}
 		
 	changeCSSStyle("input-values", "height", "0px");
+	changeCSSStyle("save-button", "visibility", "visible");
 
 	writeHTML('char-name', '');
 	writeHTML('char-class', '');
@@ -408,6 +417,8 @@ northBtn.onclick = function(event) {
 	event.preventDefault();
 	moveControl('north');
 
+	writeHTML("action-display", "north<br>");
+	console.log('direction: north');
 	loadRoom(moveCount, move);
 }
 eastBtn.onclick = function(event) {
@@ -415,14 +426,18 @@ eastBtn.onclick = function(event) {
 	event.preventDefault();
 	moveControl('east');
     
+	writeHTML("action-display", "east<br>");
+	console.log('direction: east');
 	loadRoom(moveCount, move);	
 }
 southBtn.onclick = function(event) {
 
 	event.preventDefault();
 	moveControl('south');
-    
-	loadRoom(moveCount, move);	
+
+	writeHTML("action-display", "south<br>");
+	console.log('direction: south');
+   	loadRoom(moveCount, move);	
 }
 westBtn.onclick = function(event) {
 
@@ -430,6 +445,8 @@ westBtn.onclick = function(event) {
 	event.preventDefault();
 	moveControl('north');
     
+	writeHTML("action-display", "west<br>");
+	console.log('direction: west');
 	loadRoom(moveCount, move);	
 }
 lookBtn.onclick = function(event) { // TODO:: layout, make the description divs more interesting
@@ -446,20 +463,9 @@ weaponBtn.onclick = function(event) {
 	document.getElementById('describe').innerHTML = room.item_1;
 	console.log('looking for weapons');
 }
+
 itemBtn.onclick = function(event) {
 	event.preventDefault();
 	document.getElementById('describe').innerHTML = room.item_2;
 	console.log('looking for items');
 }
-
-/* save game object states
-saveBtn.onclick = function(event) {
-	save(player);
-	console.log('file saved');
-}
-loadBtn.onclick = function(event) {
-
-	if (c_created == false) {
-		load();
-	}
-}*/

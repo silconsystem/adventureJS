@@ -61,7 +61,7 @@ var exitObject = {
 	// 				____002____
 	exits_002		: "TODO"
 }
-// npc's
+/*// npc's
 var npcObject = {
 	npc_001			: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you...",
 	npc_001_n		: "harold"
@@ -93,3 +93,66 @@ var trapObject = {
 var secretObject = {
 	secret_001 		: "none"
 }
+*/
+
+/**
+		Room Objects
+
+		entry_flag	: 		// set flag if room = active
+		id 			: 		// each room extends id var
+		name 		: 		// set room name
+		exits 		: 		// "n|e|s|w" get available exits
+		entry 		: 		// get entry variable
+		scene 		: 		// describe scene on room_no load
+		look 		: 		// html: look for objects and exits
+		weapon 		: 		// html: describe | script: fill room with roomItems[0] = treasure where needed
+		item		: 		// html: describe | fill room with roomItems[1] = weapons where needed
+		npc 		: 		// npc info
+		trap 		: 		// maybe there's a trap ?
+		secret 		: 		// maybe there's a secret ?
+		exit_out	: 		// "n|e|s|w" exit variable
+*/
+const room_objects = [
+	{
+		room_0:
+		[
+			{
+				entry_flag	: false,
+				id 			: 0,
+				name 		: "room zero",
+				exits 		: "n|e|s|w",
+				entry 		: entryPoint,
+				scene 		: "this is a creepy looking house over here,<br><br>do you really want to go on...",
+				look:		: "there's just one way in it seems, you go south and open the heavy oakwood door, <br>its unlocked.",	
+				weapon 		: "none",
+				item		: "none",
+				npc 		: "none",
+				trap 		: "none",
+				secret 		: "none",
+				exit_out	: exitPoint = "south";
+
+			}
+		]
+	},
+	{
+		room_1:
+		[
+			{
+				entry_flag	: false,
+				id 			: 1,
+				name 		: "room one",
+				exits 		: "n|e|s|w",
+				entry 		: entryPoint = "north",
+				scene 		: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room",
+				look 		: "There is a stairs in the East corner and a door to the South",
+				weapon		: "You spot a rusted pistol<br>Dont touch anything, come here ! The man says...",
+				item		: "You manage to take a potion from this chest when the man looks for his keys",
+				npc 		: "harold",
+				trap 		: "none",
+				secret 		: "none",
+				exit_out	: exitPoint
+
+			}
+		]
+	}
+]

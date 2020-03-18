@@ -38,8 +38,7 @@ var entered,
 	room_no = 0;
 	room_exits = [];
 //
-// 								____gane save
-var saveGame;
+// 			
 //								____player_objects_arrays
 // stat objects
 var	playerStats = {
@@ -108,16 +107,6 @@ var enemy_names = [
 	"lisa"
 ];
 
-//								____rooms_objects_arrays
-// scenes
-var scenes = [
-	"nothing to see here but dust, but it seems theres a opening on the east exit and a crappy door at the south exit.",
-	"a dim light only barely shows the door in this room",
-	" room mrood",
-	"shite room",
-	"zombie stuff"
-];
-
 // acces variables
 var startBtn 	= document.getElementById('start-btn'),
 	nameInput 	= document.getElementById('name-input'),
@@ -135,8 +124,6 @@ var startBtn 	= document.getElementById('start-btn'),
 	actionInput = document.getElementById('action-text'),
 	actionBtn 	= document.getElementById('action-button'),
 	actionOut	= document.getElementById('action-display');
-	saveBtn 	= document.getElementById('save-button');
-	loadBtn 	= document.getElementById('load-button');
 // html elements
 var char_name 	= 'char-name';
 // room elements
