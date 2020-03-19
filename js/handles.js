@@ -218,11 +218,24 @@ function roomEntryPoint(mv) {
 // control the NESW button
 function moveControl(btn) {
 
-		move = document.getElementById(btn).value;
-		moveCount++;
+	let freezeCount = moveCount;
 
-		console.log('move made: ' + move);
-	
+	// get direction value
+	move = document.getElementById(btn).value;
+
+	if (room_objects[1].room_1[0].entry_flag == true) {
+
+		// set freezeCount with moveCount value,
+		// if we are in the room the buttons cant update the timer
+		moveCount = freezeCount;
+	} else {
+		
+		// if we are exiting, update the counter + 1
+		moveCount++;	
+	}
+
+	console.log('moveControl: move made: ' + move + '\nmoveControl: moveCount:', moveCount);
+	return [move, moveCount];
 }
 
 // load html

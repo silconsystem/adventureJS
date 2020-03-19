@@ -52,7 +52,82 @@ TODO: create text parser                                                        
           objects {
             type: array[name,description,game,img_url]
           }
-        i.e: objects.type[0] = array[0](name);
+        i.e: objects.type[0] = array[0](name);                                    !_WORK_!
+
+TODO: room objects/actors handling, trying to create a class that should
+  load a new <HTML> page dynamicly and setting the object properties
+  accordingly, the class takes the movecount as id where the class will
+  use its getters and setters to access the related room data out of the 
+  room_objects object array structured like the inventory objects array
+Room Class, get event information and set room data accordingly
+
+basic structure:
+
+class roomHandler(counter, direction)
+
+  constructor:
+    - get the id of the room to link it with the room objects array properties
+    - get the move of the player
+    - use the counter to set the id
+
+  methods:
+
+    build room:
+    - get and set needed values
+    - return needed value
+
+    - scene method; use id to find and return the proper html responses
+     - describe : on entry => to <html>
+     - look   : get look from room_objects[id].look[etc]
+     - weapon   : check what it is, check if it can be taken, decribe
+     - item   : same
+     - npc    : check if npc in room #no[id]; 
+      - if Y: check type: npc/enemy
+       - description => to <html>
+       - call handle setting npc properties
+        - call text parser argument handle
+        - return results and setup for further handling
+     - trap   : check if trap in room #no[id]
+     - secret   : check if secret in room #no[id]
+
+    entry method:
+    - get the value of entry so we can keep handle a map
+     - if exit = south: entry = north (moveControl(button pressed)) {returns : entryPoint}
+     - set entryPoint and set it as room_object variable
+     - if entered, set entry_flag to true, when true pressing NESW buttons doesnt update moveCount.
+      - NESW buttons onclick:
+        - check exit y/n flags, give descriptions
+        - UI: if exit N|E|S|W tests true; ask user to exit Y/N
+        - if Y: update moveCount,load a new room using updated moveCount as [id]
+        - if N: do nothing, freeze moveCount untill user input = Y(ES)
+
+    >>  TODO style change idea? : 
+          >>> 
+          probable the look|weapon|item buttons are more efficient as text commands
+          so create code with this in mind so a change will be easy
+          or the user input could be re-imagined as an icon for each action like
+          SCUMMVM games or a mix like early Sierra titles like Leisure Suit Larry,
+          space quest or more modern like discworld
+          <<<
+    <<
+
+    - handle text input for objects                                               !_DONE_!
+     - pick/drop up object                                                        !_DONE_!
+      - add/remove from player inventory by type => remove from <HTML> page       !_DONE_!
+      - talk to                                                                   ! TODO !
+       - check if npc in room
+        - if Y: 
+         - get type, set properties
+        - if N: 
+         - nothing
+        - if Y: 
+         - describe,
+         - let speak if !mute,
+         - attack:
+          - passive
+          - attack after speak
+          - set defeat/leave
+      - attack/leave                                                              !_TODO_!
 ==========================================================================================
 TODO: one function to set item image when added to inventory
 
