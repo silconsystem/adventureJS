@@ -88,13 +88,15 @@ function manInventory(func, id, item) {
 			case "item":
 
 				// add to inventory
-				player.inventory.items.push(item);				
+				player.inventory.items.push(item);
+				inventoryNamesList.push(item.name);			
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "weapon":
 
 				// add to inventory
-				player.inventory.weapon.push(item);	
+				player.inventory.weapon.push(item);
+				inventoryNamesList.push(item.name);		
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "magic_H":
@@ -218,56 +220,73 @@ function roomEntryPoint(mv) {
 // control the NESW button
 function moveControl(btn) {
 
-	let freezeCount = moveCount;
-
+	let freezeCount = moveCount,
+		active 		= false;
 	// get direction value
 	move = document.getElementById(btn).value;
 
-	if (room_objects[1].room_1[0].entry_flag == true) {
+	if (active == true) {
 
 		// set freezeCount with moveCount value,
 		// if we are in the room the buttons cant update the timer
 		moveCount = freezeCount;
 	} else {
 		
+		// get room info from roomContentLoad class using moveCount, move
+		var currentRoom = new roomContentLoad(moveCount, move);
+		currentRoom.loadRoom();
+
+		var	activeRoom = currentRoom.getRoom();
+		active = true;
 		// if we are exiting, update the counter + 1
-		moveCount++;	
+		//moveCount++;	
 	}
+
+	// handle exit and entry
+	function enterAndExit(ex) {
+		
+		// N|E|S|W  = [0,0,1,1]
+
+		switch (move) {
+			case 'n':
+				// statements_1
+				if (activeRoom.exits[0] = 1) {
+					TODO: describe 0 (no exit),
+							return 0
+				} else
+				break;
+			default:
+				// statements_def
+				break;
+		}
+		return room_exits;
+	} 	
 
 	console.log('moveControl: move made: ' + move + '\nmoveControl: moveCount:', moveCount);
 	return [move, moveCount];
 }
 
-// load html
+/* load html
 function loadRoom(count, dir) {
 
 	// count 		= moveCount;
 	// dir 		 	= move;
 
-	var pageUrl 		= "../html/room-00" + count + ".html",
+	var id 				= count+1,
+		pageUrl 		= "../html/room-" + id + ".html",
 		page_load		= false,
-		id 				= count-1,
-		room_exits 		= "exitObject.exits_room_00" + id,
-		room_scene 		= "sceneObject.describe_00" + id,
-		room_weapon 	= "weaponObject.weapon__00" + id,
-		room_item 		= "itemObject.item_00" + id,
-		room_npc 		= "npcObject.npc_00" + id,
-		room_trap 		= "trapObject.trap_00" + id,
-		room_secret 	= "secretObject.secret_00" + id,
+		room_exits 		= "exitObject.exits_room_" + id,
+		room_scene 		= "sceneObject.describe_" + id,
+		room_weapon 	= "weaponObject.weapon__" + id,
+		room_item 		= "itemObject.item_" + id,
+		room_npc 		= "npcObject.npc_" + id,
+		room_trap 		= "trapObject.trap_" + id,
+		room_secret 	= "secretObject.secret_" + id,
 		entryPoint 		= roomEntryPoint(dir); 
 		move 			= dir;
 	
-	// handle exit and entry
-	function enterAndExit(ex) {
-		
-		for (var i = 0; i >= ex.length; i++) {
-			room_exits.push(ex[i]);
-			console.log(ex[i]);
-		}
-		return room_exits;
-	} 	
-
-    fetch(pageUrl /*, options */)
+	
+    fetch(pageUrl )
     .then((response) => response.text())
     .then((html) => {
 
@@ -287,7 +306,7 @@ function loadRoom(count, dir) {
     	Room_1 = new room(entry_flag,1,"room-one",1,exitObject.exits_room_001,
     							move,sceneObject.describe_001,weaponObject.weapon__001,
     							weapon[0],items[1],npcObject.npc_001,traps[0],secret[0]
-    							,entryPoint);*/
+    							,entryPoint);
 
     	room.flag 		= entry_flag;
     	room.id 		= id;
@@ -313,7 +332,7 @@ function loadRoom(count, dir) {
     });
 
     return Room_1;
-}
+}*/
 
 // hide a div element after event
 function hideHTML(id) {

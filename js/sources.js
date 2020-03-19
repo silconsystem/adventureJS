@@ -9,13 +9,9 @@ var id,							// set room id
 	move,						// holds move direction
 	moved = ["entry", "exit"],	// check if room is done and stop submit if false
 	moveCount = 0,				// count = room-no
-	entryPoint,					// tell room where you enter
-	exitPoint = "none",			// change with move button
 	c_created = false,			// character created flag
-	loaded_room,				// put html in var
-	intro = false,				// set move to n on first page room_001
-	entry_flag = false,
-	Room_1;
+	exitPoint,
+	enrtyPoint;
 
 //								____player
 // global variables
@@ -30,15 +26,8 @@ var playerName,
 	inventory_magic_H	= [],
 	inventory_magic_D 	= [],
 	inventory_skills 	= [],
-	playerAction;
-//								____rooms
-// global variables
-var entered,
-	room_name,
-	room_no = 0;
-	room_exits = [];
-//
-// 			
+	playerAction,
+	inventoryNamesList 	= [];			
 //								____player_objects_arrays
 // stat objects
 var	playerStats = {

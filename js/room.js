@@ -32,8 +32,9 @@ function makeExit(mov) {
 			entry = "w";
 			break;
 	}
+	entryPoint = entry;
 	console.log('makeExit: exitpoint:', mov, '\nmakeExit: entrypoint new room:', entry);
-	return entry;
+	return entryPoint;
 }
 
 /*
@@ -70,3 +71,39 @@ function makeExit(mov) {
 		  	- if Y: update moveCount,load a new room using updated moveCount as [id]
 		  	- if N: do nothing, freeze moveCount untill user input = Y(ES)
 */
+class roomContentLoad {
+
+	constructor(counter, direction) {
+		this.counter;
+		this.direction;
+		this.id = counter +1;
+		this.url = "../html/room-" + this.id + ".html";
+	}
+
+	getRoom() {
+		let currentRoom = room_objects[this.id];
+
+		this.currentRoom = currentRoom;
+		return this.currentRoom;
+	}
+
+	loadRoom() {
+
+		fetch(this.url /*, options */)
+    	.then((response) => response.text())
+   		.then((html) => {
+
+	    	// parse html page 
+	    	let loaded_room = html.toString();
+	    	writeHTML('room-content', html);
+
+	    	console.log('built room object');
+    	
+    		console.log('html page: ' + this.url + " :: " + loaded_room.split()[0][1]);
+	    }).catch((error) => {
+
+	        console.log('html page: ' + this.url + " not loaded or error");
+	    	return false;
+	    });
+	}
+}

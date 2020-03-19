@@ -419,7 +419,7 @@ northBtn.onclick = function(event) {
 
 	writeHTML("action-display", "north<br>");
 	console.log('direction: north');
-	loadRoom(moveCount, move);
+	//loadRoom(moveCount, move);
 }
 eastBtn.onclick = function(event) {
 
@@ -428,7 +428,7 @@ eastBtn.onclick = function(event) {
     
 	writeHTML("action-display", "east<br>");
 	console.log('direction: east');
-	loadRoom(moveCount, move);	
+	//loadRoom(moveCount, move);	
 }
 southBtn.onclick = function(event) {
 
@@ -437,7 +437,7 @@ southBtn.onclick = function(event) {
 
 	writeHTML("action-display", "south<br>");
 	console.log('direction: south');
-   	loadRoom(moveCount, move);	
+   	//loadRoom(moveCount, move);	
 }
 westBtn.onclick = function(event) {
 
@@ -447,7 +447,7 @@ westBtn.onclick = function(event) {
     
 	writeHTML("action-display", "west<br>");
 	console.log('direction: west');
-	loadRoom(moveCount, move);	
+	//loadRoom(moveCount, move);	
 }
 lookBtn.onclick = function(event) { // TODO:: layout, make the description divs more interesting
 	event.preventDefault();

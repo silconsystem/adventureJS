@@ -185,44 +185,33 @@ const scene_objects = [
 */
 const room_objects = [
 	{
-		room_0:
-		[
-			{
-				entry_flag	: false,
-				id 			: 0,
-				name 		: "room zero",
-				exits 		: [0,0,1,0],		//"n|e|s|w"
-				entry 		: entryPoint = "north",
-				scene 		: scene_objects[0].scenes[0].describe,
-				look		: scene_objects[0].scenes[0].look,	
-				weapon 		: rm_weapon = ["none", 0, scene_objects[0].scenes[0].weapon], 		// name|can-take y/n|description[room-id]
-				item		: rm_item 	= ["none", 0, scene_objects[0].scenes[0].item],			// name|can-take y/n|description[room-id]
-				npc 		: rm_npc 	= ["none", , 0, 0, scene_objects[0].scenes[0].NPC],		// name|can-take y/n|npc/enemy|description[room-id]
-				trap 		: rm_trap 	= ["none", 0, scene_objects[0].scenes[0].trap],			// name|active y/n|description[room-id]
-				secret 		: rm_secret = ["none", 0, scene_objects[0].scenes[0].secret],		// name|active y/n|description[room-id]
-				exit_out	: exitPoint
-			}
-		]
+		entry_flag	: false,
+		id 			: 0,
+		name 		: "room zero",
+		exits 		: [0,0,1,0],		//"n|e|s|w"
+		entry 		: entryPoint = "north",
+		scene 		: scene_objects[0].scenes[0].describe,
+		look		: scene_objects[0].scenes[0].look,	
+		weapon 		: rm_weapon = ["none", 0, scene_objects[0].scenes[0].weapon], 		// name|can-take y/n|description[room-id]
+		item		: rm_item 	= ["none", 0, scene_objects[0].scenes[0].item],			// name|can-take y/n|description[room-id]
+		npc 		: rm_npc 	= ["none", , 0, 0, scene_objects[0].scenes[0].NPC],		// name|can-take y/n|npc/enemy|description[room-id]
+		trap 		: rm_trap 	= ["none", 0, scene_objects[0].scenes[0].trap],			// name|active y/n|description[room-id]
+		secret 		: rm_secret = ["none", 0, scene_objects[0].scenes[0].secret],		// name|active y/n|description[room-id]
+		exit_out	: exitPoint
 	},
 	{
-		room_1:
-		[
-			{
-				entry_flag	: false,
-				id 			: 1,
-				name 		: "room one",
-				exits 		: [0,1,1,0],					//"n|e|s|w"
-				entry 		: entryPoint = "north",
-				scene 		: "north",
-				look 		: "none",
-				weapon		: "You spot a rusted pistol<br>Dont touch anything, come here ! The man says...",
-				item		: "You manage to take a potion from this chest when the man looks for his keys",
-				npc 		: "harold",
-				trap 		: "none",
-				secret 		: "none",
-				exit_out	: exitPoint
-
-			}
-		]
+		entry_flag	: false,
+		id 			: 1,
+		name 		: "room one",
+		exits 		: [0,1,1,0],					//"n|e|s|w"
+		entry 		: entryPoint = "north",
+		scene 		: scene_objects[0].scenes[1].describe,
+		look 		: scene_objects[0].scenes[1].look,
+		weapon		: rm_weapon = ["none", 		0, scene_objects[0].scenes[1].weapon],
+		item		: rm_item 	= ["potion", 	1, scene_objects[0].scenes[1].item],
+		npc 		: rm_npc 	= ["harold", 	1, scene_objects[0].scenes[1].NPC],
+		trap 		: rm_trap 	= ["none", 		0, scene_objects[0].scenes[1].trap],
+		secret 		: rm_secret = ["none", 		0, scene_objects[0].scenes[1].secret],
+		exit_out	: exitPoint
 	}
 ];
