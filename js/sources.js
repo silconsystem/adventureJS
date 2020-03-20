@@ -9,13 +9,10 @@ var id,							// set room id
 	move,						// holds move direction
 	moved = ["entry", "exit"],	// check if room is done and stop submit if false
 	moveCount = 0,				// count = room-no
-	entryPoint,					// tell room where you enter
-	exitPoint = "none",			// change with move button
 	c_created = false,			// character created flag
-	loaded_room,				// put html in var
-	intro = false,				// set move to n on first page room_001
-	entry_flag = false,
-	Room_1;
+	exitPoint,
+	enrtyPoint,
+	activeRoom;
 
 //								____player
 // global variables
@@ -30,16 +27,8 @@ var playerName,
 	inventory_magic_H	= [],
 	inventory_magic_D 	= [],
 	inventory_skills 	= [],
-	playerAction;
-//								____rooms
-// global variables
-var entered,
-	room_name,
-	room_no = 0;
-	room_exits = [];
-//
-// 								____gane save
-var saveGame;
+	playerAction,
+	inventoryNamesList 	= [];			
 //								____player_objects_arrays
 // stat objects
 var	playerStats = {
@@ -108,16 +97,6 @@ var enemy_names = [
 	"lisa"
 ];
 
-//								____rooms_objects_arrays
-// scenes
-var scenes = [
-	"nothing to see here but dust, but it seems theres a opening on the east exit and a crappy door at the south exit.",
-	"a dim light only barely shows the door in this room",
-	" room mrood",
-	"shite room",
-	"zombie stuff"
-];
-
 // acces variables
 var startBtn 	= document.getElementById('start-btn'),
 	nameInput 	= document.getElementById('name-input'),
@@ -135,8 +114,6 @@ var startBtn 	= document.getElementById('start-btn'),
 	actionInput = document.getElementById('action-text'),
 	actionBtn 	= document.getElementById('action-button'),
 	actionOut	= document.getElementById('action-display');
-	saveBtn 	= document.getElementById('save-button');
-	loadBtn 	= document.getElementById('load-button');
 // html elements
 var char_name 	= 'char-name';
 // room elements

@@ -1,11 +1,73 @@
 /*		helper functions   			*/
 // increment a value
 var increment = (function(n) {
+
 	return function() {
 	  n += 1;
 	  return n;
 	}
-  }(0));
+}(0));
+
+// handle yes no questions either by keypress or text input
+// returns boolean
+function getYesNo(func) {
+
+	/*
+		func = 0 : listen for keyboard input
+		func = 1 : get <input>.value
+	*/
+	// handle y/n input
+	var key = event.key || event.keyCode,
+		result;
+
+	switch (func) {
+		case 0:
+
+			console.log('getYesNo: function:', func, '; keyboard listener');
+		
+			// keyboard event// listen for keyboard input 'y || n'
+			document.addEventListener('keyup', function (event) {
+
+			    if (event.defaultPrevented) {
+			        return;
+				}
+
+				// get key input 'y' or 'n'
+			    if (key === 'y' || key === 89) {
+
+			    	result = true;
+			    	console.log('player chose \'yes\'');
+			    } else if (key === 'n' || key === 78) {
+
+			    	result = false;
+		        	console.log('player chose no');				    	
+		    	}
+			});
+			break;
+		case 1:
+
+			console.log('getYesNo: function:', func, '; text input hanle');
+
+			// text field input
+			let textInput = actionInput.value;
+			textInput.toLowerCase();
+
+			if (textInput.includes("y")) {
+
+				result = true;
+			    console.log('player chose \'yes\'');
+			} else if (textInput.includes("n")) {
+
+				result = false;
+		        console.log('player chose no');	
+
+				
+			}
+			break;
+	}	
+	return result;
+}
+
 // get input val
 function getInputValue(func, argOne, argTwo) {
 
@@ -88,13 +150,15 @@ function manInventory(func, id, item) {
 			case "item":
 
 				// add to inventory
-				player.inventory.items.push(item);				
+				player.inventory.items.push(item);
+				inventoryNamesList.push(item.name);			
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "weapon":
 
 				// add to inventory
-				player.inventory.weapon.push(item);	
+				player.inventory.weapon.push(item);
+				inventoryNamesList.push(item.name);		
 				console.log('added ' + item + ' to: ' + id);
 				break;
 			case "magic_H":
@@ -169,7 +233,7 @@ function onload(rm_name) {
 
 	if (rm_name == "room one") {
 		intro = true;
-		document.getElementById('describe').innerHTML = "this is a creepy looking house over here,<br><br>do you really want to go on...";
+		//document.getElementById('describe').innerHTML = ;
 	} else {
 		intro = false;
 	}
@@ -218,43 +282,119 @@ function roomEntryPoint(mv) {
 // control the NESW button
 function moveControl(btn) {
 
-		move = document.getElementById(btn).value;
-		moveCount++;
+	let freezeCount = moveCount,
+		active 		= false;
+	// get direction value
+	move = document.getElementById(btn).value;
 
-		console.log('move made: ' + move);
+	function handleExit(exitBool) {
+
+		switch (exitBool) {
+			case 0:
+				// no exit
+				moveCount = freezeCount;
+				writeHTML('action-display', 'you cant use this exit');
+				break;
+			case 1:
+
+				// exit
+				writeHTML('action-display', 'use this exit ?? (y/n)');
+
+				let go_exit = getYesNo(0);
+
+				if (go_exit) {
+					
+					// set entryPoint
+					entryPoint = roomEntryPoint(mov);
+		    		moveCount++;
+		    	}
+				break;
+		}
+	}
 	
+	function getActiveRoom() {
+		// get room info from roomContentLoad class using moveCount, move
+		var currentRoom = new roomContentLoad(moveCount, move);
+
+		if (currentRoom.loadRoom()) {
+				
+			activeRoom = currentRoom.getRoom();
+			active = false;
+	    	console.log('player chose yes');
+		} else {
+
+			console.log('no room to load');
+		} 
+	}			
+
+	// handle exit and entry
+	function enterAndExit(mov) {
+
+		mov = mov.toLowerCase();
+
+
+		
+		// N|E|S|W  = [0,0,1,1]
+
+		switch (mov) {
+			case 'n':
+				
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[0];
+
+				handleExit(activeRoom.exits[0]);
+				break;
+			case 'e':
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[1];
+				if (activeRoom.exits[1] == 1) {
+					console.log('can exit');
+				}
+				break;
+			case 's':
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[2];
+				if (activeRoom.exits[2] == 1) {
+					console.log('can exit');
+				}
+			case 'w':
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[3];
+				if (activeRoom.exits[3] == 1) {
+					console.log('can exit');
+				}
+			default:
+				// statements_def
+				break;
+		}
+		return room_exits;
+	} 	
+
+	console.log('moveControl: move made: ' + move + '\nmoveControl: moveCount:', moveCount);
+	return [move, moveCount];
 }
 
-// load html
+/* load html
 function loadRoom(count, dir) {
 
 	// count 		= moveCount;
 	// dir 		 	= move;
 
-	var pageUrl 		= "../html/room-00" + count + ".html",
+	var id 				= count+1,
+		pageUrl 		= "../html/room-" + id + ".html",
 		page_load		= false,
-		id 				= count-1,
-		room_exits 		= "exitObject.exits_room_00" + id,
-		room_scene 		= "sceneObject.describe_00" + id,
-		room_weapon 	= "weaponObject.weapon__00" + id,
-		room_item 		= "itemObject.item_00" + id,
-		room_npc 		= "npcObject.npc_00" + id,
-		room_trap 		= "trapObject.trap_00" + id,
-		room_secret 	= "secretObject.secret_00" + id,
+		room_exits 		= "exitObject.exits_room_" + id,
+		room_scene 		= "sceneObject.describe_" + id,
+		room_weapon 	= "weaponObject.weapon__" + id,
+		room_item 		= "itemObject.item_" + id,
+		room_npc 		= "npcObject.npc_" + id,
+		room_trap 		= "trapObject.trap_" + id,
+		room_secret 	= "secretObject.secret_" + id,
 		entryPoint 		= roomEntryPoint(dir); 
 		move 			= dir;
 	
-	// handle exit and entry
-	function enterAndExit(ex) {
-		
-		for (var i = 0; i >= ex.length; i++) {
-			room_exits.push(ex[i]);
-			console.log(ex[i]);
-		}
-		return room_exits;
-	} 	
-
-    fetch(pageUrl /*, options */)
+	
+    fetch(pageUrl )
     .then((response) => response.text())
     .then((html) => {
 
@@ -274,7 +414,7 @@ function loadRoom(count, dir) {
     	Room_1 = new room(entry_flag,1,"room-one",1,exitObject.exits_room_001,
     							move,sceneObject.describe_001,weaponObject.weapon__001,
     							weapon[0],items[1],npcObject.npc_001,traps[0],secret[0]
-    							,entryPoint);*/
+    							,entryPoint);
 
     	room.flag 		= entry_flag;
     	room.id 		= id;
@@ -300,7 +440,7 @@ function loadRoom(count, dir) {
     });
 
     return Room_1;
-}
+}*/
 
 // hide a div element after event
 function hideHTML(id) {

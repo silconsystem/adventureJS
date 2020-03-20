@@ -17,14 +17,7 @@
 	<div id="wrapper" class="content-wrapper">
 
 		<div id="game-stats" class="game-stats">
-			<span id="stats" 		class="character-build"></span><br>
-
-			<!-- 
-				TODO: if character created true give save and load option
-					or preload using a splash screen with new game | load otption
-				<div id="save-game" class="save">
-				</div>
-			-->
+			<span id="stats" class="character-build"></span><br>
 		</div><!-- game-stats -->
 
 		<div id="player-content" class="player-content">
@@ -59,18 +52,18 @@
 					<table id="player-info" class="character-build">
 						<tr>
 							<td><h3>PLAYER NAME</h3></td>
-							<td><span id="char-name" 	class="character-build">name</td>
+							<td><span id="char-name" class="character-build"></td>
 						</tr>
 						<tr>
 							<td><h3>PLAYER SKILLS</h3></td>
-							<td><span id="skills" 		class="character-build">skills</td>
+							<td><span id="skills" class="character-build"></td>
 						</tr>
 						<tr>
 							<td><h3>PLAYER CLASS</h3></td>
-							<td><span id="char-class" 	class="character-build">class</td>
+							<td><span id="char-class" class="character-build"></td>
 						</tr>
 							<td><h3>PLAYER WEAPON</h3></td>
-							<td><span id="arm-name" 	class="character-build">weapon</td>
+							<td><span id="arm-name" class="character-build"></td>
 						</tr>
 					</table>
 				</div>		
@@ -155,6 +148,10 @@
 					</tr>
 				</table>
 			</div>
+			<div id="save-game" class="save">
+				<button id="save-button" class="saveBtn">save</button>
+				<button id="load-button" class="saveBtn">load</button>
+			</div>
 		</div>
 
 		<div id="game-content" class="game-content">
@@ -184,14 +181,6 @@
 		</div>
 	</div><!-- wrapper -->
 
-	<!-- libraries
-	<script
-	  src="https://code.jquery.com/jquery-3.4.1.js"
-	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	  crossorigin="anonymous">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-	 -->
 	<!-- scripts -->
 	<script src="js/sources.js"></script>
 	<script src="js/game-objects.js"></script>
@@ -204,7 +193,7 @@
 	<script src="js/action-handles.js"></script>
 	<script src="js/engine.js"></script>
 	<script src="js/text-parser.js"></script>
-	<!-- <script src="js/save.js"></script> -->	
+	<script src="js/save.js"></script>
 
 </body>
 </html>
