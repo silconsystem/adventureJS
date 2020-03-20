@@ -129,41 +129,36 @@ const game_objects = [
 	}
 */
 const scene_objects = [
-	{
-		scenes:
-		[
-			{
-				room_id : 0,
-				describe: "this is a creepy looking house over here,<br><br>do you really want to go on...",
-				look 	: "the house looks rundown, still the heavy oakwood door looks like they dont want anyone inside",
-				weapon 	: "you see nothing but an overgrown garden and an old house",
-				item 	: "even the garden looks like its dead and gone",
-				NPC 	: "you look for any people but outside is no one to be seen",
-				exits 	: "there's only one way to go and thats through the frontdoor on the south",
-				exit_N 	: "you came this far, you cant go back now...",
-				exit_E 	: "just bushes, and some broken garden tools",
-				exit_S 	: "you feel the heavy door handle, its openening and you step through...",
-				exit_W 	: "a headless garden gnome is still fishing in something that once was a pond",
-				trap 	: "none",
-				secret 	: "none" 	
-			},
-			{
-				room_id : 1,
-				describe: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room",
-				look 	: "There is a stairs in the East corner and a door to the South",
-				weapon 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says...",
-				item 	: "You manage to take a potion from this chest when the man looks for his keys",
-				NPC 	: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you...",
-				exits 	: "There is a stairs in the East corner and a door to the South",
-				exit_N 	: "You walk past him and go for the North exit door to get out of here, but it's locked already!!<br>If your difficult he will be displeased, the man says in a gloomy voice",
-				exit_E 	: "You follow the man up the stairs",
-				exit_S 	: "There's a door at the South exit but the man is already pointing you to the stairway on the East",
-				exit_W 	: "There is nothing there but a wall",
-				trap 	: "none",
-				secret 	: "none"
-			}
-		]
-	}
+{
+	room_id : 0,
+	describe: "this is a creepy looking house over here,<br><br>do you really want to go on...",
+	look 	: "the house looks rundown, still the heavy oakwood door looks like they dont want anyone inside",
+	weapon 	: "you see nothing but an overgrown garden and an old house",
+	item 	: "even the garden looks like its dead and gone",
+	NPC 	: "you look for any people but outside is no one to be seen",
+	exits 	: "there's only one way to go and thats through the frontdoor on the south",
+	exit_N 	: "you came this far, you cant go back now...",
+	exit_E 	: "just bushes, and some broken garden tools",
+	exit_S 	: "you feel the heavy door handle, its openening and you step through...",
+	exit_W 	: "a headless garden gnome is still fishing in something that once was a pond",
+	trap 	: "none",
+	secret 	: "none" 	
+},
+{
+	room_id : 1,
+	describe: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room",
+	look 	: "There is a stairs in the East corner and a door to the South",
+	weapon 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says...",
+	item 	: "You manage to take a potion from this chest when the man looks for his keys",
+	NPC 	: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you...",
+	exits 	: "There is a stairs in the East corner and a door to the South",
+	exit_N 	: "You walk past him and go for the North exit door to get out of here, but it's locked already!!<br>If your difficult he will be displeased, the man says in a gloomy voice",
+	exit_E 	: "You follow the man up the stairs",
+	exit_S 	: "There's a door at the South exit but the man is already pointing you to the stairway on the East",
+	exit_W 	: "There is nothing there but a wall",
+	trap 	: "none",
+	secret 	: "none"
+}
 ];
 
 /**
@@ -189,14 +184,15 @@ const room_objects = [
 		id 			: 0,
 		name 		: "room zero",
 		exits 		: [0,0,1,0],		//"n|e|s|w"
-		entry 		: entryPoint = "north",
-		scene 		: scene_objects[0].scenes[0].describe,
-		look		: scene_objects[0].scenes[0].look,	
-		weapon 		: rm_weapon = ["none", 0, scene_objects[0].scenes[0].weapon], 		// name|can-take y/n|description[room-id]
-		item		: rm_item 	= ["none", 0, scene_objects[0].scenes[0].item],			// name|can-take y/n|description[room-id]
-		npc 		: rm_npc 	= ["none", , 0, 0, scene_objects[0].scenes[0].NPC],		// name|can-take y/n|npc/enemy|description[room-id]
-		trap 		: rm_trap 	= ["none", 0, scene_objects[0].scenes[0].trap],			// name|active y/n|description[room-id]
-		secret 		: rm_secret = ["none", 0, scene_objects[0].scenes[0].secret],		// name|active y/n|description[room-id]
+		exit_txt 	: [scene_objects[0].exit_N, scene_objects[0].exit_E, scene_objects[0].exit_S, scene_objects[0].exit_W],
+		entry 		: entryPoint = 'north',
+		scene 		: scene_objects[0].describe,
+		look		: scene_objects[0].look,	
+		weapon 		: rm_weapon = ["none", 0, scene_objects[0].weapon], 		// name|can-take y/n|description[room-id]
+		item		: rm_item 	= ["none", 0, scene_objects[0].item],			// name|can-take y/n|description[room-id]
+		npc 		: rm_npc 	= ["none", , 0, 0, scene_objects[0].NPC],		// name|can-take y/n|npc/enemy|description[room-id]
+		trap 		: rm_trap 	= ["none", 0, scene_objects[0].trap],			// name|active y/n|description[room-id]
+		secret 		: rm_secret = ["none", 0, scene_objects[0].secret],			// name|active y/n|description[room-id]
 		exit_out	: exitPoint
 	},
 	{
@@ -204,14 +200,15 @@ const room_objects = [
 		id 			: 1,
 		name 		: "room one",
 		exits 		: [0,1,1,0],					//"n|e|s|w"
-		entry 		: entryPoint = "north",
-		scene 		: scene_objects[0].scenes[1].describe,
-		look 		: scene_objects[0].scenes[1].look,
-		weapon		: rm_weapon = ["none", 		0, scene_objects[0].scenes[1].weapon],
-		item		: rm_item 	= ["potion", 	1, scene_objects[0].scenes[1].item],
-		npc 		: rm_npc 	= ["harold", 	1, scene_objects[0].scenes[1].NPC],
-		trap 		: rm_trap 	= ["none", 		0, scene_objects[0].scenes[1].trap],
-		secret 		: rm_secret = ["none", 		0, scene_objects[0].scenes[1].secret],
+		exit_txt 	: [scene_objects[1].exit_N, scene_objects[1].exit_E, scene_objects[1].exit_S, scene_objects[1].exit_W],
+		entry 		: entryPoint,
+		scene 		: scene_objects[1].describe,
+		look 		: scene_objects[1].look,
+		weapon		: rm_weapon = ["none", 		0, scene_objects[1].weapon],
+		item		: rm_item 	= ["potion", 	1, scene_objects[1].item],
+		npc 		: rm_npc 	= ["harold", 	1, scene_objects[1].NPC],
+		trap 		: rm_trap 	= ["none", 		0, scene_objects[1].trap],
+		secret 		: rm_secret = ["none", 		0, scene_objects[1].secret],
 		exit_out	: exitPoint
 	}
 ];

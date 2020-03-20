@@ -11,7 +11,8 @@ var id,							// set room id
 	moveCount = 0,				// count = room-no
 	c_created = false,			// character created flag
 	exitPoint,
-	enrtyPoint;
+	enrtyPoint,
+	activeRoom;
 
 //								____player
 // global variables

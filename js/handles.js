@@ -1,11 +1,73 @@
 /*		helper functions   			*/
 // increment a value
 var increment = (function(n) {
+
 	return function() {
 	  n += 1;
 	  return n;
 	}
-  }(0));
+}(0));
+
+// handle yes no questions either by keypress or text input
+// returns boolean
+function getYesNo(func) {
+
+	/*
+		func = 0 : listen for keyboard input
+		func = 1 : get <input>.value
+	*/
+	// handle y/n input
+	var key = event.key || event.keyCode,
+		result;
+
+	switch (func) {
+		case 0:
+
+			console.log('getYesNo: function:', func, '; keyboard listener');
+		
+			// keyboard event// listen for keyboard input 'y || n'
+			document.addEventListener('keyup', function (event) {
+
+			    if (event.defaultPrevented) {
+			        return;
+				}
+
+				// get key input 'y' or 'n'
+			    if (key === 'y' || key === 89) {
+
+			    	result = true;
+			    	console.log('player chose \'yes\'');
+			    } else if (key === 'n' || key === 78) {
+
+			    	result = false;
+		        	console.log('player chose no');				    	
+		    	}
+			});
+			break;
+		case 1:
+
+			console.log('getYesNo: function:', func, '; text input hanle');
+
+			// text field input
+			let textInput = actionInput.value;
+			textInput.toLowerCase();
+
+			if (textInput.includes("y")) {
+
+				result = true;
+			    console.log('player chose \'yes\'');
+			} else if (textInput.includes("n")) {
+
+				result = false;
+		        console.log('player chose no');	
+
+				
+			}
+			break;
+	}	
+	return result;
+}
+
 // get input val
 function getInputValue(func, argOne, argTwo) {
 
@@ -225,36 +287,82 @@ function moveControl(btn) {
 	// get direction value
 	move = document.getElementById(btn).value;
 
-	if (active == true) {
+	function handleExit(exitBool) {
 
-		// set freezeCount with moveCount value,
-		// if we are in the room the buttons cant update the timer
-		moveCount = freezeCount;
-	} else {
-		
+		switch (exitBool) {
+			case 0:
+				// no exit
+				moveCount = freezeCount;
+				writeHTML('action-display', 'you cant use this exit');
+				break;
+			case 1:
+
+				// exit
+				writeHTML('action-display', 'use this exit ?? (y/n)');
+
+				let go_exit = getYesNo(0);
+
+				if (go_exit) {
+					
+					// set entryPoint
+					entryPoint = roomEntryPoint(mov);
+		    		moveCount++;
+		    	}
+				break;
+		}
+	}
+	
+	function getActiveRoom() {
 		// get room info from roomContentLoad class using moveCount, move
 		var currentRoom = new roomContentLoad(moveCount, move);
-		currentRoom.loadRoom();
 
-		var	activeRoom = currentRoom.getRoom();
-		active = true;
-		// if we are exiting, update the counter + 1
-		//moveCount++;	
-	}
+		if (currentRoom.loadRoom()) {
+				
+			activeRoom = currentRoom.getRoom();
+			active = false;
+	    	console.log('player chose yes');
+		} else {
+
+			console.log('no room to load');
+		} 
+	}			
 
 	// handle exit and entry
-	function enterAndExit(ex) {
+	function enterAndExit(mov) {
+
+		mov = mov.toLowerCase();
+
+
 		
 		// N|E|S|W  = [0,0,1,1]
 
-		switch (move) {
+		switch (mov) {
 			case 'n':
-				// statements_1
-				if (activeRoom.exits[0] = 1) {
-					TODO: describe 0 (no exit),
-							return 0
-				} else
+				
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[0];
+
+				handleExit(activeRoom.exits[0]);
 				break;
+			case 'e':
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[1];
+				if (activeRoom.exits[1] == 1) {
+					console.log('can exit');
+				}
+				break;
+			case 's':
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[2];
+				if (activeRoom.exits[2] == 1) {
+					console.log('can exit');
+				}
+			case 'w':
+				// check if exit is possible and describe to the player
+				room_objects[currentRoom.id].exit_txt[3];
+				if (activeRoom.exits[3] == 1) {
+					console.log('can exit');
+				}
 			default:
 				// statements_def
 				break;

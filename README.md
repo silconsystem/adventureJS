@@ -8,6 +8,11 @@ raw idea for a 1 screen layout :
 
 ![raw-layout](img/layout.png)
 
+UPDATE: some screenshot of the game taking form:
+![raw-layout](img/dev/screenshot-1.png)
+![raw-layout](img/dev/screenshot-2.png)
+![raw-layout](img/dev/screenshot-3.png)
+
 the goal now is to complete the engine so that rooms, items, npc, enemies, etc can be added and handled.
 So any text, characters, images, etc can be changed and added later.
 

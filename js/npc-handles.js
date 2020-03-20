@@ -49,39 +49,6 @@ function actionState(a,b,c,d,e,f) {					// TODO: returns value even if non extis
 		console.log('value equals: ', val);
 		return val;
 	}
-/*
-		var i, test;
-
-		for (i = 0; i > action_state.length; i++) {				// iterate tru array
-
-			if (val == action_state[i][0]){ 					// 1st array field
-
-				val = action_state[i][0];						// set matched value
-				console.log('pushing value ' + val);			// log
-				return val;										// return argument value
-			} else if (val == action_state[i][1]) {				// 2nd array field
-
-				val = action_state[i][1];						// set matched value
-				console.log('pushing value ' + val);			// log
-				return val;										// return argument value
-			} else if (val != action_state[i][0]) {				// if not in 1st array field
-																
-				val = "empty";									// empty of undefined 
-				console.log('bad values ! set to: ' + val);		// log
-				return val; 									// return argument value
-			} else if (val != action_state[i][1]) {				// if not in 2nd array field
-																// set to null if 
-				val = "empty";									// empty of undefined 
-				console.log('bad values ! set to: ' + val);		// log
-				return val; 									// return argument value
-			} else if (val == null || undefined) {
-
-				console.log('null or undefined value: ' + val);	// log
-				return false;									
-			}
-		}
-		actions.push(val); 
-	}*/
 
 	actions.push(testValue(a));
 	actions.push(testValue(b));
