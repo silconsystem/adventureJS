@@ -2,6 +2,58 @@
  *
  *			game logic, get&set functions
  */
+ /* 		DEV SWITCHES 		*/
+ /* =========================== */
+function change(id) {
+
+	let ID 		= "dip-" + id,
+		cssId 	= document.getElementById(ID),
+		state 	= 0;
+
+	function getAction(id) {
+
+		console.log('getAction:', id);
+
+		switch (id) {
+			case "dip-1":
+				// statements_1
+				break;
+			case "dip-2":
+				// statements_1
+				if (state == 1) {
+					c_created = true;
+					console.log('change: c_created is true');
+				} else {
+					state = 0
+					c_created = false;
+					console.log('change: c_created is false');
+				}
+				break;
+			case "dip-3":
+				// statements_1
+				changeCSSStyle("player-content", "border", "0px");
+				changeCSSStyle("input-values", "border", "0px");
+				changeCSSStyle("game-content", "border", "0px");
+				break;
+		}
+	}
+
+	console.log('change: call id:', ID);
+
+	if (cssId.getAttribute("style") != "background-image: url(\"../img/dev/switch-down.png\")") {
+
+		state = 1;
+		cssId.setAttribute("style", "background-image: url(\"../img/dev/switch-down.png\")");
+		getAction(cssId.id);
+		console.log('change: DIP on, state:', state);
+	} else {
+
+		state =  0;
+		cssId.setAttribute("style", "background-image: url(\"../img/dev/switch-up.png\")");
+		getAction(cssId.id);
+		console.log('change: DIP off, state:', state);
+	}
+}
 // 
 function inventoryInfo(invObj) {
 

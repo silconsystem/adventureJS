@@ -1,3 +1,32 @@
+/* ======================== */
+/* 		 DEV-SWITCHES 		*/
+/* ======================== */
+#dev-switch {
+	z-index: 4;
+	position: absolute;
+	top: 500px;
+	left: 300px;
+	color: #fff;
+	font-size: 10px;
+}
+a#dip-1 {
+	display: block;
+	width: 7px;
+	height: 14px;
+	background-image: url("../img/dev/switch-up.png");	
+}
+a#dip-2{
+	display: block;
+	width: 7px;
+	height: 14px;
+	background-image: url("../img/dev/switch-up.png");
+}
+a#dip-3  {
+	display: block;
+	width: 7px;
+	height: 14px;
+	background-image: url("../img/dev/switch-up.png");
+}
 /*								____HTML	*/
 * {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
