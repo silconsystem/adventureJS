@@ -13,8 +13,16 @@ UPDATE: some screenshot of the game taking form:
 ![raw-layout](img/dev/screenshot-2.png)
 ![raw-layout](img/dev/screenshot-3.png)
 
+UPDATE: added some retro styled elements while thinking about the room engine
+![raw-layout](img/dev/screenshot-4.png)
+
 the goal now is to complete the engine so that rooms, items, npc, enemies, etc can be added and handled.
 So any text, characters, images, etc can be changed and added later.
+UPDATE: story on monitor, room layout in original position, enemy/NPC in bottom-right corner
+		roll dice in bottom left, work on finding right way to layout the keyboard
+		--
+		since control elements can be easily be re-assigned to the keyboard it would be a cool 
+		control interface
 
 The most important elements:
 1. character creation user input handler

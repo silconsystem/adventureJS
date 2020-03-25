@@ -280,34 +280,53 @@ document.addEventListener('keyup', function (event) {
 
     switch (event.keyCode) {
     	case 49:
-    		// focus item div
+    		// focus item div 					'1 key'
         	itemId.focus();
         	console.log('key:', key, 'pressed, focus on:', itemId.id);
     		break;
     	case 50:
-    		// focus magic-h div
+    		// focus magic-h div 				'2 key'
         	magicHId.focus();
         	console.log('key:', key, 'pressed, focus on:', magicHId.id);
     		break;
     	case 51:
-    		// focus magic-d div
+    		// focus magic-d div 				'3 key'
         	magicDId.focus();
         	console.log('key:', key, 'pressed, focus on:', magicDId.id);
     		break;
     	case 52:
-    		// focus skills div
+    		// focus skills div 				'4 key'
     		skillsId.focus();
     		console.log('key:', key, 'pressed, focus on:', skillsId.id);
+    		break;
     	case 73:
-    		// show inventory
-    		var txt = list(player.inventory.items);
+    		// show inventory 					'i key'
+    		var item_txt 	= list(player.inventory.items),
+    			weapon_txt 	= list(player.inventory.weapon),
+    			magic_D_txt = list(player.inventory.magic_D),
+    			magic_H_txt = list(player.inventory.magic_H),
+    			skills_txt 	= list(player.inventory.skills);
+
+    		var txt = "weapons:<br>" +weapon_txt+ "<br>items:<br>" +item_txt+ "<br>magic_D:<br>" +magic_D_txt+ "<br>magic_H:<br>" +magic_H_txt+ "<br>skills:<br>" +skills_txt+ "<br>inventory<br>"; 
 
     		console.log(txt);
     		console.log('key:', key, 'pressed, showing inventory');
-    		writeHTML('action-display', '<ul>' + txt.join(",") + '</ul>');
+    		writeHTML('action-display', '<ul>' + (txt.split(",").join("</br>")) + '</ul>');
+    		break;
+    	case 68:
+    		// show dev panel 					'd key'
+    		var dipSwitches = document.getElementById("dev-switch");
+
+    		if (dipSwitches.style.visibility == "visible") {
+
+    			dipSwitches.style.visibility = "hidden";
+    		} else {
+    		
+    			dipSwitches.style.visibility = "visible";
+    		}
+    		break;
     	default:
     		// statements_def
     		break;
     }
-
 });

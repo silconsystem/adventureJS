@@ -1,0 +1,100 @@
+/*
+		styles for floating keyboard
+*/
+#keyboard {
+	position: absolute;
+	top: 384px;
+	left: -512px;
+	display: block;
+	width: 600px;
+	max-width: 600px;
+	max-height: 600px;
+	height: 200px;
+	background-image: url("../img/keyboard/spectrum-keyboard.png");
+	z-index: 90;
+	background-color: rgb(48, 55, 97);
+	border-radius: 16px 0px 16px 16px;
+	border: 1px solid #808080;
+}
+#keyboardheader {
+	display: block;
+	cursor: move;
+	max-width: 600px;
+	max-height: 600px;
+	z-index: 100;
+}
+a#key-1 {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 44px;
+	left: 6px;
+	background-image: url("../img/keyboard/key-1-up.png");
+}
+a#key-2 {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 44px;
+	left: 62px;
+	background-image: url("../img/keyboard/key-2-up.png");
+}
+a#key-3 {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 44px;
+	left: 119px;
+	background-image: url("../img/keyboard/key-3-up.png");
+}
+a#key-4 {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 44px;
+	left: 174px;
+	background-image: url("../img/keyboard/key-4-up.png");
+}
+a#key-y {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 86px;
+	left: 308px;
+	background-image: url("../img/keyboard/key-y-up.png");
+}
+a#key-i {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 86px;
+	left: 420px;
+	background-image: url("../img/keyboard/key-i-up.png");
+}
+a#key-d {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 127px;
+	left: 162px;
+	background-image: url("../img/keyboard/key-d-up.png");
+}
+a#key-n {
+	display: block;
+	position: absolute;
+	height: 22px;
+	width: 48px;
+	top: 168px;
+	left: 354px;
+	background-image: url("../img/keyboard/key-n-up.png");
+}
+.content {
+  	margin-top: 10px;
+}

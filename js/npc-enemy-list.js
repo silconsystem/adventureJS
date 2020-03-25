@@ -35,7 +35,7 @@ var harold = Object.create(npc);
 			st_F_P
 			)
 */
-harold = new npc('npc_001', 'harold', 'npc', 'serious looking old and intimidating man',
+var harold = new npc('npc_001', 'harold', 'npc', 'serious looking old and intimidating man',
 				 'no lingering', actionState('aware', 'passive', 'none', 'speak','nodrop', 'noboss'));
 
 npc_objects.push(harold.name);

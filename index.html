@@ -8,11 +8,16 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css?family=Lacquer|Orbitron&display=swap" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=Lacquer|Orbitron|Press+Start+2P&display=swap" rel="stylesheet"> 
-</head>
-<body>
+	<link href="https://fonts.googleapis.com/css?family=Lacquer|Orbitron|Press+Start+2P&display=swap" rel="stylesheet">
 
-	<header id="header"></header>
+	<!-- InteractiveJS draggable and min/maximixable keyboard input -->
+	  	<script src="libs/src/interactive.js"></script>
+	  	<link href="libs/src/css/interactive.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="css/keyboard.css">
+	<!-- InteractiveJS draggable and min/maximixable keyboard input -->  	 
+</head>
+
+<body>
 
 	<div id="wrapper" class="content-wrapper">
 
@@ -66,7 +71,9 @@
 							<td><span id="arm-name" class="character-build"></td>
 						</tr>
 					</table>
-				</div>	
+				</div>
+
+			<div id="minimizeZone" style="position: relative;top: 300px; right: 140px;"></div>
 		</div>
 
 		<div id="player-stats" class="player-stats">
@@ -118,36 +125,36 @@
 
 			<span id="action-display" class="action-display">
 				player actions
-			</span>				
-
-			<div id="room">
+				<div id="room">
 				<table id="room-display" class="room-display">
 					<tr>
 						<td>
-							<h2 class="room-display">room name</h2>
+							<h2 class="room-display"></h2>
 						</td>
 						<td>
-							<span id="room-name" class="room-display">still chilling at home, </span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h2>information</h2>
-						</td>
-						<td>
-							<span id="describe" class="room-display">you are nowhere yet !</span>
+							<span id="room-name" class="room-display"></span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<h2 id="room-text" class="room-display">doing your thing..</h2>
+							<h2 class="describe-display"></h2>
+						</td>
+						<td>
+							<span id="describe" class="room-display"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h2 id="room-text" class="room-display"></h2>
 						</td>
 						<td>
 							<span id="direction" class="room-display"></span>
 						</td>
 					</tr>
 				</table>
-			</div>
+				</div>
+			</span>				
+
 			<div id="save-game" class="save">
 				<button id="save-button" class="saveBtn">save</button>
 				<button id="load-button" class="saveBtn">load</button>
@@ -157,19 +164,19 @@
 					<tr>
 						<td>dev switch:</td>
 						<td>
-							<a href="#" class="dips" id="dip-1" onclick="change(1);"></a>
+							<a href="#" class="dips" id="dip-1" name="off" onclick="change(1);"></a>
 						</td>
 					</tr>
 					<tr>
 						<td>c_created:</td>
 						<td>
-							<a href="#" class="dips" id="dip-2" onclick="change(2);"></a>
+							<a href="#" class="dips" id="dip-2" name="off" onclick="change(2);"></a>
 						</td>
 					</tr>
 					<tr>
 						<td>el. border:</td>
 						<td>
-							<a href="#" class="dips" id="dip-3" onclick="change(3);"></a>
+							<a href="#" class="dips" id="dip-3" name="off" onclick="change(3);"></a>
 						</td>
 					</tr>
 				</table>
@@ -178,8 +185,8 @@
 
 		<div id="game-content" class="game-content">
 			<!--<input type="text" id="move-value" placeholder="move N/S/E/W" autocomplete="off">
-			  <button id="move-submit">submit</button>-->
-			  <div id="control-buttons">
+		  	<button id="move-submit">submit</button>-->
+		  	<div id="control-buttons">
 				<h1>N = up | S = down |	W = left | E = right</h1>
 				<button id="north" 	value="n">N</button>
 				<button id="east" 	value="e">E</button>
@@ -195,12 +202,31 @@
 			  	<br>
 			  	<h1> take + item | drop + item | attack + NPC <br>
 			  	 leave + NPC | talk + NPC <br></h1>
-			  	 <h1 class="class-dependant">
+			  	<h1 class="class-dependant">
 			  	 	magic Def | magic Heal | skill + name
-			  	 </h1>
-			  </div>
-			 <div id="room-content" class="room-content"></div> 	
-		</div>
+			  	</h1>
+			</div>
+
+			<div id="room-content" class="room-content"></div> 
+
+			<!-- InteractiveJS draggable and min/maximixable keyboard input -->
+			<div id="keyboard" name="keyboard">
+				<div id="keyboardheader" class="content">
+					<a id="key-1" class="ZX-keys" href="#" onclick="changeImage(1);" name="0"></a>
+					<a id="key-2" class="ZX-keys" href="#" onclick="changeImage(2);" name="0"></a>
+					<a id="key-3" class="ZX-keys" href="#" onclick="changeImage(3);" name="0"></a>
+					<a id="key-4" class="ZX-keys" href="#" onclick="changeImage(4);" name="0"></a>
+
+					<a id="key-y" class="ZX-keys" href="#" onclick="changeImage('y');" name="0"></a>
+					<a id="key-i" class="ZX-keys" href="#" onclick="changeImage('i');" name="0"></a>
+					<a id="key-d" class="ZX-keys" href="#" onclick="changeImage('d');" name="0"></a>
+					<a id="key-n" class="ZX-keys" href="#" onclick="changeImage('n');" name="0"></a>
+				</div>
+			</div>
+			<!-- InteractiveJS draggable and min/maximixable keyboard input -->
+
+		</div>	
+
 	</div><!-- wrapper -->
 
 	<!-- scripts -->
@@ -216,6 +242,7 @@
 	<script src="js/engine.js"></script>
 	<script src="js/text-parser.js"></script>
 	<script src="js/save.js"></script>
+	<script src="js/keyboard.js"></script>
 
 </body>
 </html>

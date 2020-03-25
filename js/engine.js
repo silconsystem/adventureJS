@@ -7,8 +7,7 @@
 function change(id) {
 
 	let ID 		= "dip-" + id,
-		cssId 	= document.getElementById(ID),
-		state 	= 0;
+		cssId 	= document.getElementById(ID);
 
 	function getAction(id) {
 
@@ -17,23 +16,39 @@ function change(id) {
 		switch (id) {
 			case "dip-1":
 				// statements_1
+				if (cssId.name == "off") {
+					changeCSSStyle("dev-switch", "visibility", "hidden");
+					cssId.name = "on";
+					console.log('getAction: hid dev switch panel,')
+				} 
 				break;
 			case "dip-2":
 				// statements_1
-				if (state == 1) {
-					c_created = true;
-					console.log('change: c_created is true');
-				} else {
-					state = 0
-					c_created = false;
-					console.log('change: c_created is false');
-				}
+				if (cssId.name === "off") {
+					cssId.name = "on";
+					console.log('change: dip 2 state:', cssId.name);
+				} 
+				playerDummy();
+
+				var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+				startBtn.click();
+				writeHTML('stats', htmlString);
 				break;
 			case "dip-3":
 				// statements_1
-				changeCSSStyle("player-content", "border", "0px");
-				changeCSSStyle("input-values", "border", "0px");
-				changeCSSStyle("game-content", "border", "0px");
+				if (cssId.name == "off") {
+					changeCSSStyle("player-content", "border", "0px");
+					changeCSSStyle("input-values", "border", "0px");
+					changeCSSStyle("game-content", "border", "0px");
+					changeCSSStyle("player-stats", "border", "0px");
+					cssId.name = "on";
+				} else {
+					changeCSSStyle("player-content", "border", "1px dotted #fa7d7d");
+					changeCSSStyle("input-values", "border", "1px dotted #fa7d7d");
+					changeCSSStyle("game-content", "border", "1px dotted #fa7d7d");
+					changeCSSStyle("player-stats", "border", "1px dotted #fa7d7d");
+					cssId.name = "off";
+				}
 				break;
 		}
 	}
@@ -42,16 +57,16 @@ function change(id) {
 
 	if (cssId.getAttribute("style") != "background-image: url(\"../img/dev/switch-down.png\")") {
 
-		state = 1;
+		cssId.name = "on";
 		cssId.setAttribute("style", "background-image: url(\"../img/dev/switch-down.png\")");
 		getAction(cssId.id);
-		console.log('change: DIP on, state:', state);
+		console.log('change: DIP on, state:', cssId.name);
 	} else {
 
-		state =  0;
+		cssId.name = "off";
 		cssId.setAttribute("style", "background-image: url(\"../img/dev/switch-up.png\")");
 		getAction(cssId.id);
-		console.log('change: DIP off, state:', state);
+		console.log('change: DIP off, state:', cssId.name);
 	}
 }
 // 
@@ -186,7 +201,7 @@ nameBtn.onclick = function(event) {
 		player.name = playerName;								
 
 		writeHTML(char_name ,playerName);						// alert user in span element
-		writeHTML('skills', playerSkills.none);				// add info
+		writeHTML('skills', playerSkills.none);				// add info TODO: ??? <<<<<<<<<<<<<<<<<<<<<<<<< ????
 		
 		console.log('player name set: ' + playerName);			// console info
 		
@@ -263,43 +278,16 @@ armSelMenu.onchange = function(event) {
 
 	playerWeapon 	= document.getElementById('weapon-menu').value;
 	playerWeapon  	= playerWeapon.trim();
-/*
-	if (playerWeapon == undefined || playerWeapon == "") {
 
-		playerWeapon = undefined;
-		writeHTML(char_name ,'no weapon value input');
-		document.getElementById('weapon-menu').options.selectedIndex = 0;
+	c_created = true;													// set created flag flag
+	pl_weaponObj = objArray('weapon', playerWeapon);
+	playerWeapon = pl_weaponObj;
+																		// TODO: cannot use textParser if false
+	player.weapon = playerWeapon;										// set player.weapon
+	writeHTML('arm-name' ,'weapon selected: ' + playerWeapon.name);		// write name to HTML
 
-		c_created = false;
-
-		console.log('no weapon value');
-	
-		return false;
-	} else if (playerName == undefined || playerName == "") {
-
-		playerWeapon = undefined;
-		writeHTML(char_name ,'no name value input');
-		document.getElementById('weapon-menu').options.selectedIndex = 0;
-
-		c_created = false;
-
-		console.log('no name value');
-
-		return false;
-	} else {
-*/
-//	if (playerWeapon) {
-
-		c_created = true;													// set created flag flag
-		pl_weaponObj = objArray('weapon', playerWeapon);
-		playerWeapon = pl_weaponObj;
-																			// TODO: cannot use textParser if false
-		player.weapon = playerWeapon;										// set player.weapon
-		writeHTML('arm-name' ,'weapon selected: ' + playerWeapon.name);		// write name to HTML
-
-		console.log('player weapon: ' + playerWeapon.name);
-		console.log('weapon object: ' + pl_weaponObj.name);
-//	}
+	console.log('player weapon: ' + playerWeapon.name);
+	console.log('weapon object: ' + pl_weaponObj.name);
 }
 
 // create character
@@ -313,10 +301,10 @@ startBtn.onclick = function(event) {
 	let new_img 	= document.querySelectorAll("#class-image");
 	let new_W_img 	= document.querySelectorAll("#weapon-image");
 
-	manInventory(0, playerWeapon.type, playerWeapon)
-	newrow(0, playerWeapon);
-
-	for (let i = 0; i < new_stats.length; i++) {
+	if (playerWeapon) {
+		manInventory(0, playerWeapon.type, playerWeapon)
+		newrow(0, playerWeapon);
+		for (let i = 0; i < new_stats.length; i++) {
 
 		new_stats[i].style.visibility 	= 'visible';
 		new_stats[i].style.position 	= "absolute";
@@ -327,141 +315,147 @@ startBtn.onclick = function(event) {
 		new_stats[i].style.border 		= "1px solid #000";
 
 		console.log('style changed: ' + new_stats[0].id);
+		}	
+
+		for (let i = 0; i < new_img.length; i++) {
+
+			new_img[i].style.position 		= "relative";
+			new_img[i].style.top 			= "5px";
+			new_img[i].style.margin 	 	= "0 auto";
+
+			console.log('style changed: ' + new_stats[0].id);
+		}
+
+		for (let i = 0; i < new_img.length; i++) {
+
+			new_W_img[i].style.position 	= "relative";
+			new_W_img[i].style.top 			= "0px";
+			new_W_img[i].style.left 		= "0px";
+			new_W_img[i].style.width	 	= "40px";
+			new_W_img[i].style.height 		= "40px";
+
+			console.log('style changed: ' + new_stats[0].id);
+		}
+
+		switch (playerClass) {
+
+			case "Thief":
+				player.state 	= "alive";
+		 		player.coins 	= 100;
+				player.name 	= playerName;
+				player.class 	= playerClass;
+				player.weapon 	= player.inventory.weapon[0].name;
+				player.exp 		= 100;
+				player.lvl 		= 1;
+				player.HP 		= playerStats.HP 	+ 12;
+				player.MP  		= playerStats.MP 	= 0;
+				player.str 		= playerStats.STR 	+ 6;
+				player.int 		= playerStats.INT 	+ 6;
+				player.evd 		= playerStats.EVD 	+ 4;
+				player.luc 		= playerStats.STR 	+ 11;
+
+				manInventory(0, game_objects[4].skills[1].type, game_objects[4].skills[1]);
+				newrow(0, game_objects[4].skills[1]);
+
+				var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp: " + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+
+				writeHTML(targetElement, htmlString);
+
+				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+				break;
+			case "Warrior":
+				player.state 	= "alive";
+		 		player.coins 	= 100;
+				player.name 	= playerName;
+				player.class 	= playerClass;
+				player.weapon 	= player.inventory.weapon[0].name;
+				player.exp 		= 100;
+				player.lvl 		= 1;
+				player.HP 		= playerStats.HP 	+ 20;
+				player.MP  		= playerStats.MP 	= 0;
+				player.str 		= playerStats.STR 	+ 10;
+				player.int 		= playerStats.INT 	+ 2;
+				player.evd 		= playerStats.EVD 	+ 6;
+				player.luc 		= playerStats.STR 	+ 5;
+
+				manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
+				newrow(0, game_objects[4].skills[4]);
+
+				var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+
+				writeHTML(targetElement, htmlString);
+				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+				break;
+			case "Rogue":
+				player.state 	= "alive";
+		 		player.coins 	= 100;
+				player.name 	= playerName;
+				player.class 	= playerClass;
+				player.weapon 	= player.inventory.weapon[0].name;
+				player.exp 		= 100;
+				player.lvl 		= 1;
+				player.HP 		= playerStats.HP 	+ 15;
+				player.MP  		= playerStats.MP 	= 0;
+				player.str 		= playerStats.STR 	+ 7;
+				player.int 		= playerStats.INT 	+ 10;
+				player.evd 		= playerStats.EVD 	+ 7;
+				player.luc 		= playerStats.STR 	+ 7;
+
+				manInventory(0, game_objects[4].skills[2].type, game_objects[4].skills[2]);
+				newrow(0, game_objects[4].skills[2]);
+
+				var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+
+				writeHTML(targetElement, htmlString);
+				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+				break;
+			case "Mage":
+				player.state 	= "alive";
+		 		player.coins 	= 100;			
+				player.name 	= playerName;
+				player.class 	= playerClass;
+				player.weapon 	= player.inventory.weapon[0].name;
+				player.exp 		= 100;
+				player.lvl 		= 1;
+				player.HP 		= playerStats.HP 	+ 5;
+				player.MP  		= playerStats.MP 	= 20;
+				player.str 		= playerStats.STR 	+ 6;
+				player.int 		= playerStats.INT 	+ 20;
+				player.evd 		= playerStats.EVD 	+ 15;
+				player.luc 		= playerStats.STR 	+ 7;
+
+				manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
+				newrow(0, game_objects[4].skills[4]);
+
+				var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
+
+				writeHTML(targetElement, htmlString);
+				console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
+				break;
+		}
+			
+		changeCSSStyle("input-values", "height", "0px");
+		changeCSSStyle("save-button", "visibility", "visible");
+		changeCSSStyle("room", "visibility", "visible");
+
+		writeHTML('char-name', '');
+		writeHTML('char-class', '');
+		writeHTML('arm-name', '');
+		writeHTML('skills', '');
+
+		writeHTML('action-display', 'press any direction and you are off...');
+		document.getElementById('action-display').innerHTML += ('[MESSAGE:] >>>>>>>>>>>>>>>>>>><br>');
+		document.getElementById('action-display').innerHTML += ('you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !<br>');
+		document.getElementById('action-display').innerHTML += ('[MESSAGE:] >>>>>>>>>>>>>>>>>>><br>');
+		document.getElementById('action-display').innerHTML += ('Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.<br>');
+		console.log('character created');
+
+		hideHTML('player-content');
+	} else {
+		// no player.weapon
+		writeHTML('arm-name' ,'no weapon selected');
 	}	
-
-	for (let i = 0; i < new_img.length; i++) {
-
-		new_img[i].style.position 		= "relative";
-		new_img[i].style.top 			= "5px";
-		new_img[i].style.margin 	 	= "0 auto";
-
-		console.log('style changed: ' + new_stats[0].id);
-	}
-
-	for (let i = 0; i < new_img.length; i++) {
-
-		new_W_img[i].style.position 	= "relative";
-		new_W_img[i].style.top 			= "0px";
-		new_W_img[i].style.left 		= "0px";
-		new_W_img[i].style.width	 	= "40px";
-		new_W_img[i].style.height 		= "40px";
-
-		console.log('style changed: ' + new_stats[0].id);
-	}
-
-	switch (playerClass) {
-
-		case "Thief":
-			player.state 	= "alive";
-	 		player.coins 	= 100;
-			player.name 	= playerName;
-			player.class 	= playerClass;
-			player.weapon 	= player.inventory.weapon[0].name;
-			player.exp 		= 100;
-			player.lvl 		= 1;
-			player.HP 		= playerStats.HP 	+ 12;
-			player.MP  		= playerStats.MP 	= 0;
-			player.str 		= playerStats.STR 	+ 6;
-			player.int 		= playerStats.INT 	+ 6;
-			player.evd 		= playerStats.EVD 	+ 4;
-			player.luc 		= playerStats.STR 	+ 11;
-
-			manInventory(0, game_objects[4].skills[1].type, game_objects[4].skills[1]);
-			newrow(0, game_objects[4].skills[1]);
-
-			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp: " + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
-
-			writeHTML(targetElement, htmlString);
-
-			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-			break;
-		case "Warrior":
-			player.state 	= "alive";
-	 		player.coins 	= 100;
-			player.name 	= playerName;
-			player.class 	= playerClass;
-			player.weapon 	= player.inventory.weapon[0].name;
-			player.exp 		= 100;
-			player.lvl 		= 1;
-			player.HP 		= playerStats.HP 	+ 20;
-			player.MP  		= playerStats.MP 	= 0;
-			player.str 		= playerStats.STR 	+ 10;
-			player.int 		= playerStats.INT 	+ 2;
-			player.evd 		= playerStats.EVD 	+ 6;
-			player.luc 		= playerStats.STR 	+ 5;
-
-			manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
-			newrow(0, game_objects[4].skills[4]);
-
-			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
-
-			writeHTML(targetElement, htmlString);
-			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-			break;
-		case "Rogue":
-			player.state 	= "alive";
-	 		player.coins 	= 100;
-			player.name 	= playerName;
-			player.class 	= playerClass;
-			player.weapon 	= player.inventory.weapon[0].name;
-			player.exp 		= 100;
-			player.lvl 		= 1;
-			player.HP 		= playerStats.HP 	+ 15;
-			player.MP  		= playerStats.MP 	= 0;
-			player.str 		= playerStats.STR 	+ 7;
-			player.int 		= playerStats.INT 	+ 10;
-			player.evd 		= playerStats.EVD 	+ 7;
-			player.luc 		= playerStats.STR 	+ 7;
-
-			manInventory(0, game_objects[4].skills[2].type, game_objects[4].skills[2]);
-			newrow(0, game_objects[4].skills[2]);
-
-			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
-
-			writeHTML(targetElement, htmlString);
-			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-			break;
-		case "Mage":
-			player.state 	= "alive";
-	 		player.coins 	= 100;			
-			player.name 	= playerName;
-			player.class 	= playerClass;
-			player.weapon 	= player.inventory.weapon[0].name;
-			player.exp 		= 100;
-			player.lvl 		= 1;
-			player.HP 		= playerStats.HP 	+ 5;
-			player.MP  		= playerStats.MP 	= 20;
-			player.str 		= playerStats.STR 	+ 6;
-			player.int 		= playerStats.INT 	+ 20;
-			player.evd 		= playerStats.EVD 	+ 15;
-			player.luc 		= playerStats.STR 	+ 7;
-
-			manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
-			newrow(0, game_objects[4].skills[4]);
-
-			var	htmlString = "<table id=\"stat-table\" class=\"character-build\"><tr><td>Name: " + player.name + "</td></tr><tr><td>Class: " + player.class + "</td></tr><tr><td>Arms: " + player.weapon + "</td></tr><tr><td>Exp:" + player.exp + "</td></tr><tr><td>Level:" + player.lvl + "</td></tr><tr><td>HP: " + player.HP + "</td></tr><tr><td>MP: " + player.MP + "</td></tr><tr><td>STR: " + player.str + "</td></tr><tr><td>INT: " + player.int + "</td></tr><tr><td>EVD: " + player.evd + "</td></tr><tr><td>LUC: " + player.luc + "</td></tr><tr><td>Skill: " + player.inventory.skills[0].name + "</td></tr></table>";
-
-			writeHTML(targetElement, htmlString);
-			console.log('name: ' +playerName + ' class: ' + playerClass + ' chosen');
-			break;
-	}
-		
-	changeCSSStyle("input-values", "height", "0px");
-	changeCSSStyle("save-button", "visibility", "visible");
-
-	writeHTML('char-name', '');
-	writeHTML('char-class', '');
-	writeHTML('arm-name', '');
-	writeHTML('skills', '');
-
-	writeHTML('action-display', 'press any direction and you are off...');
-	writeHTML('describe','you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !');
-
-	console.log('character created');
-
-	hideHTML('player-content');
 }
-
 
 // get movement variables
 northBtn.onclick = function(event) {
