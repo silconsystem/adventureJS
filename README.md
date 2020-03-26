@@ -11,18 +11,27 @@ raw idea for a 1 screen layout :
 UPDATE: some screenshot of the game taking form:
 	(previous ideas for layout)
 ![raw-layout](img/dev/screenshot-2.png)
-![raw-layout](img/dev/screenshot-3.png)
 
 UPDATE: added some retro styled elements while thinking about the room engine
-![raw-layout](img/dev/screenshot_4.png)
+![raw-layout](img/dev/Screenshot_4.png)
+
+UPDATE: the layout plan I go with for now is gonna be like this:
+![raw-layout](img/dev/Layout_plan_0.png)
 
 the goal now is to complete the engine so that rooms, items, npc, enemies, etc can be added and handled.
 So any text, characters, images, etc can be changed and added later.
-UPDATE: story on monitor, room layout in original position, enemy/NPC in bottom-right corner
+UPDATE: story on monitor, room/map layout in original position, enemy/NPC in bottom-right corner
 		roll dice in bottom left, work on finding right way to layout the keyboard
 		--
 		since control elements can be easily be re-assigned to the keyboard it would be a cool 
 		control interface
+		-- but it also takes a lot of space, the middle section on the page bottom was intended for
+		the dice roll display originally
+		--
+		in the code I've changed loading the html for the room with a complex set of functions 
+		to a 'room' class that will(should) load html text in the monitor display from an 
+		object array like game_objects wich gets the text from another object array and hold 
+		game variables to be used and interacted with. 
 
 The most important elements:
 1. character creation user input handler
