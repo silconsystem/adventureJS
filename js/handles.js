@@ -374,6 +374,25 @@ function moveControl(btn) {
 	return [move, moveCount];
 }
 
+// load html
+function loadHTML (e, elId, elUrl) {
+
+	/**/
+	(e || window.event).preventDefault();
+	var con = document.getElementById(elId);
+		xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function (e) { 
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			con.innerHTML = xhr.responseText;
+		}
+	}
+
+	xhr.open("GET", elUrl, true);
+	xhr.setRequestHeader('Content-type', 'text/html');
+	xhr.send();
+}
+
 /* load html
 function loadRoom(count, dir) {
 

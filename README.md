@@ -9,12 +9,12 @@ raw idea for a 1 screen layout :
 ![raw-layout](img/layout.png)
 
 UPDATE: some screenshot of the game taking form:
-![raw-layout](img/dev/screenshot-1.png)
+	(previous ideas for layout)
 ![raw-layout](img/dev/screenshot-2.png)
 ![raw-layout](img/dev/screenshot-3.png)
 
 UPDATE: added some retro styled elements while thinking about the room engine
-![raw-layout](img/dev/screenshot-4.png)
+![raw-layout](img/dev/screenshot_4.png)
 
 the goal now is to complete the engine so that rooms, items, npc, enemies, etc can be added and handled.
 So any text, characters, images, etc can be changed and added later.

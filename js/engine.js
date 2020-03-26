@@ -442,14 +442,19 @@ startBtn.onclick = function(event) {
 		writeHTML('char-class', '');
 		writeHTML('arm-name', '');
 		writeHTML('skills', '');
-
-		writeHTML('action-display', 'press any direction and you are off...');
+/*
+		writeHTML('action-display', 'press any direction and you are off...<br><br>');
 		document.getElementById('action-display').innerHTML += ('[MESSAGE:] >>>>>>>>>>>>>>>>>>><br>');
 		document.getElementById('action-display').innerHTML += ('you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !<br>');
 		document.getElementById('action-display').innerHTML += ('[MESSAGE:] >>>>>>>>>>>>>>>>>>><br>');
-		document.getElementById('action-display').innerHTML += ('Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.<br>');
+		document.getElementById('action-display').innerHTML += ('Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.<br>Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.');
 		console.log('character created');
+*/
+		loadHTML(null, 'room', '../html/message.html');
 
+			//document.getElementById('message-field').innerHTML += ('you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !<br>');
+			//document.getElementById('info-field').innerHTML += ('Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.<br>Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.');
+		
 		hideHTML('player-content');
 	} else {
 		// no player.weapon
