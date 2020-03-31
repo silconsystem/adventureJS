@@ -115,6 +115,10 @@ function replaceHTML(target, source) {
   document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
 }
 
+function addHTML(target, source) {
+  document.getElementById(target).innerHTML += source;
+}
+
 //  get player inventory
 function manInventory(func, id, item) {
 	

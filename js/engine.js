@@ -452,9 +452,7 @@ startBtn.onclick = function(event) {
 */
 		loadHTML(null, 'room', '../html/message.html');
 
-			//document.getElementById('message-field').innerHTML += ('you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !<br>');
-			//document.getElementById('info-field').innerHTML += ('Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.<br>Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.');
-		
+		changeCSSStyle('dice-display', 'visibility', 'visible');
 		hideHTML('player-content');
 	} else {
 		// no player.weapon
@@ -519,4 +517,23 @@ itemBtn.onclick = function(event) {
 	event.preventDefault();
 	document.getElementById('describe').innerHTML = room.item_2;
 	console.log('looking for items');
+}
+/* 						 DICE ROLLER							*/
+document.querySelector('input[type=button]#dice-button').addEventListener('click', function(){rollTheDice();});
+
+/*
+	becomes a background function, call to calculate hits by status values 
+*/
+var rollTheDice = function() {
+    var i,
+        faceValue,
+        output = '',
+        diceCount = 2;
+        //diceCount = document.querySelector('input[type=number]#dice-number').value || 1;
+    for (i = 0; i < diceCount; i++) {
+        faceValue = Math.floor(Math.random() * 6);
+        output += "&#x268" + faceValue + "; ";
+    }
+    document.getElementById('dice').innerHTML = output;
+    console.log(output);
 }
