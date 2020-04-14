@@ -113,7 +113,7 @@ var startBtn 	= document.getElementById('start-btn'),
 	itemBtn 	= document.getElementById('item-btn'),
 	actionInput = document.getElementById('action-text'),
 	actionBtn 	= document.getElementById('action-button'),
-	actionOut	= document.getElementById('action-display');
+	actionOut	= document.getElementById('game-info');
 // html elements
 var char_name 	= 'char-name';
 // room elements

@@ -32,7 +32,7 @@ function textParserActions(actCmd, actObj, actSpc) {
             // add obj to inventory and set image
             manInventory(0, actObj.type, actObj);
             newrow(0, actObj);
-            writeHTML('action-display', player.name + ' took the ' + actObj.name + ' and added it to the ' + actObj.type + ' inventory');            // write to display
+            writeHTML('game-info', player.name + ' took the ' + actObj.name + ' and added it to the ' + actObj.type + ' inventory');            // write to display
             
             console.log('textParserActions: action: \'' + actCmd + '\'');
             console.log('textParserActions: added:', actObj.name, 'object to:', actObj.type, 'inventory array and created html element');

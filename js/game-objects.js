@@ -129,36 +129,36 @@ const game_objects = [
 	}
 */
 const scene_objects = [
-{
-	room_id : 0,
-	describe: "this is a creepy looking house over here,<br><br>do you really want to go on...",
-	look 	: "the house looks rundown, still the heavy oakwood door looks like they dont want anyone inside",
-	weapon 	: "you see nothing but an overgrown garden and an old house",
-	item 	: "even the garden looks like its dead and gone",
-	NPC 	: "you look for any people but outside is no one to be seen",
-	exits 	: "there's only one way to go and thats through the frontdoor on the south",
-	exit_N 	: "you came this far, you cant go back now...",
-	exit_E 	: "just bushes, and some broken garden tools",
-	exit_S 	: "you feel the heavy door handle, its openening and you step through...",
-	exit_W 	: "a headless garden gnome is still fishing in something that once was a pond",
-	trap 	: "none",
-	secret 	: "none" 	
-},
-{
-	room_id : 1,
-	describe: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room",
-	look 	: "There is a stairs in the East corner and a door to the South",
-	weapon 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says...",
-	item 	: "You manage to take a potion from this chest when the man looks for his keys",
-	NPC 	: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you...",
-	exits 	: "There is a stairs in the East corner and a door to the South",
-	exit_N 	: "You walk past him and go for the North exit door to get out of here, but it's locked already!!<br>If your difficult he will be displeased, the man says in a gloomy voice",
-	exit_E 	: "You follow the man up the stairs",
-	exit_S 	: "There's a door at the South exit but the man is already pointing you to the stairway on the East",
-	exit_W 	: "There is nothing there but a wall",
-	trap 	: "none",
-	secret 	: "none"
-}
+	{
+		room_id : 0,
+		describe: "this is a creepy looking house over here,<br><br>do you really want to go on...",
+		look 	: "the house looks rundown, still the heavy oakwood door looks like they dont want anyone inside",
+		weapon 	: "you see nothing but an overgrown garden and an old house",
+		item 	: "even the garden looks like its dead and gone",
+		NPC 	: "you look for any people but outside is no one to be seen",
+		exits 	: "there's only one way to go and thats through the frontdoor on the south",
+		exit_N 	: "you came this far, you cant go back now...",
+		exit_E 	: "just bushes, and some broken garden tools",
+		exit_S 	: "you feel the heavy door handle, its openening and you step through...",
+		exit_W 	: "a headless garden gnome is still fishing in something that once was a pond",
+		trap 	: "none",
+		secret 	: "none" 	
+	},
+	{
+		room_id : 1,
+		describe: "You step into a large livingroom<br>there's a strange man staring at you<br>You spot an object in the SouthWest corner and a chest in the SouthEast one<br>But a strange man stands in the middle of the room",
+		look 	: "There is a stairs in the East corner and a door to the South",
+		weapon 	: "You find a rusted pistol<br>Dont touch anything, come here ! The man says...",
+		item 	: "You manage to take a potion from this chest when the man looks for his keys",
+		NPC 	: "So you finally came, larp sent you right?<br>Follow me, he's waiting for you...",
+		exits 	: "There is a stairs in the East corner and a door to the South",
+		exit_N 	: "You walk past him and go for the North exit door to get out of here, but it's locked already!!<br>If your difficult he will be displeased, the man says in a gloomy voice",
+		exit_E 	: "You follow the man up the stairs",
+		exit_S 	: "There's a door at the South exit but the man is already pointing you to the stairway on the East",
+		exit_W 	: "There is nothing there but a wall",
+		trap 	: "none",
+		secret 	: "none"
+	}
 ];
 
 /**

@@ -28,11 +28,25 @@ a#dip-3  {
 	height: 14px;
 	background-image: url("../img/dev/switch-up.png");
 }
+/* 								____WebFonts */
+@font-face {
+	font-family: 'LCD-Bold';
+    src:  url('LCD-Bold.ttf.woff') format('woff'),
+    url('LCD-Bold.ttf.svg#LCD-Bold') format('svg'),
+    url('LCD-Bold.ttf.eot'),
+    url('LCD-Bold.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
 /*								____HTML	*/
 * {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box; /* Firefox, other Gecko */
     box-sizing: border-box; /* Opera/IE 8+ */
+}
+pre {
+	font-family: 'Press Start 2P';
+	font-weight: bold;
 }
 header {
 	width: 100%;
@@ -53,9 +67,9 @@ h2 {
 }
 
 h3 {
-	font-family: 'Press Start 2P';
-	font-size: 8px;
-	font-weight: bold;
+	
+	font-family: 'LCD-Bold';
+	font-size: 12px;
 }
 
 body {
@@ -141,13 +155,25 @@ div#input-values {
 	width: 300px;
 	top: 270px;
 	left: 0px;
-	text-align: left;
-	font-family: 'Press Start 2P' ;
+	text-align: left;/* TODO: make pda background
+	background-image: url('../img/keyboard/pda.png');
+	background-repeat: no-repeat;
+	background-size: 160px 240px;
+	*/
 }
 
 .character-build {
+	font-size: 10px;
+	font-family: 'LCD-Bold';
+}
+
+.rainbow-text {
+	background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
 	font-family: 'Press Start 2P';
-	font-size: 8px;
+	font-size: 7px;
+	font-weight: bold;
+	-webkit-background-clip: text;	
+	background-clip: text;
 }
 
 table#stat-table.character-build {
@@ -162,6 +188,8 @@ table#stat-table.character-build {
 	background-image: url('../img/keyboard/paper-border.png');
 	background-size: contain;
     border-radius: 2px;
+	font-size: 14px;
+	font-family: 'LCD-Bold';
 }
 td#stat-table.character-build {
 	width: 100%;
@@ -200,12 +228,47 @@ div#player-stats {
 	overflow-y: hidden;
 }
 
+#direction {
+	position: absolute;
+	display: block;
+	background-color: #000;
+	text-align: center;
+	color: #fff;
+	top: 0px;
+	left: -125px;
+	margin-left: 50%;
+	min-width: 250px;
+	min-height: 20px;
+	max-width: 263px;
+	max-height: 20px;
+	border: 1px solid #fff;
+	border-radius: 6px;
+	z-index: 10; 
+}
+
+#game-info {
+	position: absolute;
+	width: 260px;
+	height: 135px;
+	padding-top: 30px;
+	margin-left: 50%;
+	left: -130px;
+	top: 40px;
+	color: #fff;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	scrollbar-color: white black;
+	scrollbar-width: none;
+	border-radius: 12px;
+	padding: 5px;
+}
+
 .action-display {
 	position: absolute;
 	margin-left: 50%;
-	padding-left: 75px;
+	/*padding-left: 75px;
 	padding-top: 66px;
-	padding-right: 65px; 
+	padding-right: 65px; */
 	left: -205px;
 	top: 105px;
 	text-align: left; 

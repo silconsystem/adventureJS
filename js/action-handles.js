@@ -238,7 +238,7 @@ actionBtn.onclick = function(event) {
 
 	playerAction = actionInput.value;					// set value as variable
 
-	console.log('player submitted string: ' + playerAction + '\nwrite to id: \'action-display\'');		// log
+	console.log('player submitted string: ' + playerAction + '\nwrite to id: \'game-info\'');		// log
 
 	//writeHTML('action-display',playerAction);			// write to display
 
@@ -249,15 +249,15 @@ actionBtn.onclick = function(event) {
 		textParserString(playerAction);
 	} else {
         console.log('no input');
-        writeHTML('action-display', 'type some command');
+        writeHTML('game-info', 'type some command');
 	}
 }
 
-var itemId = document.getElementById('item-image'),
-	weaponId = document.getElementById('weapon-image'),
-	magicDId = document.getElementById('magic_D-image'),
-	magicHId = document.getElementById('magic_H-image'),
-	skillsId = document.getElementById('skills-image');
+var itemId 		= document.getElementById('item-image'),
+	weaponId 	= document.getElementById('weapon-image'),
+	magicDId 	= document.getElementById('magic_D-image'),
+	magicHId 	= document.getElementById('magic_H-image'),
+	skillsId 	= document.getElementById('skills-image');
 
 document.addEventListener('keyup', function (event) {
 
@@ -301,17 +301,20 @@ document.addEventListener('keyup', function (event) {
     		break;
     	case 73:
     		// show inventory 					'i key'
-    		var item_txt 	= list(player.inventory.items),
-    			weapon_txt 	= list(player.inventory.weapon),
-    			magic_D_txt = list(player.inventory.magic_D),
-    			magic_H_txt = list(player.inventory.magic_H),
-    			skills_txt 	= list(player.inventory.skills);
+    		if (event.shiftKey) {
+    			var item_txt 	= list(player.inventory.items),
+	    			weapon_txt 	= list(player.inventory.weapon),
+	    			magic_D_txt = list(player.inventory.magic_D),
+	    			magic_H_txt = list(player.inventory.magic_H),
+	    			skills_txt 	= list(player.inventory.skills);
 
-    		var txt = "weapons:<br>" +weapon_txt+ "<br>items:<br>" +item_txt+ "<br>magic_D:<br>" +magic_D_txt+ "<br>magic_H:<br>" +magic_H_txt+ "<br>skills:<br>" +skills_txt+ "<br>inventory<br>"; 
+	    		var txt = "<strong>==[player inventory]==</strong><br><br><b>[weapons]::</b><br>" +weapon_txt+ "<br><b>[items]::</b><br>" +item_txt+ "<br><b>[magic_D]::</b><br>" +magic_D_txt+ "<br><b>[magic_H]::</b><br>" +magic_H_txt+ "<br><b>[skills]::</b><br>" +skills_txt+ "<br><strong>end inventory</strong><br>";
+			
+    			console.log(txt);
+    			console.log('key:', key, 'pressed, showing inventory');
+    			writeHTML('game-info', '<ul>' + (txt.split(",").join("</br>")) + '</ul>');
+	    	}    		
 
-    		console.log(txt);
-    		console.log('key:', key, 'pressed, showing inventory');
-    		writeHTML('action-display', '<ul>' + (txt.split(",").join("</br>")) + '</ul>');
     		break;
     	case 68:
     		// show dev panel 					'd key'

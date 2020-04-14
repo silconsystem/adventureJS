@@ -74,17 +74,50 @@ function makeExit(mov) {
 class roomContentLoad {
 
 	constructor(counter, direction) {
-		this.counter;
-		this.direction;
-		this.id = counter +1;
-		this.url = "../html/room-" + this.id + ".html";
+		this.counter 	= counter;
+		this.direction 	= direction;
+		this.id 		= counter;
+		this.url 		= "../html/room-" + this.id + ".html";
+		this.exits 		= room_objects[counter].exits;			// TODO errors in handle
 	}
 
-	getRoom() {
-		let currentRoom = room_objects[this.id];
+	getRoomId() {
+		return this.id;
+	}
 
-		this.currentRoom = currentRoom;
-		return this.currentRoom;
+	getCounter() {
+		return this.counter;
+	}
+
+	getDirection() {
+		return this.direction;
+	}
+
+	getRoomHTML() {
+
+		let id = this.id;
+
+		let msgField	= document.getElementById('message-field'),
+			infField 	= document.getElementById('info-field');	
+
+		msgField.innerHTML = room_objects[id].name;
+		infField.innerHTML = room_objects[id].scene;
+
+		// room controls
+		var roomControls = document.querySelectorAll(".room-nav");
+
+		roomControls.forEach((btn) => {
+		  btn.addEventListener("click", (event) => {
+
+			let btnID = event.target.id,
+		  		result;
+
+		  	console.log('roomControls: pressed control:', btnID);
+		  });
+		});
+		
+		console.log(room_objects[id].name);
+		console.log(room_objects[id].scene);
 	}
 
 	loadRoom() {
@@ -105,5 +138,10 @@ class roomContentLoad {
 	        console.log('html page: ' + this.url + " not loaded or error");
 	    	return false;
 	    });
+	}
+
+	getRoomExits() {
+
+		return this.exits;
 	}
 }

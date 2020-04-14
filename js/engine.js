@@ -353,6 +353,7 @@ startBtn.onclick = function(event) {
 				player.int 		= playerStats.INT 	+ 6;
 				player.evd 		= playerStats.EVD 	+ 4;
 				player.luc 		= playerStats.STR 	+ 11;
+				player.status 	= playerStatEffect[0];
 
 				manInventory(0, game_objects[4].skills[1].type, game_objects[4].skills[1]);
 				newrow(0, game_objects[4].skills[1]);
@@ -377,6 +378,7 @@ startBtn.onclick = function(event) {
 				player.int 		= playerStats.INT 	+ 2;
 				player.evd 		= playerStats.EVD 	+ 6;
 				player.luc 		= playerStats.STR 	+ 5;
+				player.status 	= playerStatEffect[0];
 
 				manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
 				newrow(0, game_objects[4].skills[4]);
@@ -400,6 +402,7 @@ startBtn.onclick = function(event) {
 				player.int 		= playerStats.INT 	+ 10;
 				player.evd 		= playerStats.EVD 	+ 7;
 				player.luc 		= playerStats.STR 	+ 7;
+				player.status 	= playerStatEffect[0];
 
 				manInventory(0, game_objects[4].skills[2].type, game_objects[4].skills[2]);
 				newrow(0, game_objects[4].skills[2]);
@@ -423,6 +426,7 @@ startBtn.onclick = function(event) {
 				player.int 		= playerStats.INT 	+ 20;
 				player.evd 		= playerStats.EVD 	+ 15;
 				player.luc 		= playerStats.STR 	+ 7;
+				player.status 	= playerStatEffect[0];
 
 				manInventory(0, game_objects[4].skills[4].type, game_objects[4].skills[4]);
 				newrow(0, game_objects[4].skills[4]);
@@ -442,14 +446,8 @@ startBtn.onclick = function(event) {
 		writeHTML('char-class', '');
 		writeHTML('arm-name', '');
 		writeHTML('skills', '');
-/*
-		writeHTML('action-display', 'press any direction and you are off...<br><br>');
-		document.getElementById('action-display').innerHTML += ('[MESSAGE:] >>>>>>>>>>>>>>>>>>><br>');
-		document.getElementById('action-display').innerHTML += ('you have been summoned by larp corporation,\nThere\'s this old house they found and they dont dare to enter,\n but they figured you would !<br>');
-		document.getElementById('action-display').innerHTML += ('[MESSAGE:] >>>>>>>>>>>>>>>>>>><br>');
-		document.getElementById('action-display').innerHTML += ('Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.<br>Lorem ipsum adipiscing elit members of the grief. But variable region that pregnant lion skirt. Each makeup Vulputate sauce. largest real estate passengers. Maecenas Performance pot diam deductible policies. Vestibulum in dignissim nibh, nisi pretium dui. Phasellus in nulla ac sem pulvinar dignissim.');
-		console.log('character created');
-*/
+
+		writeHTML('game-info', '');
 		loadHTML(null, 'room', '../html/message.html');
 
 		changeCSSStyle('dice-display', 'visibility', 'visible');
@@ -459,54 +457,87 @@ startBtn.onclick = function(event) {
 		writeHTML('arm-name' ,'no weapon selected');
 	}	
 }
-
+/*
 // get movement variables
 northBtn.onclick = function(event) {
 
+	let dir = northBtn.value;
+	console.log('northBtn: pressed value:', dir);
 	event.preventDefault();
-	moveControl('north');
 
-	writeHTML("action-display", "north<br>");
-	console.log('direction: north');
-	//loadRoom(moveCount, move);
+	if (c_created == false) {
+		document.getElementById("direction").innerHTML = "no character created yet";
+		console.log('direction: north disabled, no character');
+	} else {
+
+		moveControl('north');
+		document.getElementById("direction").innerHTML = "north<br>";
+		console.log('direction: north');
+		loadRoom(moveCount, move);	
+	}	
 }
 eastBtn.onclick = function(event) {
 
 	event.preventDefault();
-	moveControl('east');
-    
-	writeHTML("action-display", "east<br>");
-	console.log('direction: east');
-	//loadRoom(moveCount, move);	
+
+    if (c_created == false) {
+
+		document.getElementById("direction").innerHTML = "no character created yet";
+		console.log('direction: east disabled, no character');
+    } else if (c_created == true) {
+
+		moveControl('east');
+    	document.getElementById("direction").innerHTML = "east<br>";
+		console.log('direction: east');
+		loadRoom(moveCount, move);
+    }
 }
 southBtn.onclick = function(event) {
 
 	event.preventDefault();
-	moveControl('south');
 
-	writeHTML("action-display", "south<br>");
-	console.log('direction: south');
-   	//loadRoom(moveCount, move);	
+	if (c_created == false) {
+
+		document.getElementById("direction").innerHTML = "no character created yet";
+		console.log('direction: south disabled, no character');	
+	} else if(c_created == true) {
+
+		moveControl('south');
+		document.getElementById("direction").innerHTML = "south<br>";
+		console.log('direction: south');
+	   	loadRoom(moveCount, move);
+	}	
 }
 westBtn.onclick = function(event) {
 
 
 	event.preventDefault();
-	moveControl('north');
-    
-	writeHTML("action-display", "west<br>");
-	console.log('direction: west');
-	//loadRoom(moveCount, move);	
+
+	if (c_created == false) {
+		
+		document.getElementById("direction").innerHTML = "no character created yet";
+		console.log('direction: west disabled, no character');
+	} else if (c_created == true) {
+
+		moveControl('north');
+		document.getElementById("direction").innerHTML = "west<br>";
+		console.log('direction: west');
+		loadRoom(moveCount, move);	
+	}	
 }
+
 lookBtn.onclick = function(event) { // TODO:: layout, make the description divs more interesting
 	event.preventDefault();
 
-	if (room.id >= 0) {
-	document.getElementById('room-name').innerHTML = room.name;
+	var roomID = activeRoom.getRoomId();
+
+	if (roomID > 0) {
+	document.getElementById('info-field').innerHTML = room_objects[roomID].look;
 	document.getElementById('describe').innerHTML = room.scene;
 	console.log('looking around');
 	}
 }
+
 weaponBtn.onclick = function(event) {
 	event.preventDefault();	
 	document.getElementById('describe').innerHTML = room.item_1;
@@ -518,6 +549,7 @@ itemBtn.onclick = function(event) {
 	document.getElementById('describe').innerHTML = room.item_2;
 	console.log('looking for items');
 }
+*/
 /* 						 DICE ROLLER							*/
 document.querySelector('input[type=button]#dice-button').addEventListener('click', function(){rollTheDice();});
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+	
 	<style>
 		/*styles*/
 		div#room-content.room-content {		
@@ -10,22 +10,87 @@
 			left: 0;
 			width: 300px;
 			height: 250px;
-			background-image: url('../img/house.jpeg');
+			background-image: url('../img/rooms/room-1.png');
 			background-repeat: no-repeat;
 			background-size: contain;
 			margin: 0;
 			padding: 0;
 			font-weight: bold;
 			font-size: 20px;
-			color: #fff;
+			color: #000;
+		}
+		#href-north {
+			position: absolute;
+			top:0px;
+			left:133px;
+			display:block;
+			width:30px;
+			height:30px;
+		}
+		#href-east {
+			position: absolute;
+			top:109px;
+			left:267px;
+			display:block;
+			width:30px;
+			height:30px;
+		}
+		#href-south {
+			position: absolute;
+			top:220px;
+			left:133px;
+			display:block;
+			width:30px;
+			height:30px;
+		}
+		#href-west {
+			position: absolute;
+			top:108px;
+			left:0px;
+			display:block;
+			width:30px;
+			height:30px;
+		}
+		.room-nav {
+			background-color: transparent;
+			text-align: center;
+			background-color: #fff;
+			border: 2px solid #000;
+			border-radius: 12px;
+			color: #000;
+		}
+		#href-npc {
+			position: absolute;
+			display: block;
+			top: 137px;
+			left: 134px;
+			min-width: 28px;
+			max-height: 70px;
+			width: 28px;
+			height: 70px;
+			background-image:  url('npc/room-1-npc.png');
+			border: 1px solid #000;
+			border-radius: 3px;
+		}
+		a.room-nav {
+			color: #000;
+		}
+		a.room-nav:hover {
+			text-shadow: 3px 3px 5px;
 		}
 	</style>
 
 </head>
-<body>
-	
-	<data id="room-1" value="room one">room one</data>
+	<body onload="onload();" class="room-body">
+		
+		<!-- content -->
+		<a href="#" id="href-north" class="room-nav">N</a>
+		<a href="#" id="href-east"	class="room-nav">E</a>
+		<a href="#" id="href-south"	class="room-nav">S</a>
+		<a href="#" id="href-west"	class="room-nav">W</a>
 
-</body>
+		<a href="#" id="href-npc" 	class="room-obj"></a>
+
+	</body>
 
 </html>

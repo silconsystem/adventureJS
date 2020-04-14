@@ -283,13 +283,35 @@ function roomEntryPoint(mv) {
 	}
 }
 
+// get current room by id and counter
+function getActiveRoom(id, mv) {
+
+	// get room info from roomContentLoad class using moveCount, move
+	activeRoom = new roomContentLoad(id, mv);
+
+	return activeRoom;
+}
+
 // control the NESW button
-function moveControl(btn) {
+function moveControl(btn) { 				// TODO handle loading new room 
 
 	let freezeCount = moveCount,
-		active 		= false;
+		rm_result;
 	// get direction value
-	move = document.getElementById(btn).value;
+	move = btn;
+
+	if (moveCount == 0) {
+		moveCount = 1;
+	}
+
+	activeRoom = getActiveRoom(moveCount, move);
+
+	let rm_exits 	= activeRoom.getRoomExits(),
+		rm_id 		= activeRoom.getRoomId();
+
+	console.log('moveControl: current room id,', rm_id);
+	console.log('moveControl: current room exits', rm_exits);
+	console.log('moveControl: direction value:', btn, '\nmoveControl: set variable \'move\' to:', move,);
 
 	function handleExit(exitBool) {
 
@@ -297,12 +319,13 @@ function moveControl(btn) {
 			case 0:
 				// no exit
 				moveCount = freezeCount;
-				writeHTML('action-display', 'you cant use this exit');
+				writeHTML('info-field', 'you cant use this exit');
+				console.log('handleExit: froze moveCount:', moveCount, '\nhandleExit: moveCount frozen to:', freezeCount);
 				break;
 			case 1:
 
 				// exit
-				writeHTML('action-display', 'use this exit ?? (y/n)');
+				writeHTML('game-info', 'use this exit ?? (y/n)');
 
 				let go_exit = getYesNo(0);
 
@@ -311,68 +334,76 @@ function moveControl(btn) {
 					// set entryPoint
 					entryPoint = roomEntryPoint(mov);
 		    		moveCount++;
+		    		console.log('handleExit: moveCount increment:',moveCount);
 		    	}
 				break;
 		}
-	}
-	
-	function getActiveRoom() {
-		// get room info from roomContentLoad class using moveCount, move
-		var currentRoom = new roomContentLoad(moveCount, move);
-
-		if (currentRoom.loadRoom()) {
-				
-			activeRoom = currentRoom.getRoom();
-			active = false;
-	    	console.log('player chose yes');
-		} else {
-
-			console.log('no room to load');
-		} 
 	}			
 
-	// handle exit and entry
-	function enterAndExit(mov) {
+	// N|E|S|W  = [0,0,1,1]
 
-		mov = mov.toLowerCase();
+	switch (move) {
+		case 'north':
+			
+			// check if exit is possible and describe to the player
+			document.getElementById("message-field").innerHTML = "trying the " +move+ " exit";
+			document.getElementById("info-field").innerHTML = scene_objects[rm_id].exit_N;
 
+			if (rm_exits[0] == 0) {
+				rm_result = 0;
+			} else {
+				rm_result = 1;
+			}
+			break;
+		case 'east':
 
-		
-		// N|E|S|W  = [0,0,1,1]
+			// check if exit is possible and describe to the player
+			document.getElementById("message-field").innerHTML = "trying the " +move+ " exit";
+			document.getElementById("info-field").innerHTML = scene_objects[rm_id].exit_E;
 
-		switch (mov) {
-			case 'n':
-				
-				// check if exit is possible and describe to the player
-				room_objects[currentRoom.id].exit_txt[0];
+			if (rm_exits[1] == 0) {
+				rm_result = 0;
+			} else {
+				rm_result = 1;
+			}
+			break;
+		case 'south':
 
-				handleExit(activeRoom.exits[0]);
-				break;
-			case 'e':
-				// check if exit is possible and describe to the player
-				room_objects[currentRoom.id].exit_txt[1];
-				if (activeRoom.exits[1] == 1) {
-					console.log('can exit');
-				}
-				break;
-			case 's':
-				// check if exit is possible and describe to the player
-				room_objects[currentRoom.id].exit_txt[2];
-				if (activeRoom.exits[2] == 1) {
-					console.log('can exit');
-				}
-			case 'w':
-				// check if exit is possible and describe to the player
-				room_objects[currentRoom.id].exit_txt[3];
-				if (activeRoom.exits[3] == 1) {
-					console.log('can exit');
-				}
-			default:
-				// statements_def
-				break;
-		}
-		return room_exits;
-	} 	
+			// check if exit is possible and describe to the player
+			document.getElementById("message-field").innerHTML = "trying the " +move+ " exit";
+			document.getElementById("info-field").innerHTML = scene_objects[rm_id].exit_S;
+
+			if (rm_exits[2] == 0) {
+				rm_result = 0;
+			} else {
+				rm_result = 1;
+			}
+		case 'west':
+			
+			// check if exit is possible and describe to the player
+			document.getElementById("message-field").innerHTML = "trying the " +move+ " exit";
+			document.getElementById("info-field").innerHTML = scene_objects[rm_id].exit_W;
+
+			if (rm_exits[3] == 0) {
+				rm_result = 0;
+			} else {
+				rm_result = 1;
+			}
+		default:
+			// statements_def
+			break;
+	} 
+	handleExit(rm_result);
+
+	if (rm_result == 0) {
+
+		moveCount = freezeCount;
+		console.log('moveControl: player cannot exit', move, 'froze counter', moveCount);
+	} else {
+
+		moveCount++;
+		console.log('moveControl: player can exit', move, 'increment counter', moveCount);
+	}
 
 	console.log('moveControl: move made: ' + move + '\nmoveControl: moveCount:', moveCount);
 	return [move, moveCount];
@@ -397,12 +428,34 @@ function loadHTML (e, elId, elUrl) {
 	xhr.send();
 }
 
-/* load html
+// load html
 function loadRoom(count, dir) {
 
+	/*
+		called by directionbuttons and/or game event
+
+		button pressed passes: 
+			count:
+				if we are still in the room dont update count
+				-test currentroom
+				TODO: altenative to coutnting with the buttons
+			direction:
+				if we come from the last room convert to entrypoint
+				if we are in the room test against current room exits
+					if exit => call yes/no function
+	*/
+	activeRoom = new roomContentLoad(count, dir);
+
+	activeRoom.loadRoom();
+	activeRoom.getRoomId();
+	console.log('loadRoom: loadRoom:', activeRoom.loadRoom());
+	console.log('loadRoom: counter:', activeRoom.getCounter());
+
+	return activeRoom;
+
+	/*
 	// count 		= moveCount;
 	// dir 		 	= move;
-
 	var id 				= count+1,
 		pageUrl 		= "../html/room-" + id + ".html",
 		page_load		= false,
@@ -462,8 +515,8 @@ function loadRoom(count, dir) {
         console.log('html page: ' + pageUrl + " not loaded or error");
     });
 
-    return Room_1;
-}*/
+    return Room_1;*/
+}
 
 // hide a div element after event
 function hideHTML(id) {

@@ -132,6 +132,36 @@
 
 			<div id="action-display" class="action-display">
 				
+				<div id="direction"></div>
+
+				<span id="game-info" class="game-msg">
+					<audio id="audioFile" src="audio/chiptune_intro.mp3"></audio>
+					<script type="text/javascript">
+						function playAudio(IO) {
+
+							var x = document.getElementById("audioFile"); 
+
+							if (IO == 1) {
+						  		x.play();
+						  	} else if (IO == 0) {
+						  		x.stop();	
+						  	}
+						} 
+					</script>
+
+					<marquee id="marquee-txt" loop="1" onclick="this.stop();" ondblclick="gameInfo();" behavior="scroll" direction="left" ><!-- TODO: intergrate audio => onstart="playAudio(1);" onfinish="playAudio(0);"-->
+					
+					<pre id="taag_output_text" style="float:left;" class="fig" contenteditable="true"><h6  class="rainbow-text">--[[
+          (`-')  _       (`-') (`-')  _  (`-').->             (`-')   _      _  (`-')(`-')         (`-')      (`-')  _ (`-')     (`-')          (`-')  _ _(`-')         (`-') (`-')  _<-. (`-')_ (`-')                   (`-')  (`-')  _ 
+          (OO ).-/      _(OO ) (OO ).-/  ( OO)_   _        <-.(OO )  (_)     \-.(OO )( OO).->      ( OO).->   ( OO).-/ (OO )_.-> ( OO).->       (OO ).-/( (OO ).->     _(OO ) ( OO).-/   \( OO) )( OO).->       .->   <-.(OO )  ( OO).-/ 
+   <-.--. / ,---.  ,--.(_/,-.\ / ,---.  (_)--\_)  \-,-----.,------,) ,-(`-') _.'    \/    '._      /    '._  (,------. (_| \_)--./    '._       / ,---.  \    .'_ ,--.(_/,-.\(,------.,--./ ,--/ /    '._  ,--.(,--.  ,------,)(,------. 
+ (`-'| ,| | \ /`.\ \   \ / (_/ | \ /`.\ /    _ /   |  .--./|   /`. ' | ( OO)(_...--''|'--...__)    |'--...__) |  .---' \  `.'  / |'--...__)     | \ /`.\ '`'-..__)\   \ / (_/ |  .---'|   \ |  | |'--...__)|  | |(`-')|   /`. ' |  .---' 
+ (OO |(_| '-'|_.' | \   /   /  '-'|_.' |\_..`--.  /_) (`-')|  |_.' | |  |  )|  |_.' |`--.  .--'    `--.  .--'(|  '--.   \    .') `--.  .--'     '-'|_.' ||  |  ' | \   /   / (|  '--. |  . '|  |)`--.  .--'|  | |(OO )|  |_.' |(|  '--.  
+,--. |  |(|  .-.  |_ \     /_)(|  .-.  |.-._)   \ ||  |OO )|  .   .'(|  |_/ |  .___.'   |  |          |  |    |  .--'   .'    \     |  |       (|  .-.  ||  |  / :_ \     /_) |  .--' |  |\    |    |  |   |  | | |  \|  .   .' |  .--'  
+|  '-'  / |  | |  |\-'\   /    |  | |  |\       /(_'  '--'\|  |\  \  |  |'->|  |        |  |          |  |    |  `---. /  .'.  \    |  |        |  | |  ||  '-'  /\-'\   /    |  `---.|  | \   |    |  |   \  '-'(_ .'|  |\  \  |  `---. 
+ `-----'  `--' `--'    `-'     `--' `--' `-----'    `-----'`--' '--' `--'   `--'        `--'          `--'    `------'`--'   '--'   `--'        `--' `--'`------'     `-'     `------'`--'  `--'    `--'    `-----'   `--' '--' `------' 
+--]]</h6></pre></marquee>
+				</span>
 				<div id="room">
 				<table id="room-display" class="room-display">
 					<tr>
@@ -195,14 +225,14 @@
 		  	<button id="move-submit">submit</button>-->
 		  	<div id="control-buttons">
 				<h1>N = up | S = down |	W = left | E = right</h1>
-				<button id="north" 	value="n">N</button>
-				<button id="east" 	value="e">E</button>
-				<button id="south" 	value="s">S</button>
-				<button id="west" 	value="w">W</button>
+				<button id="north" 	value="north" 	class="game-controls">N</button>
+				<button id="east" 	value="east" 	class="game-controls">E</button>
+				<button id="south" 	value="south" 	class="game-controls">S</button>
+				<button id="west" 	value="west" 	class="game-controls">W</button>
 				<br>
-				<button id="look-btn" 	value="look-ctrl">look</button>
-				<button id="weapon-btn" value="weapon-ctrl">weapon</button>
-				<button id="item-btn" 	value="item-ctrl">item</button>
+				<button id="look-btn" 	value="look-ctrl" 	class="game-controls">look</button>
+				<button id="weapon-btn" value="weapon-ctrl" class="game-controls">weapon</button>
+				<button id="item-btn" 	value="item-ctrl" 	class="game-controls">item</button>
 			  	<br><br>
 			  	<input type="text" name="actions" id="action-text" class="action-text" placeholder="your action?" ></input>
 			  	<button id="action-button" class="action-button" value="do">DO !!</button>
@@ -214,7 +244,7 @@
 			  	</h1>
 			</div>
 
-			<div id="room-content" class="room-content"></div> 
+			<div id="room-content" class="room-content" usemap="#room-map"></div> 
 
 			<!-- InteractiveJS draggable and min/maximixable keyboard input -->
 			<div id="keyboard" name="keyboard">
@@ -251,6 +281,7 @@
 	<script src="js/text-parser.js"></script>
 	<script src="js/save.js"></script>
 	<script src="js/keyboard.js"></script>
+	<script src="js/game-controls.js"></script>
 
 </body>
 </html>
